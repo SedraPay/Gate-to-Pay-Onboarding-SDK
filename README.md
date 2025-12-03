@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/SedraPay/AbyanCheck/blob/main/AbyanCheck.png" alt="Icon"/>
+  <img src="https://github.com/SedraPay/AbyanCheck/blob/main/gatetopay.png" alt="Icon"/>
 </p>
 <H1 align="center">AbyanCheck</H1>
 
@@ -8,7 +8,7 @@ The new eKYC in simple way.
 `AbyanCheck` is between your hands to help you onboard your customer easily with almost no effort.
 
 ## Screenshot
-[![AbyanCheck](https://github.com/SedraPay/AbyanCheck/blob/main/screenshot.png)](https://youtu.be/8oehz24fXI4)
+[![GatetoPayOnboardingSDK](https://github.com/SedraPay/AbyanCheck/blob/main/screenshot.png)](https://youtu.be/8oehz24fXI4)
 
 
 
@@ -22,11 +22,11 @@ The new eKYC in simple way.
 ## Installation
 ==========================
 
-AbyanCheck is available through [CocoaPods](https://cocoapods.org/pods/AbyanCheck). To install
+Gate to Pay Onboarding SDK is available through [CocoaPods](https://github.com/SedraPay/Gate-to-Pay-Onboarding-SDK). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'AbyanCheck'
+pod 'GatetoPayOnboardingSDK'
 
 #also add this
 post_install do |installer_representation|
