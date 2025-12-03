@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
  s.name             = 'GateToPayOnboardingSDK'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
 s.summary          = 'Find the liveness of your app user and to check if the ID image is similar to the photo of the user, extract info from ID and passport.'
 
 s.homepage         = 'https://github.com/SedraPay/Gate-to-Pay-Onboarding-SDK'
@@ -27,7 +27,7 @@ s.static_framework = false
   s.vendored_frameworks = "GatetoPayOnboardingSDK.xcframework"
 s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
-s.ios.vendored_frameworks = 'Abyan.xcframework'
+s.ios.vendored_frameworks = 'GateToPayOnboardingSDK.xcframework'
 s.frameworks = 'UIKit', 'AVFoundation', 'Foundation', 'AVKit'
 s.dependency 'Alamofire'
 s.dependency 'GoogleMLKit/FaceDetection'
