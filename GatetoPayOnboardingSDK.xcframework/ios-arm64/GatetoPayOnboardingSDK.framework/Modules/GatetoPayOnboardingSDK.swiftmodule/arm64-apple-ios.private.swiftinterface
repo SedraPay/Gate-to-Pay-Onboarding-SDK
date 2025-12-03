@@ -1,0 +1,897 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name GatetoPayOnboardingSDK
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1.2
+import AVFoundation
+import AVKit
+import CoreImage
+import CoreMotion
+import CoreVideo
+import DeveloperToolsSupport
+import Foundation
+@_exported import GatetoPayOnboardingSDK
+import Network
+import PDFKit
+import Speech
+import Swift
+import SwiftUI
+import SystemConfiguration
+import UIKit
+import VideoToolbox
+import Vision
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public struct FormInfoResponse : Swift.Codable {
+  public var integrationInfos: [IntegrationInfo]?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct IntegrationInfo : Swift.Codable {
+  public var integrationName: Swift.String?
+  public var integrationType: Swift.Int?
+  public var integrationFields: [IntegrationField]?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct IntegrationField : Swift.Codable {
+  public var isRequired: Swift.Bool?
+  public var fieldTypes: GatetoPayOnboardingKYCFieldType?
+  public var fieldName: Swift.String?, fieldNameAr: Swift.String?
+  public var dateTypeEnum: GatetoPayOnboardingDateFieldType?
+  public var enumeratedValues: [EnumeratedValue]?
+  public var validationRegEx: Swift.String?
+  public var regExErrorMessage: Swift.String?
+  public var fieldMin: Swift.Int?
+  public var fieldMax: Swift.Int?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct EnumeratedValue : Swift.Codable {
+  public var key: Swift.String
+  public var value: Swift.String
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct formDataValueFields {
+  public var key: Swift.String?
+  public var value: Swift.String?
+  public init(key: Swift.String, value: Swift.String)
+}
+public struct ImageMatchingResponse : Swift.Codable {
+  public var isIdentical: Swift.Bool?
+  public var confidence: Swift.Float?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol GatetoPayOnboardingCountriesDelegate {
+  func didGetNationalitiesWithSuccess(response: CountriesAndCitiesResponse)
+  func didGetNationalitiesWithError(error: GatetoPayOnboardingError)
+}
+@_hasMissingDesignatedInitializers final public class GatetoPayOnboardingCountries {
+  final public var delegate: (any GatetoPayOnboardingCountriesDelegate)?
+  final public func getNationalities()
+  @objc deinit
+}
+public struct GatetoPayOnboardingDocument {
+  public var image: UIKit.UIImage?
+  public var documentSide: DocumentSideEnum?
+}
+public struct HTTPMethod : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
+  public static let connect: HTTPMethod
+  public static let delete: HTTPMethod
+  public static let get: HTTPMethod
+  public static let head: HTTPMethod
+  public static let options: HTTPMethod
+  public static let patch: HTTPMethod
+  public static let post: HTTPMethod
+  public static let put: HTTPMethod
+  public static let trace: HTTPMethod
+  public let rawValue: Swift.String
+  public init(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+}
+public struct ConfigureScanDocumentsViews {
+  public var ConfigureDocumentsCameraPage: ConfigureDocumentsCameraPage?
+  public var ConfigureDocumentsEditPage: ConfigureDocumentsEditPage?
+  public var ConfigureDocumentsPreviewPage: ConfigureDocumentsPreviewPage?
+  public init(ConfigureDocumentsCameraPage: ConfigureDocumentsCameraPage? = nil, ConfigureDocumentsEditPage: ConfigureDocumentsEditPage? = nil, ConfigureDocumentsPreviewPage: ConfigureDocumentsPreviewPage? = nil)
+}
+public struct ConfigureDocumentsCameraPage {
+  public var cameraViewBackgroundColor: UIKit.UIColor?
+  public var topHintCameraLabelColor: UIKit.UIColor?
+  public var topHintCameraLabelTitle: Swift.String?
+  public var topHintCameraIsHidden: Swift.Bool?
+  public var topHintCameraLabelNumberOfLines: Swift.Int?
+  public var frontIDLabelColor: UIKit.UIColor?
+  public var frontIDLabelTitle: Swift.String?
+  public var frontIDIsHidden: Swift.Bool?
+  public var backIDLabelColor: UIKit.UIColor?
+  public var backIDLabelTitle: Swift.String?
+  public var backIDIsHidden: Swift.Bool?
+  public var passportLabelColor: UIKit.UIColor?
+  public var passportLabelTitle: Swift.String?
+  public var passportIsHidden: Swift.Bool?
+  public var frontDrivingLicenseLabelColor: UIKit.UIColor?
+  public var frontDrivingLicenseLabelTitle: Swift.String?
+  public var frontDrivingLicenseIsHidden: Swift.Bool?
+  public var backDrivingLicenseLabelColor: UIKit.UIColor?
+  public var backDrivingLicenseLabelTitle: Swift.String?
+  public var backDrivingLicenseIsHidden: Swift.Bool?
+  public var documentTypeLabelNumberOfLines: Swift.Int?
+  public var fontNameAndSize: UIKit.UIFont?
+  public var captureButtonImage: UIKit.UIImage?
+  public var captureButtonImageURL: Swift.String?
+  public var captureButtonIsHidden: Swift.Bool?
+  public var captureButtonTitle: Swift.String?
+  public var captureButtonColor: UIKit.UIColor?
+  public var captureButtonFontColor: UIKit.UIColor?
+  public var captureButtonFontNameAndSize: UIKit.UIFont?
+  public var captureButtonImageTintColor: UIKit.UIColor?
+  public var closeButtonImageURL: Swift.String?
+  public var closeButtonImage: UIKit.UIImage?
+  public var closeButtonIsHidden: Swift.Bool?
+  public var closeButtonTitle: Swift.String?
+  public var closeButtonColor: UIKit.UIColor?
+  public var closeButtonFontColor: UIKit.UIColor?
+  public var closeButtonFontNameAndSize: UIKit.UIFont?
+  public var closeButtonImageTintColor: UIKit.UIColor?
+  public var flashButtonImageURL: Swift.String?
+  public var flashButtonImage: UIKit.UIImage?
+  public var flashButtonIsHidden: Swift.Bool?
+  public var flashButtonTitle: Swift.String?
+  public var flashButtonColor: UIKit.UIColor?
+  public var flashButtonFontColor: UIKit.UIColor?
+  public var flashButtonFontNameAndSize: UIKit.UIFont?
+  public var flashButtonImageTintColor: UIKit.UIColor?
+  public init(cameraViewBackgroundColor: UIKit.UIColor? = .black, topHintCameraLabelColor: UIKit.UIColor? = .white, topHintCameraLabelTitle: Swift.String? = NSLocalizedString("Please get close to the ID/Passport so it would fill the empty area", comment: ""), topHintCameraIsHidden: Swift.Bool? = false, topHintCameraLabelNumberOfLines: Swift.Int? = 0, frontIDLabelColor: UIKit.UIColor? = .white, frontIDLabelTitle: Swift.String? = NSLocalizedString("Scan your ID front face", comment: ""), frontIDIsHidden: Swift.Bool? = false, backIDLabelColor: UIKit.UIColor? = .white, backIDLabelTitle: Swift.String? = NSLocalizedString("Scan your ID Back face", comment: ""), backIDIsHidden: Swift.Bool? = false, passportLabelColor: UIKit.UIColor? = .white, passportLabelTitle: Swift.String? = NSLocalizedString("Scan your passport", comment: ""), passportIsHidden: Swift.Bool? = false, frontDrivingLicenseLabelColor: UIKit.UIColor? = .white, frontDrivingLicenseLabelTitle: Swift.String? = NSLocalizedString("Scan your Driving front face", comment: ""), frontDrivingLicenseIsHidden: Swift.Bool? = false, backDrivingLicenseLabelColor: UIKit.UIColor? = .white, backDrivingLicenseLabelTitle: Swift.String? = NSLocalizedString("Scan your Driving back face", comment: ""), backDrivingLicenseIsHidden: Swift.Bool? = false, documentTypeLabelNumberOfLines: Swift.Int? = 0, fontNameAndSize: UIKit.UIFont? = .systemFont(ofSize: 13), captureButtonImage: UIKit.UIImage? = nil, captureButtonImageURL: Swift.String? = "", captureButtonIsHidden: Swift.Bool? = false, captureButtonTitle: Swift.String? = "", captureButtonColor: UIKit.UIColor? = .clear, captureButtonFontColor: UIKit.UIColor? = .white, captureButtonFontNameAndSize: UIKit.UIFont? = .systemFont(ofSize: 13), captureButtonImageTintColor: UIKit.UIColor? = .white, closeButtonImageURL: Swift.String? = "", closeButtonImage: UIKit.UIImage? = nil, closeButtonIsHidden: Swift.Bool? = false, closeButtonTitle: Swift.String? = "", closeButtonColor: UIKit.UIColor? = .clear, closeButtonFontColor: UIKit.UIColor? = .white, closeButtonFontNameAndSize: UIKit.UIFont? = .systemFont(ofSize: 13), closeButtonImageTintColor: UIKit.UIColor? = .white, flashButtonImageURL: Swift.String? = "", flashButtonImage: UIKit.UIImage? = nil, flashButtonIsHidden: Swift.Bool? = false, flashButtonTitle: Swift.String? = "", flashButtonColor: UIKit.UIColor? = .clear, flashButtonFontColor: UIKit.UIColor? = .white, flashButtonFontNameAndSize: UIKit.UIFont? = .systemFont(ofSize: 13), flashButtonImageTintColor: UIKit.UIColor? = .white)
+}
+public struct ConfigureDocumentsEditPage {
+  public var editPageBackgroundColor: UIKit.UIColor?
+  public var outlinesCroppingColor: UIKit.UIColor?
+  public var backButtonImage: UIKit.UIImage?
+  public var backButtonImageURL: Swift.String?
+  public var backButtonTitle: Swift.String?
+  public var backButtonIsHidden: Swift.Bool?
+  public var backButtonColor: UIKit.UIColor?
+  public var backButtonFontColor: UIKit.UIColor?
+  public var backButtonFontNameAndSize: UIKit.UIFont?
+  public var backButtonImageTintColor: UIKit.UIColor?
+  public var cropButtonImage: UIKit.UIImage?
+  public var cropButtonImageURL: Swift.String?
+  public var cropButtonTitle: Swift.String?
+  public var cropButtonIsHidden: Swift.Bool?
+  public var cropButtonColor: UIKit.UIColor?
+  public var cropButtonFontColor: UIKit.UIColor?
+  public var cropButtonFontNameAndSize: UIKit.UIFont?
+  public var cropButtonImageTintColor: UIKit.UIColor?
+  public init(editPageBackgroundColor: UIKit.UIColor? = .black, outlinesCroppingColor: UIKit.UIColor? = .red, backButtonImage: UIKit.UIImage? = nil, backButtonImageURL: Swift.String? = "", backButtonTitle: Swift.String? = "", backButtonIsHidden: Swift.Bool? = false, backButtonColor: UIKit.UIColor? = .clear, backButtonFontColor: UIKit.UIColor? = .white, backButtonFontNameAndSize: UIKit.UIFont? = .systemFont(ofSize: 13), backButtonImageTintColor: UIKit.UIColor? = .white, cropButtonImage: UIKit.UIImage? = nil, cropButtonImageURL: Swift.String? = "", cropButtonTitle: Swift.String? = "", cropButtonIsHidden: Swift.Bool? = false, cropButtonColor: UIKit.UIColor? = .clear, cropButtonFontColor: UIKit.UIColor? = .white, cropButtonFontNameAndSize: UIKit.UIFont? = .systemFont(ofSize: 13), cropButtonImageTintColor: UIKit.UIColor? = .white)
+}
+public struct ConfigureDocumentsPreviewPage {
+  public var previewPageBackgroundColor: UIKit.UIColor?
+  public var reviewLabelTitle: Swift.String?
+  public var reviewLabelColor: UIKit.UIColor
+  public var reviewLabelNumberOfLine: Swift.Int?
+  public var reviewLabelIsHidden: Swift.Bool?
+  public var editScanButtonImage: UIKit.UIImage?
+  public var editScanButtonImageURL: Swift.String?
+  public var editScanButtonTitle: Swift.String?
+  public var editScanButtonIsHidden: Swift.Bool?
+  public var editScanButtonColor: UIKit.UIColor?
+  public var editButtonFontColor: UIKit.UIColor?
+  public var editButtonFontNameAndSize: UIKit.UIFont?
+  public var editScanButtonImageTintColor: UIKit.UIColor?
+  public var confirmButtonImage: UIKit.UIImage?
+  public var confirmButtonImageURL: Swift.String?
+  public var confirmButtonTitle: Swift.String?
+  public var confirmButtonIsHidden: Swift.Bool?
+  public var confirmScanButtonColor: UIKit.UIColor?
+  public var confirmButtonFontColor: UIKit.UIColor?
+  public var confirmButtonFontNameAndSize: UIKit.UIFont?
+  public var confirmScanButtonImageTintColor: UIKit.UIColor?
+  public var rotateButtonImage: UIKit.UIImage?
+  public var rotateButtonImageURL: Swift.String?
+  public var rotateButtonTitle: Swift.String?
+  public var rotateButtonIsHidden: Swift.Bool?
+  public var rotateScanButtonColor: UIKit.UIColor?
+  public var rotateButtonFontColor: UIKit.UIColor?
+  public var rotateButtonFontNameAndSize: UIKit.UIFont?
+  public var rotateScanButtonImageTintColor: UIKit.UIColor?
+  public init(previewPageBackgroundColor: UIKit.UIColor? = .black, reviewLabelTitle: Swift.String? = "", reviewLabelColor: UIKit.UIColor = .white, reviewLabelNumberOfLine: Swift.Int? = 0, reviewLabelIsHidden: Swift.Bool? = false, editScanButtonImage: UIKit.UIImage? = nil, editScanButtonImageURL: Swift.String? = "", editScanButtonTitle: Swift.String? = "", editScanButtonIsHidden: Swift.Bool? = false, editScanButtonColor: UIKit.UIColor? = .clear, editButtonFontColor: UIKit.UIColor? = .white, editButtonFontNameAndSize: UIKit.UIFont? = .systemFont(ofSize: 13), editScanButtonImageTintColor: UIKit.UIColor? = .white, confirmButtonImage: UIKit.UIImage? = nil, confirmButtonImageURL: Swift.String? = "", confirmButtonTitle: Swift.String? = "", confirmButtonIsHidden: Swift.Bool? = false, confirmScanButtonColor: UIKit.UIColor? = .clear, confirmButtonFontColor: UIKit.UIColor? = .white, confirmButtonFontNameAndSize: UIKit.UIFont? = .systemFont(ofSize: 13), confirmScanButtonImageTintColor: UIKit.UIColor? = .white, rotateButtonImage: UIKit.UIImage? = nil, rotateButtonImageURL: Swift.String? = "", rotateButtonTitle: Swift.String? = "", rotateButtonIsHidden: Swift.Bool? = false, rotateScanButtonColor: UIKit.UIColor? = .clear, rotateButtonFontColor: UIKit.UIColor? = .white, rotateButtonFontNameAndSize: UIKit.UIFont? = .systemFont(ofSize: 13), rotateScanButtonImageTintColor: UIKit.UIColor? = .white)
+}
+public struct ConfigureLivenessCheckView {
+}
+public enum ReachabilityError : Swift.Error {
+  case failedToCreateWithAddress(Darwin.sockaddr_in)
+  case failedToCreateWithHostname(Swift.String)
+  case unableToSetCallback
+  case unableToSetDispatchQueue
+}
+public let ReachabilityChangedNotification: Foundation.Notification.Name
+open class Reachability {
+  public typealias NetworkReachable = (Reachability) -> ()
+  public typealias NetworkUnreachable = (Reachability) -> ()
+  public enum NetworkStatus : Swift.CustomStringConvertible {
+    case notReachable, reachableViaWiFi, reachableViaWWAN
+    public var description: Swift.String {
+      get
+    }
+    public static func == (a: Reachability.NetworkStatus, b: Reachability.NetworkStatus) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  open var whenReachable: Reachability.NetworkReachable?
+  open var whenUnreachable: Reachability.NetworkUnreachable?
+  open var reachableOnWWAN: Swift.Bool
+  open var notificationCenter: Foundation.NotificationCenter
+  open var currentReachabilityString: Swift.String {
+    get
+  }
+  open var currentReachabilityStatus: Reachability.NetworkStatus {
+    get
+  }
+  required public init(reachabilityRef: SystemConfiguration.SCNetworkReachability)
+  convenience public init?(hostname: Swift.String)
+  convenience public init?()
+  @objc deinit
+}
+extension Reachability {
+  public func startNotifier() throws
+  public func stopNotifier()
+  public var isReachable: Swift.Bool {
+    get
+  }
+  public var isReachableViaWWAN: Swift.Bool {
+    get
+  }
+  public var isReachableViaWiFi: Swift.Bool {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+}
+public struct GetCSPDInfoResponse : Swift.Codable {
+  public let arabicName1: Swift.String?, arabicName2: Swift.String?, arabicName3: Swift.String?, arabicName4: Swift.String?
+  public let birthOrder: Swift.String?
+  public let identityCardExpiryDate: Swift.String?, birthDate: Swift.String?
+  public let birthOffice: Swift.String?, birthCountry: Swift.String?
+  public let birthPSDate: Swift.String?
+  public let birthKada: Swift.String?, birthLiwa: Swift.String?
+  public let bookDate: Swift.String?, cardDate: Swift.String?
+  public let cardNumber: Swift.String?
+  public let cardExpiryDate: Swift.String?, changeDateTime: Swift.String?
+  public let changeFlag: Swift.String?, chkd: Swift.String?, civilRegistrationNumber: Swift.String?, civilRegistrationOffice: Swift.String?
+  public let deathStatus: Swift.String?, englishName1: Swift.String?, englishName2: Swift.String?, englishName3: Swift.String?
+  public let englishName4: Swift.String?, famno: Swift.String?, famsts: Swift.String?, passportFileNumber: Swift.String?
+  public let fatherNationalNumber: Swift.String?, motherNationality: Swift.String?, motherNationalNumber: Swift.String?, motherName: Swift.String?
+  public let nationality: Swift.String?, nationalNumber: Swift.String?, passportNumber: Swift.String?
+  public let passportIssueDate: Swift.String?, passportExpiryDate: Swift.String?
+  public let passportName1: Swift.String?, passportName2: Swift.String?, passportName3: Swift.String?, passportName4: Swift.String?
+  public let religionNumber: Swift.String?, religionArabicName: Swift.String?, religionEnglishName: Swift.String?, residenceCode: Swift.String?
+  public let residenceInfo: Swift.String?, sex: Swift.String?
+  public let isWanted: Swift.Bool?
+  public let birthGovern: BirthGovern?
+  public let fileOffice: Office?, fatherCivilOffice: Office?, passportOffice: Office?
+  public let socialStatus: SocialStatus?
+  public let message: Swift.String?
+  public let isSuccess: Swift.Bool?
+  public let errors: [Swift.String]?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct BirthGovern : Swift.Codable {
+  public let cityNumber: Swift.String?, arabicCityName: Swift.String?, englishCityName: Swift.String?, governNumber: Swift.String?
+  public let kadaNumber: Swift.String?, liwaNumber: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct Office : Swift.Codable {
+  public let compOffice: Swift.String?, englishName: Swift.String?, contractOfficeNumber: Swift.String?, address: Swift.String?
+  public let officeNumber: Swift.String?, arabicName: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct SocialStatus : Swift.Codable {
+  public let englishName: Swift.String?, arabicName: Swift.String?, statusNumber: Swift.String?, statusName: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CSPDType : Swift.Codable {
+  public let key: Swift.String?
+  public let value: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol GatetoPayOnboardingCloseJourneyDelegate {
+  func didFinishCloseJourneyWithSuccess()
+  func didFinishCloseJourneyWithError(error: GatetoPayOnboardingError)
+}
+@_hasMissingDesignatedInitializers final public class GatetoPayOnboardingCloseJourney {
+  final public var delegate: (any GatetoPayOnboardingCloseJourneyDelegate)?
+  final public func closeJourneyAPI(customerId: Swift.String?)
+  @objc deinit
+}
+public var hasSafeArea: Swift.Bool {
+  get
+}
+public enum DocumentTypeEnum : Swift.Int {
+  case id
+  case passport
+  case drivingLicense
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum DocumentSideEnum : Swift.Int {
+  case front
+  case back
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum AbyanIDType : Swift.Int {
+  case iqama
+  case id
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public struct GatetoPayOnboardingError : Swift.Error {
+  public var error: GatetoPayOnboardingErrorEnum
+  public var errorString: Swift.String
+}
+public enum GatetoPayOnboardingErrorEnum : Swift.Error {
+  case failedToCreateSession
+  case nonValidServerURL
+  case emptyServerURL
+  case severURLIsNil
+  case createJourneyError
+  case journeyIsNotGenerated
+  case complyError
+  case failedToUploadImage
+  case idDocumentVerificationError
+  case cameraAccessDenied
+  case serverError
+  case imageLoadingError
+  case emptyScreeningNameError
+  case emptyIdNumber
+  case emptyBirthdate
+  case invalidSubscription
+  public static func == (a: GatetoPayOnboardingErrorEnum, b: GatetoPayOnboardingErrorEnum) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public protocol GatetoPayOnboardingRiskFormDelegate {
+  func riskFormFinishedWithError(error: GatetoPayOnboardingError)
+  func riskFormFields(fields: [GatetoPayOnboardingKYCFieldItem])
+  func didUpdateRiskFormSuccessfully(riskLevel: Swift.Int?)
+  func updateRiskFormFinishedWithError(error: Swift.String)
+}
+public protocol GatetoPayOnboardingCSPDDelegate {
+  func cspdTypesReceived(types: [CSPDType])
+  func cspdTypesFinishedWithError(error: GatetoPayOnboardingError)
+  func productIdForKYCReceived(productId: Swift.Int)
+  func productIdForKYCFinishedWithError(error: GatetoPayOnboardingError)
+}
+extension GatetoPayOnboardingCSPDDelegate {
+  public func cspdTypesReceived(types: [CSPDType])
+  public func cspdTypesFinishedWithError(error: GatetoPayOnboardingError)
+  public func productIdForKYCReceived(productId: Swift.Int)
+  public func productIdForKYCFinishedWithError(error: GatetoPayOnboardingError)
+}
+@_hasMissingDesignatedInitializers final public class GatetoPayOnboardingRiskForm {
+  final public var delegate: (any GatetoPayOnboardingRiskFormDelegate)?
+  final public func getRiskFields(fieldValues: [formDataValueFields])
+  final public func updateRiskData(riskFields: [GatetoPayOnboardingKYCFieldItem])
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class GatetoPayOnboardingCSPD {
+  final public var delegate: (any GatetoPayOnboardingCSPDDelegate)?
+  final public func getCSPDTypes(nationality: Swift.String, residency: Swift.String)
+  final public func getProductByIdType(riskLevel: Swift.Int, customerIdentityType: Swift.Int)
+  @objc deinit
+}
+public struct GatetoPayOnboardingDataResponse<Success, Failure> where Failure : Swift.Error {
+  public let request: Foundation.URLRequest?
+  public let response: Foundation.HTTPURLResponse?
+  public let data: Foundation.Data?
+  public let metrics: Foundation.URLSessionTaskMetrics?
+  public let serializationDuration: Foundation.TimeInterval
+  public let result: Swift.Result<Success, Failure>
+  public var value: Success? {
+    get
+  }
+  public var error: Failure? {
+    get
+  }
+  public init(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, data: Foundation.Data?, metrics: Foundation.URLSessionTaskMetrics?, serializationDuration: Foundation.TimeInterval, result: Swift.Result<Success, Failure>)
+}
+public enum GatetoPayOnboardingAFError : Swift.Error {
+}
+public struct GetNationalities : Swift.Codable {
+  public let nationalities: [Nationality]?
+  public let isSuccess: Swift.Bool?
+  public let errors: [Swift.String]?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct Nationality : Swift.Codable {
+  public var nationalityID: Swift.Int?
+  public var isoCode: Swift.String?, name: Swift.String?
+  public var nationalityIDTypes: [NationalityIDType]?
+  public init(nationalityID: Swift.Int?, isoCode: Swift.String?, name: Swift.String?, nationalityIDTypes: [NationalityIDType]?)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct NationalityIDType : Swift.Codable {
+  public var typeID: Swift.Int?
+  public var name: NationalityIdTypeName?
+  public var numberOfImages: Swift.Int?
+  public init(typeID: Swift.Int?, name: NationalityIdTypeName?, numberOfImages: Swift.Int?)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum NationalityIdTypeName : Swift.String, Swift.Codable {
+  case idCard
+  case passport
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct CountriesAndCitiesResponse : Swift.Codable {
+  public var countries: [GatetoPayOnboardingCountry]?
+  public var targetUrl: Swift.String?
+  public var success: Swift.Bool?
+  public var error: Swift.String?
+  public var unAuthorizedRequest: Swift.Bool?
+  public var abp: Swift.Bool?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct GatetoPayOnboardingCountry : Swift.Codable {
+  public var id: Swift.Int?
+  public var iso: Swift.String?
+  public var isO3: Swift.String?
+  public var isoNumaric: Swift.Int?
+  public var name: Swift.String?
+  public var phoneCode: Swift.String?
+  public var cities: [City]?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct City : Swift.Codable {
+  public var id: Swift.Int?
+  public var name: Swift.String?
+  public var countryId: Swift.Int?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ProductsResponseElement : Swift.Codable {
+  public let name: Swift.String?
+  public let id: Swift.Int?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public typealias ProductsResponse = [ProductsResponseElement]
+public enum GatetoPayOnboardingJourneyType : Swift.Int {
+  case new
+  case update
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public protocol GatetoPayOnboardingJourneyDelegate : ObjectiveC.NSObjectProtocol {
+  func didFinishCreatingJourneyWithError(error: GatetoPayOnboardingError)
+  func didFinishCreatingJourneyWithSuccess(journeyId: Swift.String, isDocumentVerification: Swift.Bool, isLiveness: Swift.Bool, isFaceMatching: Swift.Bool)
+}
+@_hasMissingDesignatedInitializers final public class GatetoPayOnboarding {
+  public static let livenessCheck: GatetoPayOnboardingLivenessCheck
+  public static let documentsCheck: GatetoPayOnboardingDocuments
+  public static let shared: GatetoPayOnboarding
+  public static let comply: GatetoPayOnboardingComply
+  public static let closeJourney: GatetoPayOnboardingCloseJourney
+  public static let kyc: GatetoPayOnboardingKYC
+  public static let product: GatetoPayOnboardingProducts
+  public static let countries: GatetoPayOnboardingCountries
+  public static let riskForm: GatetoPayOnboardingRiskForm
+  public static let cspdData: GatetoPayOnboardingCSPD
+  final public var delegate: (any GatetoPayOnboardingJourneyDelegate)?
+  final public var scannedDocuments: [GatetoPayOnboardingDocument]?
+  final public var livenessImage: UIKit.UIImage?
+  final public var livenessImageId: Swift.String?
+  final public var imagesIds: [ServerImageDocument]?
+  final public var journeySession: Swift.String?
+  final public var isOCREnabled: Swift.Bool
+  final public func setSettings(serverKey: Swift.String, serverURLString: Swift.String?, _ needsLogging: Swift.Bool = false, _ journeyType: GatetoPayOnboardingJourneyType = .new, referenceKey: Swift.String? = nil, customerId: Swift.String? = nil, nationalNumber: Swift.String, riskFormId: Swift.String, applicationId: Swift.String? = nil) throws
+  final public func setOCREnabled(_ enabled: Swift.Bool)
+  @objc deinit
+}
+public protocol EditImageViewDelegate : AnyObject {
+  func cropped(image: UIKit.UIImage)
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency final public class EditImageViewController : UIKit.UIViewController {
+  @_Concurrency.MainActor @preconcurrency weak final public var delegate: (any EditImageViewDelegate)?
+  @_Concurrency.MainActor @preconcurrency @objc override final public func viewDidLoad()
+  @_Concurrency.MainActor @preconcurrency @objc override final public func viewDidLayoutSubviews()
+  @_Concurrency.MainActor @preconcurrency final public func cropImage()
+  @_Concurrency.MainActor @preconcurrency final public func rotateImage()
+  @objc deinit
+}
+public protocol GatetoPayOnboardingKYCDelegate {
+  func kycFinishedWithError(error: GatetoPayOnboardingError)
+  func kycFields(fields: GatetoPayOnboardingKYCFieldModel)
+  func didUpdateKYCSuccessfully(id: Swift.Int?)
+  func updateKYCFinishedWithError(error: Swift.String)
+}
+@_hasMissingDesignatedInitializers final public class GatetoPayOnboardingKYC {
+  final public var delegate: (any GatetoPayOnboardingKYCDelegate)?
+  final public func getKYCFields(fieldValues: [formDataValueFields], productId: Swift.Int)
+  final public func getOCRKYCFields(fieldValues: [formDataValueFields], productId: Swift.Int)
+  final public func updateKYC(kycFields: [GatetoPayOnboardingKYCFieldItem])
+  @objc deinit
+}
+public struct screeningResponse : Swift.Codable {
+  public let requestID: Swift.String?, requestStatus: Swift.String?, requestStatusDescription: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol GatetoPayOnboardingLivenessCheckDelegate {
+  func didPressCancel()
+  func didGetImageSuccessfully(data: UIKit.UIImage)
+  func didGetImageMatchingResponseSuccessfully(response: ImageMatchingResponse)
+  func didGetError(errorMessage: Swift.String)
+  func LivenessCheckPageError(error: GatetoPayOnboardingError)
+  func LivenessCheckDone()
+  func cameraAccessDeniedError(error: GatetoPayOnboardingError)
+  func faceMatchingBundleNotAvailable()
+}
+@_hasMissingDesignatedInitializers final public class GatetoPayOnboardingLivenessCheck {
+  final public var delegate: (any GatetoPayOnboardingLivenessCheckDelegate)?
+  final public func checkLiveness(viewController: any GatetoPayOnboardingLivenessCheckDelegate, detectOptions: [DetectionOptions], isDetectionOptionsSorted: Swift.Bool? = false)
+  final public func uploadLivenessCheckImage()
+  @objc deinit
+}
+public struct ServerImageDocument {
+}
+public struct GatetoPayOnboardingKYCFieldModel : Swift.Codable {
+  public var formId: Swift.Int?, productId: Swift.Int?
+  public var isFormReadOnly: Swift.Bool?
+  public var isUpdated: Swift.Bool?
+  public var tenantId: Swift.Int?, transactionID: Swift.Int?
+  public var journeyGuid: Swift.String?, createdDate: Swift.String?, expiredDate: Swift.String?
+  public var isNewValue: Swift.Bool?, isModelNeedUpdate: Swift.Bool?, isApprovedByUser: Swift.Bool?
+  public var modificationTime: Swift.String?
+  public var isReturnedToClient: Swift.Bool?
+  public var isNewFieldAdded: Swift.Bool?
+  public var isHint: Swift.Bool?
+  public var placeHolder: Swift.String?
+  public var isContractApproved: Swift.Bool?
+  public var formType: Swift.Int?
+  public var steps: [GatetoPayOnboardingKYCFieldItem]?
+  public var isSuccess: Swift.Bool?
+  public var errors: [Swift.String]?
+  public var cspdMatchingResponse: CspdMatchingResponse?
+  public var isNumberMatchOCR: Swift.Bool?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CspdMatchingResponse : Swift.Codable {
+  public var isIdentical: Swift.Bool?
+  public var confidence: Swift.Double?
+  public var isSuccess: Swift.Bool?
+  public var errors: [Swift.String]?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct GatetoPayOnboardingKYCFieldItem : Swift.Codable {
+  public var tag: Swift.String?
+  public var fieldLabel: Swift.String?
+  public var dynamicFields: [GatetoPayOnboardingKYCDynamicField]?
+  public var description: Swift.String?
+  public var code: Swift.Int?
+  public var id: Swift.Int?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct GatetoPayOnboardingKYCDynamicField : Swift.Codable {
+  public var id: Swift.Int?
+  public var tag: Swift.String?
+  public var fieldLabel: Swift.String?
+  public var fieldMin: Swift.Int?
+  public var fieldMax: Swift.Int?
+  public var dateMin: Swift.String?
+  public var dateMax: Swift.String?
+  public var dataType: GatetoPayOnboardingKYCFieldType?
+  public var value: Swift.String?, valueAr: Swift.String?, currentValue: Swift.String?, newValue: Swift.String?
+  public var isRequired: Swift.Bool?
+  public var isReadOnly: Swift.Bool?
+  public var enumeratedValues: [GatetoPayOnboardingKYCDynamicFieldEnumeratedValue]?
+  public var documentID: Swift.Int?
+  public var validationRegEx: Swift.String?
+  public var regExErrorMessage: Swift.String?
+  public var hint: Swift.String?
+  public var helperText: Swift.String?
+  public var dependsOnItem: Swift.String?
+  public var isBusiness: Swift.Bool?
+  public var fileData: Foundation.Data?
+  public var selectedFileName: Swift.String?
+  public var imageData: Foundation.Data?
+  public var selectedImageName: Swift.String?
+  public var isNeedUpdate: Swift.Bool?, isNewField: Swift.Bool?, isAPIIntegration: Swift.Bool?
+  public var isRowNeedUpdate: Swift.Bool?
+  public var isNewRow: Swift.Bool?, isNeedVerfication: Swift.Bool?, isHint: Swift.Bool?, requiredToApproved: Swift.Bool?
+  public var placeHolder: Swift.String?
+  public var enable24Hours: Swift.Bool?, enableSeconds: Swift.Bool?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct GatetoPayOnboardingKYCDynamicFieldEnumeratedValue : Swift.Codable {
+  public var key: Swift.String?
+  public var value: Swift.String?
+  public var isSelected: Swift.Bool?
+  public init(key: Swift.String? = nil, value: Swift.String? = nil, isSelected: Swift.Bool? = nil)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum GatetoPayOnboardingKYCFieldType : Swift.Int, Swift.Codable {
+  case textField
+  case dropdown
+  case checkbox
+  case radioButton
+  case dateTime
+  case boolean
+  case file
+  case image
+  case country
+  case city
+  case table
+  case textArea
+  case email
+  case mobile
+  case number
+  case address
+  case textEditor
+  case yesNo
+  case countryandcity
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum GatetoPayOnboardingDateFieldType : Swift.Int, Swift.Codable {
+  case Hijri
+  case Gregorian
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public protocol CameraScannerViewOutputDelegate : AnyObject {
+  func captureImageFailWithError(error: any Swift.Error)
+  func captureImageSuccess(image: UIKit.UIImage, withQuad quad: Quadrilateral?)
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency final public class CameraScannerViewController : UIKit.UIViewController {
+  @_Concurrency.MainActor @preconcurrency final public var isAutoScanEnabled: Swift.Bool {
+    get
+    set
+  }
+  @_Concurrency.MainActor @preconcurrency weak final public var delegate: (any CameraScannerViewOutputDelegate)?
+  @_Concurrency.MainActor @preconcurrency @objc override final public func viewDidLoad()
+  @_Concurrency.MainActor @preconcurrency @objc override final public func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override final public func viewDidLayoutSubviews()
+  @_Concurrency.MainActor @preconcurrency @objc override final public func viewWillDisappear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override final public func touchesBegan(_ touches: Swift.Set<UIKit.UITouch>, with event: UIKit.UIEvent?)
+  @_Concurrency.MainActor @preconcurrency final public func capture()
+  @_Concurrency.MainActor @preconcurrency final public func toggleFlash()
+  @_Concurrency.MainActor @preconcurrency final public func toggleAutoScan()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+extension UIKit.UIImage {
+  convenience public init?(pixelBuffer: CoreVideo.CVPixelBuffer)
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class BlurView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency public func maskToRoi(roi: UIKit.UIView)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency final public class ScannerViewController : UIKit.UIViewController {
+  @_Concurrency.MainActor @preconcurrency @objc override final public func viewDidLoad()
+  @_Concurrency.MainActor @preconcurrency @objc override final public func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override final public func viewDidLayoutSubviews()
+  @_Concurrency.MainActor @preconcurrency @objc override final public func viewWillDisappear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override final public func touchesBegan(_ touches: Swift.Set<UIKit.UITouch>, with event: UIKit.UIEvent?)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public struct DocumentVerificationResponse : Swift.Codable {
+  public let extractedFields: [ExtractedField]?
+  public let validationResult: ValidationResult?
+  public let frontImageID: Swift.String?, backImageID: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ExtractedField : Swift.Codable {
+  public let name: Swift.String?
+  public let value: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ValidationResult : Swift.Codable {
+  public let result: Swift.String?
+  public let validationChecks: [ValidationCheck]?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ValidationCheck : Swift.Codable {
+  public let name: Swift.String?, value: Swift.String?, result: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct Quadrilateral {
+  public var topLeft: CoreFoundation.CGPoint
+  public var topRight: CoreFoundation.CGPoint
+  public var bottomRight: CoreFoundation.CGPoint
+  public var bottomLeft: CoreFoundation.CGPoint
+  public var description: Swift.String {
+    get
+  }
+}
+extension Quadrilateral : Swift.Equatable {
+  public static func == (lhs: Quadrilateral, rhs: Quadrilateral) -> Swift.Bool
+}
+public enum DetectionOptions {
+  case blink
+  case lookRight
+  case lookLeft
+  case singleFaceDetect
+  case smile
+  case speechRecognition
+  public static func == (a: DetectionOptions, b: DetectionOptions) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public protocol GatetoPayOnboardingProductsDelegate {
+  func productsFinishedWithError(error: GatetoPayOnboardingError)
+  func products(products: ProductsResponse)
+  func FormInfofields(fields: [IntegrationInfo])
+  func EmptyFormInfofields()
+}
+@_hasMissingDesignatedInitializers final public class GatetoPayOnboardingProducts {
+  final public var delegate: (any GatetoPayOnboardingProductsDelegate)?
+  final public func getProducts()
+  final public func getFormInfo(productID: Swift.Int, isOcrEnabled: Swift.Bool? = false)
+  @objc deinit
+}
+public protocol GatetoPayOnboardingComplyDelegate {
+  func screeningFinishedWithSuccess(response: screeningResponse)
+  func screeningFinishedWithError(message: GatetoPayOnboardingError)
+  func emptyNamesError(error: GatetoPayOnboardingError)
+}
+@_hasMissingDesignatedInitializers final public class GatetoPayOnboardingComply {
+  final public var delegate: (any GatetoPayOnboardingComplyDelegate)?
+  final public func screenCustomer(firstName: Swift.String, secondName: Swift.String?, thirdName: Swift.String?, lastName: Swift.String)
+  @objc deinit
+}
+public protocol ImageScannerControllerDelegate : ObjectiveC.NSObjectProtocol {
+  func imageScannerController(_ scanner: ImageScannerController, didFinishScanningWithResults results: ImageScannerResults)
+  func imageScannerControllerDidCancel(_ scanner: ImageScannerController)
+  func imageScannerController(_ scanner: ImageScannerController, didFailWithError error: any Swift.Error)
+}
+@objc @_Concurrency.MainActor @preconcurrency final public class ImageScannerController : UIKit.UINavigationController {
+  @_Concurrency.MainActor @preconcurrency weak final public var imageScannerDelegate: (any ImageScannerControllerDelegate)?
+  @_Concurrency.MainActor @preconcurrency @objc override final public var supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask {
+    @objc get
+  }
+  @_Concurrency.MainActor @preconcurrency required public init(image: UIKit.UIImage? = nil, delegate: (any ImageScannerControllerDelegate)? = nil)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency final public func useImage(image: UIKit.UIImage)
+  @_Concurrency.MainActor @preconcurrency final public func resetScanner()
+  @objc deinit
+}
+public struct ImageScannerScan {
+  public enum ImageScannerError : Swift.Error {
+    case failedToGeneratePDF
+    public static func == (a: ImageScannerScan.ImageScannerError, b: ImageScannerScan.ImageScannerError) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public var image: UIKit.UIImage
+  public func generatePDFData(completion: @escaping (Swift.Result<Foundation.Data, ImageScannerScan.ImageScannerError>) -> Swift.Void)
+}
+public struct ImageScannerResults {
+  public var originalScan: ImageScannerScan
+  public var croppedScan: ImageScannerScan
+  public var enhancedScan: ImageScannerScan?
+  public var doesUserPreferEnhancedScan: Swift.Bool
+  public var detectedRectangle: Quadrilateral
+  public var originalImage: UIKit.UIImage?
+  public var scannedImage: UIKit.UIImage?
+  public var enhancedImage: UIKit.UIImage?
+  public var doesUserPreferEnhancedImage: Swift.Bool
+}
+public enum ImageScannerControllerError : Swift.Error {
+  case authorization
+  case inputDevice
+  case capture
+  case ciImageCreation
+  public static func == (a: ImageScannerControllerError, b: ImageScannerControllerError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension ImageScannerControllerError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public protocol GatetoPayOnboardingDocumentsDelegate {
+  func userDidCloseCamera()
+  func userFinishCapturingDocument(documents: [GatetoPayOnboardingDocument])
+  func didFinishWithError(error: GatetoPayOnboardingError)
+  func userFinishCapturingDocumentsWithResponse(documents: [GatetoPayOnboardingDocument], response: DocumentVerificationResponse)
+  func userFinishCapturingDocumentsWithError(documents: [GatetoPayOnboardingDocument], error: GatetoPayOnboardingError)
+}
+@_hasMissingDesignatedInitializers final public class GatetoPayOnboardingDocuments {
+  final public var delegate: (any GatetoPayOnboardingDocumentsDelegate)?
+  final public func captureDocuments(documentType: NationalityIDType, configuration: ConfigureScanDocumentsViews?)
+  final public func extractData()
+  @objc deinit
+}
+extension Reachability.NetworkStatus : Swift.Equatable {}
+extension Reachability.NetworkStatus : Swift.Hashable {}
+extension DocumentTypeEnum : Swift.Equatable {}
+extension DocumentTypeEnum : Swift.Hashable {}
+extension DocumentTypeEnum : Swift.RawRepresentable {}
+extension DocumentSideEnum : Swift.Equatable {}
+extension DocumentSideEnum : Swift.Hashable {}
+extension DocumentSideEnum : Swift.RawRepresentable {}
+extension AbyanIDType : Swift.Equatable {}
+extension AbyanIDType : Swift.Hashable {}
+extension AbyanIDType : Swift.RawRepresentable {}
+extension GatetoPayOnboardingErrorEnum : Swift.Equatable {}
+extension GatetoPayOnboardingErrorEnum : Swift.Hashable {}
+extension NationalityIdTypeName : Swift.Equatable {}
+extension NationalityIdTypeName : Swift.Hashable {}
+extension NationalityIdTypeName : Swift.RawRepresentable {}
+extension GatetoPayOnboardingJourneyType : Swift.Equatable {}
+extension GatetoPayOnboardingJourneyType : Swift.Hashable {}
+extension GatetoPayOnboardingJourneyType : Swift.RawRepresentable {}
+extension GatetoPayOnboardingKYCFieldType : Swift.Equatable {}
+extension GatetoPayOnboardingKYCFieldType : Swift.Hashable {}
+extension GatetoPayOnboardingKYCFieldType : Swift.RawRepresentable {}
+extension GatetoPayOnboardingDateFieldType : Swift.Equatable {}
+extension GatetoPayOnboardingDateFieldType : Swift.Hashable {}
+extension GatetoPayOnboardingDateFieldType : Swift.RawRepresentable {}
+extension DetectionOptions : Swift.Equatable {}
+extension DetectionOptions : Swift.Hashable {}
+extension ImageScannerScan.ImageScannerError : Swift.Equatable {}
+extension ImageScannerScan.ImageScannerError : Swift.Hashable {}
+extension ImageScannerControllerError : Swift.Equatable {}
+extension ImageScannerControllerError : Swift.Hashable {}
