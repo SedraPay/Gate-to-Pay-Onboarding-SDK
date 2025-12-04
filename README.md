@@ -63,7 +63,7 @@ pod install --repo-update
 ###### Create Journey ######
 
 ```swift
-import Abyan
+import GatetoPayOnboardingSDK
 
 //Mandatory step to add
 
@@ -71,31 +71,41 @@ override func viewDidLoad(){
     super.viewDidLoad()
     
     //assign the delegate to your viewController
-    Abyan.shared.delegate = self
+    GatetoPayOnboardingSDK.shared.delegate = self
     
-/// Below function is required to continue using the framework, you have to enter all parameters to let the framework works fine
+/// This function is required to initialize the SDK correctly.
+/// You must provide all parameters to ensure proper functionality.
+///
 /// - Parameters:
-///   - serverKey: this key will be from the portal
-///   - serverURLString: the base url that sent to you by sales team
-///   - needLog: this will show the errors in the debug
-///   - journeyType: this is enum that contains 3 types (.unknown, .new, .update) to show the user is new or updating the profile.
-///      If you are not intersted to check the type don't add it or set the type as .unknown
+///   - serverKey: The key provided to you from the portal.
+///   - serverURLString: The base URL provided by the sales team.
+///   - nationalNumber: Required so the backend can communicate with Civil Status Authority to retrieve user information.
+///   - riskFormId: Used to fetch the first request which contains the risk form data.
+///   - applicationId: 
 
-    Abyan.shared.setSettings(serverKey: "<YOUR_SERVER_KEY>", serverURLString: "<YOUR_GIVEN_SERVER>", true, .update) 
+GatetoPayOnboardingSDK.shared.setSettings(
+    serverKey: "<YOUR_SERVER_KEY>",
+    serverURLString: "<YOUR_GIVEN_SERVER_URL>",
+    nationalNumber: "<USER_NATIONAL_NUMBER>",
+    riskFormId: "<RISK_FORM_ID>",
+    applicationId: ""
+)
 }
 
 
-extension <YOUR_VIEW_CONTROLLER>: AbyanJourneyDelegate{
-    func didFinishCreatingJourneyWithError(error: AbyanCheckError){
+extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingJourneyDelegate{
+    func didFinishCreatingJourneyWithError(error: GatetoPayOnboardingCheckError){
         //do your own code as:
         //dismiss dialogs, loadings
         //recall the function
     }
     
-    func didFinishCreatingJourneyWithSuccess(journeyId: String) {
+    func didFinishCreatingJourneyWithSuccess(journeyId: String, isDocumentVerification: Bool, isLiveness: Bool, isFaceMatching: Bool) {
         //do your own code as:
         //dismiss dialog, loadings
         //save the journey if needed as a reference to your server to check user from our protal
+         GatetoPayOnboarding.riskForm.delegate = self
+         GatetoPayOnboarding.riskForm.getRiskFields(fieldValues: [])
     }
 }
 
@@ -106,8 +116,8 @@ You can enable or disable the OCR feature for all forms.
 
 @IBAction func enableOCRSwitchAction(_ sender: UISwitch) {
     sender.isOn ?
-      Abyan.shared.setOCREnabled(true) :
-      Abyan.shared.setOCREnabled(false)
+      GatetoPayOnboarding.shared.setOCREnabled(true) :
+      GatetoPayOnboarding.shared.setOCREnabled(false)
 }
 
 If set to true → OCR will be enabled and applied on all forms.
@@ -117,82 +127,151 @@ If set to false → OCR will be applied only if the form itself supports OCR, ot
 ###### END OF CREATE JOURNEY ######
 
 
-###### Abyan Products Flow ######
+###### GatetoPayOnboarding Risk Form Flow ######
 
-You can use the Products API to retrieve available products, get their form info, and continue the flow based on whether OCR is required or not.
 ```swift
-override func viewDidLoad(){
+override func viewDidLoad() {
     super.viewDidLoad()
-    Abyan.product.delegate = self
-    Abyan.product.getProducts()
+    
+    GatetoPayOnboarding.riskForm.delegate = self
+    
+    // Request dynamic risk form fields
+    GatetoPayOnboarding.riskForm.getRiskFields(fieldValues: [])
 }
+
 
 @IBAction func nextButton(_ sender: UIButton) {
     Dialogs.showLoading()
-    Abyan.product.getFormInfo(productID: self.selectedProduct ?? 0,isOcrEnabled: Abyan.shared.isOCREnabled)
+    
+    // Submit updated risk form data
+    GatetoPayOnboarding.riskForm.updateRiskData(
+        riskFields: sectionsArray ?? []
+    )
 }
 
 
-extension <YOUR_VIEW_CONTROLLER>: AbyanProductsDelegate {
+
+extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingRiskFormDelegate {
+
+    /// Called when updating the Risk Form fails
+    func updateRiskFormFinishedWithError(error: String) {
+        Dialogs.dismiss()
+        // Handle retry or show a proper message to the user
+    }
+
+    /// Called when updating the Risk Form succeeds
+    func didUpdateRiskFormSuccessfully(riskLevel: Int?) {
+        Dialogs.dismiss()
+        
+        // Save riskLevel for later usage when submitting getProductByIdType API
+        
+        GatetoPayOnboarding.cspdData.delegate = self
+        
+        if let sections = sectionsArray {
+            let allFields = sections.flatMap { $0.dynamicFields ?? [] }
+
+            let nationality = allFields.first {
+                $0.fieldLabel == "Nationality"
+            }?.value?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+
+            let residency = allFields.first {
+                $0.fieldLabel == "Country of Residency" ||
+                $0.fieldLabel == "Country Of Residency"
+            }?.value?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+
+            guard !nationality.isEmpty, !residency.isEmpty else {
+                print("Nationality or residency is empty — skipping CSPD API call")
+                return
+            }
+
+            GatetoPayOnboarding.cspdData.getCSPDTypes(
+                nationality: nationality,
+                residency: residency
+            )
+        }
+    }
+
+    /// Called when retrieving Risk Form fields fails
+    func riskFormFinishedWithError(error: GatetoPayOnboardingError) {
+        Dialogs.dismiss()
+        Dialogs.showError(error.localizedDescription)
+    }
+
+    /// Called when Risk Form dynamic fields are successfully retrieved
+    func riskFormFields(fields: [GatetoPayOnboardingKYCFieldItem]) {
+        Dialogs.dismiss()
+        
+        var array: [GatetoPayOnboardingKYCDynamicField] = []
+        
+        fields.forEach { item in
+            if let items = item.dynamicFields {
+                array.append(contentsOf: items)
+            }
+        }
+        
+        // `array` now contains all dynamic fields to display in your UI
+        // Please store it into sectionsArray to submit it later
+    }
+}
+
+```
+
+###### GatetoPayOnboarding CSPD Flow ######
+```swift
+
+      @IBAction func NextButton(_ sender: Any) {
+        GatetoPayOnboarding.cspdData.delegate = self
+        GatetoPayOnboarding.cspdData.getProductByIdType(riskLevel: risklevel ?? 0, customerIdentityType: self.customerIdentityType ?? 0)
+    } 
+   extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingDSPDDelegate {
     
-    // Called when products request returns with error
-    func productsFinishedWithError(error: AbyanError) {
-         //do your own code as:
+    
+    func cspdTypesReceived(types: [CSPDType]){
+          //do your own code as:
          //dismiss dialogs, loadings
          //recall the function
     }
-    }
     
-    // Called when products request returns successfully
-    func products(products: ProductsResponse) {
-          //do your own code as:
-         //dismiss dialogs, loadings
-        // handle products response (e.g., show in a list or picker)
-    }
     
-    // Called when form info fields are received for the selected product
     
-  func FormInfofields(fields: [IntegrationInfo]) {
-    Dialogs.dismiss()
-    
-    /// Note:
-    /// - The `fields` array contains the form fields for the selected product.
-    /// - If `fields` is empty → call `getKYCFields(fieldValues:productId:)` directly
-    ///   and send an empty array (`formDataValueFields`) to continue the flow.
-    /// - If `fields` is not empty → it may contain dynamic fields that you must fill
-    ///   because these dynamic fields need to be sent later when calling the next KYC step.
-    
-    if Abyan.shared.isOCREnabled == true {
-        // OCR is globally forced → always run OCR flow
-    } else {
-        // OCR depends on form content
-    }
-}
-
-    // Called when form info is empty → fallback to KYC flow
-    func EmptyFormInfofields() {
+    func cspdTypesFinishedWithError(error: GatetoPayOnboardingError){
         Dialogs.dismiss()
-        Abyan.kyc.delegate = self
-        Dialogs.showLoading()
-        Abyan.kyc.getKYCFields(fieldValues:  [formDataValueFields] = [] ,productId: self.selectedProduct ?? 0)
+        Dialogs.showError(error.localizedDescription)
     }
-}
+    
+    
+    func productIdForKYCReceived(productId: Int) {
+        productIdForKYC = productId
+        if !isDocumentVerificationEnabled && !isLivenessEnabled {
+            GatetoPayOnboarding.kyc.delegate = self
+            Dialogs.showLoading()
+            GatetoPayOnboarding.kyc.getKYCFields(fieldValues: [] , productId: productIdForKYC ?? 0)
+           
+        }
+        else if isDocumentVerificationEnabled {
+        
+              GatetoPayOnboarding.documentsCheck.captureDocuments(documentType: .id, configuration: configuration)
+
+        }
+        else if isLivenessEnabled && !isDocumentVerificationEnabled {
+            GatetoPayOnboarding.livenessCheck.checkLiveness(viewController: self, detectOptions: [.blink, .lookRight, .lookLeft], isDetectionOptionsSorted: true)
+            GatetoPayOnboarding.livenessCheck.delegate = self
+        }
+    }
+    
+    func productIdForKYCFinishedWithError(error: GatetoPayOnboardingError) {
+        Dialogs.showError(error.errorString)
+
+    }
+    
+  
 ```
 
-Explanation:
+###### GatetoPayOnboarding KYC  ######
 
-getProducts() → fetch all available products.
-getFormInfo(productID:) → fetch form fields of the selected product.
-If OCR is enabled globally → SDK forces OCR in the flow.
-If OCR is disabled globally → SDK checks the form; if it contains OCR, it runs OCR, otherwise manual flow.
-If form info is empty → SDK falls back to requesting KYC fields.
-
-
-###### Abyan KYC  ######
-
-To handle the KYC flow, you need to conform to the AbyanKYCDelegate protocol.
+To handle the KYC flow, you need to conform to the GatetoPayOnboardingKYCDelegate protocol.
 ```swift
-extension <YOUR_VIEW_CONTROLLER>: AbyanKYCDelegate {
+extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingKYCDelegate {
 
     // Called when updating KYC fails
     func updateKYCFinishedWithError(error: String) {
@@ -209,18 +288,18 @@ extension <YOUR_VIEW_CONTROLLER>: AbyanKYCDelegate {
     }
     
     // Called when KYC request fails
-    func kycFinishedWithError(error: AbyanError) {
+    func kycFinishedWithError(error: GatetoPayOnboardingError) {
         Dialogs.dismiss()
         Dialogs.showError(error.localizedDescription)
     }
     
     // Called when KYC dynamic fields are returned
-    func kycFields(fields: [AbyanKYCFieldItem]) {
+    func kycFields(fields: [GatetoPayOnboardingKYCFieldItem]) {
         Dialogs.dismiss()
         
         /// This will return all dynamic fields from the SDK.
         /// You can use them to render your own KYC form dynamically.
-        var array: [AbyanKYCDynamicField] = []
+        var array: [GatetoPayOnboardingKYCDynamicField] = []
         
         for item in fields {
             if let items = item.dynamicFields {
@@ -240,30 +319,30 @@ Call this method only once and cache the response (countries and cities) locally
 This data will be used later in the KYC screen to handle data types like country and countryCity.
 
 ```swift
-extension <YOUR_VIEW_CONTROLLER>: AbyanCountriesDelegate {
+extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingCountriesDelegate {
 
   func loadCountries() {
-    Abyan.countries.delegate = self
-    Abyan.countries.getNationalities()
+    GatetoPayOnboarding.countries.delegate = self
+    GatetoPayOnboarding.countries.getNationalities()
   }
 
   func didGetNationalitiesWithSuccess(response: CountriesAndCitiesResponse) {
     // use response (countries, cities)
   }
 
-  func didGetNationalitiesWithError(error: AbyanError) {
+  func didGetNationalitiesWithError(error: GatetoPayOnboardingError) {
     // handle error
   }
 }
 ```
 
-###### Abyan Dynamic Fields ######
+###### GatetoPayOnboarding Dynamic Fields ######
 
-Both FormInfofields(fields: [IntegrationInfo]) and kycFields(fields: [AbyanKYCFieldItem]) can return dynamic fields.
+Both FormInfofields(fields: [IntegrationInfo]) and kycFields(fields: [GatetoPayOnboardingKYCFieldItem]) can return dynamic fields.
 
 The possible field types are:
 ```swift
- AbyanKYCFieldType {
+ GatetoPayOnboardingKYCFieldType {
     case textField = 1          // Simple text input
     case dropdown = 2           // Select from multiple options
     case checkbox = 3           // Tick multiple options
@@ -287,7 +366,7 @@ The possible field types are:
 
 ```
 
-###### Abyan Check ######
+###### GatetoPayOnboarding Check ######
 
 If you need to let the user capture the document (id, passport), use below code:
 
@@ -295,40 +374,40 @@ If you need to let the user capture the document (id, passport), use below code:
 
 //put this code when you need to capture the document.
 @objc func myButtonAction(_ sender: UIButton){
-    Abyan.documentsCheck.delegate = self
+    GatetoPayOnboarding.documentsCheck.delegate = self
 
     /// Below function is for ocr the document and get the information of the user.
     /// - Parameters:
     ///   - documentType: this is an enum (.id, .passport)
     ///   - configuration: of type ConfigureScanDocumentsViews whitch contains 3 objects type will be declared down 
 
-    Abyan.documentsCheck.captureDocuments(documentType: .id, configuration: configuration)
+    GatetoPayOnboarding.documentsCheck.captureDocuments(documentType: .id, configuration: configuration)
 }
 
-extension <YOUR_VIEW_CONTROLLER>: AbyanDocumentsDelegate{
+extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingDocumentsDelegate{
     func userDidCloseCamera(){
     
     }
-    func userFinishCapturingDocument(documents: [AbyanDocument]){
+    func userFinishCapturingDocument(documents: [GatetoPayOnboardingDocument]){
     
     }
-    func userFinishCapturingDocumentsWithResponse(documents: [AbyanDocument], response: AbyanDocumentVerificationResponse){
+    func userFinishCapturingDocumentsWithResponse(documents: [GatetoPayOnboardingDocument], response: GatetoPayOnboardingDocumentVerificationResponse){
     
     }
-    func userFinishCapturingDocumentsWithError(documents: [AbyanDocument], , error: AbyanError){
+    func userFinishCapturingDocumentsWithError(documents: [GatetoPayOnboardingDocument], , error: GatetoPayOnboardingError){
     
     }
-    func didFinishWithError(error: AbyanError){
+    func didFinishWithError(error: GatetoPayOnboardingError){
 
     }
-    func userFinishCapturingDocumentsWithError(documents: [AbyanDocument]) {
+    func userFinishCapturingDocumentsWithError(documents: [GatetoPayOnboardingDocument]) {
         
     }
 }
 ```
-###### END OF ABYAN CHECK ######
+###### END OF GatetoPayOnboarding CHECK ######
 
-###### Abyan Configuration ######
+###### GatetoPayOnboarding Configuration ######
 If you need to configure the Documents Pages, use below code:
 ```swift
 /// ConfigureDocumentsCameraPage: this is the first object which configure all attributes in the Camera Page, use below code with default values:
@@ -461,9 +540,9 @@ public struct ConfigureDocumentsEditPage {
     }
 ```
 
-###### END OF ABYAN CHECK ######
+###### END OF GatetoPayOnboarding CHECK ######
 
-###### Abyan Liveness Check ######
+###### GatetoPayOnboarding Liveness Check ######
 
 If you need to check user liveness and take a selfie, use below code:
 
@@ -471,7 +550,7 @@ If you need to check user liveness and take a selfie, use below code:
 
 //put this code when you need to check liveness.
 @objc func myButtonAction(_ sender: UIButton){
-        Abyan.livenessCheck.delegate = self
+        GatetoPayOnboarding.livenessCheck.delegate = self
 
 
     /// Below function is for checking the liveness of the user and take a photo for the user.
@@ -479,11 +558,11 @@ If you need to check user liveness and take a selfie, use below code:
     ///   - viewController: current viewController
     ///   - detectOptions: array of side(detection) options enum [.blink, .smile, .lookRight, .lookLeft] 
 
-        Abyan.livenessCheck.checkLiveness(viewController: vc, detectOptions: [.blink])
+        GatetoPayOnboarding.livenessCheck.checkLiveness(viewController: vc, detectOptions: [.blink])
 
 }
 
-extension <YOUR_VIEW_CONTROLLER>: AbyanCheckLivenessCheckDelegate{
+extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingCheckLivenessCheckDelegate{
     func didPressCancel(){
     
     }
@@ -496,13 +575,13 @@ extension <YOUR_VIEW_CONTROLLER>: AbyanCheckLivenessCheckDelegate{
     func didGetError(errorMessage: String){
     
     }
-    func LivenessCheckPageError(error: AbyanCheckError){
+    func LivenessCheckPageError(error: GatetoPayOnboardingCheckError){
         
     }
     func LivenessCheckDone(){
     
     }
-    func cameraAccessDeniedError(error: AbyanError){
+    func cameraAccessDeniedError(error: GatetoPayOnboardingError){
     
     }
     
@@ -511,14 +590,14 @@ extension <YOUR_VIEW_CONTROLLER>: AbyanCheckLivenessCheckDelegate{
 ###### END OF SEDRA LIVENESS CHECK ######
 
 
-###### Abyan Comply ######
+###### GatetoPayOnboarding Comply ######
 
 
 ```swift
 
 //put this code when you need to check your user in the world check.
 @objc func myButtonAction(_ sender: UIButton){
-    AbyanCheck.comply.delegate = self
+    GatetoPayOnboardingCheck.comply.delegate = self
 
     /// Below function is for screening and checking the customer.
     /// - Parameters:
@@ -527,18 +606,18 @@ extension <YOUR_VIEW_CONTROLLER>: AbyanCheckLivenessCheckDelegate{
     ///   - thirdName: enter the third name of the user <Optional>, leave empty string if not needed
     ///   - lastName: enter the last name of the user <Required>
 
-    Abyan.comply.screenCustomer(firstName: "<FIRST_NAME_HERE>",
+    GatetoPayOnboarding.comply.screenCustomer(firstName: "<FIRST_NAME_HERE>",
                                     secondName: "<SECOND_NAME_HERE>",
                                     thirdName: "<THIRD_NAME_HERE>",
                                     lastName: "<LAST_NAME_HERE>")
 }
 
-extension <YOUR_VIEW_CONTROLLER>: AbyanComplyDelegate{
-    func screeningFinishedWithSuccess(response: AbyanScreeningResponse){
+extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingComplyDelegate{
+    func screeningFinishedWithSuccess(response: GatetoPayOnboardingScreeningResponse){
         //do your code here
     }
     
-    func screeningFinishedWithError(message: AbyanError){
+    func screeningFinishedWithError(message: GatetoPayOnboardingError){
         //do your code here
     }
 }
@@ -548,18 +627,18 @@ extension <YOUR_VIEW_CONTROLLER>: AbyanComplyDelegate{
 ###### Close Journey ######
 
 ```swift
-extension <YOUR_VIEW_CONTROLLER>:  AbyanCloseJourneyDelegate {
+extension <YOUR_VIEW_CONTROLLER>:  GatetoPayOnboardingCloseJourneyDelegate {
   override func viewDidLoad(){
     super.viewDidLoad()
-    Abyan.closeJourney.delegate = self
-    Abyan.closeJourney.closeJourneyAPI(customerId: "unique-customer-id")
+    GatetoPayOnboarding.closeJourney.delegate = self
+    GatetoPayOnboarding.closeJourney.closeJourneyAPI(customerId: "unique-customer-id")
   }
   func didFinishCloseJourneyWithSuccess() { 
         //do your own code as:
         //dismiss dialogs, loadings
         //recall the function
   }
-  func didFinishCloseJourneyWithError(error: AbyanError) { 
+  func didFinishCloseJourneyWithError(error: GatetoPayOnboardingError) { 
          //do your own code as:
          //dismiss dialogs, loadings
          //recall the function
