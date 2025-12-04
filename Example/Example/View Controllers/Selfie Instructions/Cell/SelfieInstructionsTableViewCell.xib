@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="76" id="KGk-i7-Jjw" customClass="SelfieInstructionsTableViewCell" customModule="SedraCheck_Demo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUn-uI-fre">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="c47-5f-djX">
+                                <rect key="frame" x="20" y="10" width="280" height="56"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tickCircle" translatesAutoresizingMaskIntoConstraints="NO" id="Q7s-n5-Z78">
+                                        <rect key="frame" x="0.0" y="15.5" width="25.5" height="25.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Q7s-n5-Z78" secondAttribute="height" id="WuE-cj-YpJ"/>
+                                            <constraint firstAttribute="height" constant="25.5" id="eQR-CG-3w9"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fz8-uw-X1d">
+                                        <rect key="frame" x="35.5" y="19.5" width="244.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
+                                        <color key="textColor" red="0.30980392156862746" green="0.37254901960784315" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="c47-5f-djX" firstAttribute="top" secondItem="HUn-uI-fre" secondAttribute="top" constant="10" id="Il6-P0-yef"/>
+                            <constraint firstItem="c47-5f-djX" firstAttribute="leading" secondItem="HUn-uI-fre" secondAttribute="leading" constant="20" id="JAM-ag-7z9"/>
+                            <constraint firstAttribute="trailing" secondItem="c47-5f-djX" secondAttribute="trailing" constant="20" id="eAS-ck-rku"/>
+                            <constraint firstAttribute="bottom" secondItem="c47-5f-djX" secondAttribute="bottom" constant="10" id="uyB-V8-lzr"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="HUn-uI-fre" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="93L-di-irm"/>
+                    <constraint firstAttribute="trailing" secondItem="HUn-uI-fre" secondAttribute="trailing" id="Qbt-yp-8N5"/>
+                    <constraint firstItem="HUn-uI-fre" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ikR-HK-YKR"/>
+                    <constraint firstAttribute="bottom" secondItem="HUn-uI-fre" secondAttribute="bottom" id="ul2-l2-a9l"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="currentInstructionLabel" destination="fz8-uw-X1d" id="rFj-o3-8XH"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="117.1875"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="tickCircle" width="25.5" height="25.5"/>
+    </resources>
+</document>

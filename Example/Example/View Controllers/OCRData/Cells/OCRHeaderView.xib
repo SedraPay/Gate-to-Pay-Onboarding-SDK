@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="OCRHeaderView" id="iN0-l3-epB" customClass="OCRHeaderView" customModule="Sample" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="455" height="104"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cti-IN-jnH">
+                    <rect key="frame" x="10" y="10" width="435" height="84"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="reC-de-soY">
+                            <rect key="frame" x="10" y="10" width="415" height="64"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0Z-li-Xd4">
+                                    <rect key="frame" x="0.0" y="0.0" width="207.5" height="64"/>
+                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
+                                    <color key="textColor" name="AbyanColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKR-Qo-YoA">
+                                    <rect key="frame" x="207.5" y="0.0" width="207.5" height="64"/>
+                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
+                                    <color key="textColor" name="AbyanColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tss-m0-XNd">
+                            <rect key="frame" x="0.0" y="83" width="435" height="1"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="EKp-4z-dZf"/>
+                                <constraint firstAttribute="height" constant="1" id="NY7-kV-gH5"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="tss-m0-XNd" secondAttribute="bottom" id="1hd-B9-RGz"/>
+                        <constraint firstAttribute="bottom" secondItem="reC-de-soY" secondAttribute="bottom" constant="10" id="DCZ-ON-lul"/>
+                        <constraint firstItem="reC-de-soY" firstAttribute="top" secondItem="Cti-IN-jnH" secondAttribute="top" constant="10" id="eNE-Bb-7Ko"/>
+                        <constraint firstAttribute="trailing" secondItem="reC-de-soY" secondAttribute="trailing" constant="10" id="muP-Rf-fM2"/>
+                        <constraint firstItem="tss-m0-XNd" firstAttribute="leading" secondItem="Cti-IN-jnH" secondAttribute="leading" id="oow-r5-t68"/>
+                        <constraint firstItem="reC-de-soY" firstAttribute="leading" secondItem="Cti-IN-jnH" secondAttribute="leading" constant="10" id="sI7-UB-026"/>
+                        <constraint firstAttribute="trailing" secondItem="tss-m0-XNd" secondAttribute="trailing" id="xMd-8K-A27"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Cti-IN-jnH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="BUa-dH-oqo"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Cti-IN-jnH" secondAttribute="trailing" constant="10" id="DKH-QH-OsR"/>
+                <constraint firstItem="Cti-IN-jnH" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="hB6-85-Oef"/>
+                <constraint firstAttribute="bottom" secondItem="Cti-IN-jnH" secondAttribute="bottom" constant="10" id="mwT-fw-YIl"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="mainView" destination="Cti-IN-jnH" id="Gf3-kP-Epx"/>
+                <outlet property="nameLabel" destination="k0Z-li-Xd4" id="OUN-NI-9Br"/>
+                <outlet property="valueLabel" destination="qKR-Qo-YoA" id="aHC-jh-RyL"/>
+            </connections>
+            <point key="canvasLocation" x="167.39130434782609" y="337.5"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="AbyanColor">
+            <color red="0.082352941176470587" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

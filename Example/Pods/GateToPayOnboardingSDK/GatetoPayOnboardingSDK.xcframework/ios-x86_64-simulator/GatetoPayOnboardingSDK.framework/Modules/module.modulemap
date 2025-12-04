@@ -1,0 +1,11 @@
+framework module GatetoPayOnboardingSDK {
+  umbrella header "GatetoPayOnboardingSDK.h"
+  export *
+
+  module * { export * }
+}
+
+module GatetoPayOnboardingSDK.Swift {
+  header "GatetoPayOnboardingSDK-Swift.h"
+  requires objc
+}

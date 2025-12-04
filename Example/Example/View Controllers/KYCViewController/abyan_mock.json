@@ -1,0 +1,299 @@
+{
+    "kycId": 0,
+    "steps": [
+        {
+            "tag": "personInfo",
+            "fieldLabel": "Person Info",
+            "dynamicFields": [
+                {
+                    "tag": "152",
+                    "fieldLabel": "نوع الوظيقة",
+                    "fieldMin": null,
+                    "fieldMax": null,
+                    "dateMin": "2023-11-20T22:00:00Z",
+                    "dateMax": "2023-11-20T22:00:00Z",
+                    "dataType": 4,
+                    "value": " ",
+                    "isRequired": true,
+                    "isReadOnly": false,
+                    "enumeratedValues": [
+                        {
+                            "key": "1114",
+                            "value": "حكومي"
+                        },
+                        {
+                            "key": "1115",
+                            "value": "خاص"
+                        },
+                        {
+                            "key": "1116",
+                            "value": "عاطل"
+                        },
+                        {
+                            "key": "1117",
+                            "value": "طالب"
+                        },
+                        {
+                            "key": "1118",
+                            "value": "أعمال حرة"
+                        }
+                    ],
+                    "validationRegEx": null,
+                    "regExErrorMessage": null,
+                    "hint": null,
+                    "helperText": null,
+                    "dependsOnItem": null,
+                    "isBusiness": false
+                },
+                {
+                    "tag": "153",
+                    "fieldLabel": "الاسم كاملاً بالانجليزي",
+                    "fieldMin": 2,
+                    "fieldMax": 100,
+                    "dateMin": "2023-11-20T22:00:00Z",
+                    "dateMax": "2023-11-20T22:00:00Z",
+                    "dataType": 1,
+                    "value": " ",
+                    "isRequired": true,
+                    "isReadOnly": false,
+                    "enumeratedValues": [],
+                    "validationRegEx": null,
+                    "regExErrorMessage": "Please enter valid name",
+                    "hint": "Your full name",
+                    "helperText": null,
+                    "dependsOnItem": null,
+                    "isBusiness": false
+                },
+                {
+                    "tag": "154",
+                    "fieldLabel": "الجنس",
+                    "fieldMin": null,
+                    "fieldMax": null,
+                    "dateMin": "2023-11-20T22:00:00Z",
+                    "dateMax": "2023-11-20T22:00:00Z",
+                    "dataType": 2,
+                    "value": " ",
+                    "isRequired": true,
+                    "isReadOnly": false,
+                    "enumeratedValues": [
+                        {
+                            "key": "1111",
+                            "value": "ذكر"
+                        },
+                        {
+                            "key": "1112",
+                            "value": "انثى"
+                        }
+                    ],
+                    "validationRegEx": null,
+                    "regExErrorMessage": null,
+                    "hint": "Gender",
+                    "helperText": null,
+                    "dependsOnItem": null,
+                    "isBusiness": false
+                },
+                {
+                    "tag": "155",
+                    "fieldLabel": "التعليم",
+                    "fieldMin": null,
+                    "fieldMax": null,
+                    "dateMin": "2023-11-20T22:00:00Z",
+                    "dateMax": "2023-11-20T22:00:00Z",
+                    "dataType": 3,
+                    "value": " ",
+                    "isRequired": true,
+                    "isReadOnly": false,
+                    "enumeratedValues": [
+                        {
+                            "key": "1120",
+                            "value": "ثاوني"
+                        },
+                        {
+                            "key": "1121",
+                            "value": "بكالوريوس"
+                        },
+                        {
+                            "key": "1122",
+                            "value": "ماسترز"
+                        },
+                        {
+                            "key": "1123",
+                            "value": "دكتوراة"
+                        },
+                        {
+                            "key": "1124",
+                            "value": "استاذ دكتور"
+                        }
+                    ],
+                    "validationRegEx": null,
+                    "regExErrorMessage": null,
+                    "hint": "Gender",
+                    "helperText": null,
+                    "dependsOnItem": null,
+                    "isBusiness": false
+                },
+                {
+                    "tag": "156",
+                    "fieldLabel": "تاريخ الميلاد",
+                    "fieldMin": null,
+                    "fieldMax": null,
+                    "dateMin": "1890-01-01T22:00:00Z",
+                    "dateMax": "2006-05-05T22:00:00Z",
+                    "dataType": 5,
+                    "value": "1999-02-12T22:00:00Z",
+                    "isRequired": true,
+                    "isReadOnly": false,
+                    "enumeratedValues": [],
+                    "validationRegEx": null,
+                    "regExErrorMessage": null,
+                    "hint": "Gender",
+                    "helperText": null,
+                    "dependsOnItem": null,
+                    "isBusiness": false
+                },
+                {
+                    "tag": "157",
+                    "fieldLabel": "هل أنت متزوج؟",
+                    "fieldMin": null,
+                    "fieldMax": null,
+                    "dateMin": "1890-01-01T22:00:00Z",
+                    "dateMax": "2006-05-05T22:00:00Z",
+                    "dataType": 6,
+                    "value": "true",
+                    "isRequired": true,
+                    "isReadOnly": false,
+                    "enumeratedValues": [],
+                    "validationRegEx": null,
+                    "regExErrorMessage": null,
+                    "hint": "Gender",
+                    "helperText": null,
+                    "dependsOnItem": null,
+                    "isBusiness": false
+                },
+                {
+                    "tag": "158",
+                    "fieldLabel": "الهوية",
+                    "fieldMin": null,
+                    "fieldMax": null,
+                    "dateMin": "1890-01-01T22:00:00Z",
+                    "dateMax": "2006-05-05T22:00:00Z",
+                    "dataType": 7,
+                    "value": "",
+                    "isRequired": true,
+                    "isReadOnly": false,
+                    "enumeratedValues": [],
+                    "validationRegEx": null,
+                    "regExErrorMessage": null,
+                    "hint": "Gender",
+                    "helperText": null,
+                    "dependsOnItem": null,
+                    "isBusiness": false
+                },
+                {
+                    "tag": "159",
+                    "fieldLabel": "صورة شخصية",
+                    "fieldMin": null,
+                    "fieldMax": null,
+                    "dateMin": "1890-01-01T22:00:00Z",
+                    "dateMax": "2006-05-05T22:00:00Z",
+                    "dataType": 8,
+                    "value": "",
+                    "isRequired": true,
+                    "isReadOnly": false,
+                    "enumeratedValues": [],
+                    "validationRegEx": null,
+                    "regExErrorMessage": null,
+                    "hint": "Gender",
+                    "helperText": null,
+                    "dependsOnItem": null,
+                    "isBusiness": false
+                },
+                {
+                    "tag": "160",
+                    "fieldLabel": "الدولة",
+                    "fieldMin": null,
+                    "fieldMax": null,
+                    "dateMin": "1890-01-01T22:00:00Z",
+                    "dateMax": "2006-05-05T22:00:00Z",
+                    "dataType": 9,
+                    "value": "",
+                    "isRequired": true,
+                    "isReadOnly": false,
+                    "enumeratedValues": [
+                    {
+                            "key": "1120",
+                            "value": "فلسطين"
+                        },
+                        {
+                            "key": "1121",
+                            "value": "العراق"
+                        },
+                        {
+                            "key": "1122",
+                            "value": "الأردن"
+                        }
+                    ],
+                    "validationRegEx": null,
+                    "regExErrorMessage": null,
+                    "hint": "Gender",
+                    "helperText": null,
+                    "dependsOnItem": null,
+                    "isBusiness": false
+                },
+                {
+                    "tag": "161",
+                    "fieldLabel": "المدينة",
+                    "fieldMin": null,
+                    "fieldMax": null,
+                    "dateMin": "1890-01-01T22:00:00Z",
+                    "dateMax": "2006-05-05T22:00:00Z",
+                    "dataType": 10,
+                    "value": "",
+                    "isRequired": true,
+                    "isReadOnly": false,
+                    "enumeratedValues": [
+                    {
+                            "key": "1130",
+                            "value": "الخليل"
+                        },
+                        {
+                            "key": "1131",
+                            "value": "نينوى"
+                        },
+                        {
+                            "key": "1132",
+                            "value": "عمان"
+                        }
+                    ],
+                    "validationRegEx": null,
+                    "regExErrorMessage": null,
+                    "hint": "Gender",
+                    "helperText": null,
+                    "dependsOnItem": null,
+                    "isBusiness": false
+                },
+                {
+                    "tag": "162",
+                    "fieldLabel": "من أنت؟",
+                    "fieldMin": 10,
+                    "fieldMax": 20,
+                    "dateMin": "1890-01-01T22:00:00Z",
+                    "dateMax": "2006-05-05T22:00:00Z",
+                    "dataType": 12,
+                    "value": "",
+                    "isRequired": true,
+                    "isReadOnly": false,
+                    "enumeratedValues": [],
+                    "validationRegEx": null,
+                    "regExErrorMessage": null,
+                    "hint": "Who are you?",
+                    "helperText": null,
+                    "dependsOnItem": null,
+                    "isBusiness": false
+                },
+                ]
+                }
+    ],
+    "isSuccess": true,
+    "errors": []
+}

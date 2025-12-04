@@ -1,0 +1,213 @@
+PODS:
+  - Alamofire (5.10.2)
+  - AMPopTip (4.12.0)
+  - DatePickerDialog (4.0)
+  - DropDown (2.3.13)
+  - FADesignable (0.1.5):
+    - "UITextView+Placeholder"
+  - FAPickerView (0.2.1):
+    - SDWebImage
+  - GateToPayOnboardingSDK (0.1.2):
+    - Alamofire
+    - GoogleMLKit/FaceDetection
+    - lottie-ios
+  - GoogleDataTransport (10.1.0):
+    - nanopb (~> 3.30910.0)
+    - PromisesObjC (~> 2.4)
+  - GoogleMLKit/FaceDetection (9.0.0):
+    - GoogleMLKit/MLKitCore
+    - MLKitFaceDetection (~> 8.0.0)
+  - GoogleMLKit/MLKitCore (9.0.0):
+    - MLKitCommon (~> 14.0.0)
+  - GoogleToolboxForMac/Defines (4.2.1)
+  - GoogleToolboxForMac/Logger (4.2.1):
+    - GoogleToolboxForMac/Defines (= 4.2.1)
+  - "GoogleToolboxForMac/NSData+zlib (4.2.1)":
+    - GoogleToolboxForMac/Defines (= 4.2.1)
+  - GoogleUtilities/Environment (8.1.0):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Logger (8.1.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Privacy (8.1.0)
+  - GoogleUtilities/UserDefaults (8.1.0):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - GTMSessionFetcher/Core (3.5.0)
+  - IQKeyboardCore (1.0.8)
+  - IQKeyboardManagerSwift (8.0.1):
+    - IQKeyboardManagerSwift/Appearance (= 8.0.1)
+    - IQKeyboardManagerSwift/Core (= 8.0.1)
+    - IQKeyboardManagerSwift/IQKeyboardReturnManager (= 8.0.1)
+    - IQKeyboardManagerSwift/IQKeyboardToolbarManager (= 8.0.1)
+    - IQKeyboardManagerSwift/IQTextView (= 8.0.1)
+    - IQKeyboardManagerSwift/Resign (= 8.0.1)
+  - IQKeyboardManagerSwift/Appearance (8.0.1):
+    - IQKeyboardManagerSwift/Core
+  - IQKeyboardManagerSwift/Core (8.0.1):
+    - IQKeyboardNotification
+    - IQTextInputViewNotification
+  - IQKeyboardManagerSwift/IQKeyboardReturnManager (8.0.1):
+    - IQKeyboardReturnManager
+  - IQKeyboardManagerSwift/IQKeyboardToolbarManager (8.0.1):
+    - IQKeyboardManagerSwift/Core
+    - IQKeyboardToolbarManager
+  - IQKeyboardManagerSwift/IQTextView (8.0.1):
+    - IQTextView
+  - IQKeyboardManagerSwift/Resign (8.0.1):
+    - IQKeyboardManagerSwift/Core
+  - IQKeyboardNotification (1.0.6)
+  - IQKeyboardReturnManager (1.0.6):
+    - IQKeyboardCore
+  - IQKeyboardToolbar (1.1.3):
+    - IQKeyboardToolbar/Core (= 1.1.3)
+  - IQKeyboardToolbar/Core (1.1.3):
+    - IQKeyboardCore
+    - IQKeyboardToolbar/Placeholderable
+  - IQKeyboardToolbar/Placeholderable (1.1.3)
+  - IQKeyboardToolbarManager (1.1.4):
+    - IQKeyboardToolbar
+    - IQTextInputViewNotification
+  - IQTextInputViewNotification (1.0.9):
+    - IQKeyboardCore
+  - IQTextView (1.0.5):
+    - IQKeyboardToolbar/Placeholderable
+  - lottie-ios (3.3.0)
+  - MLImage (1.0.0-beta8)
+  - MLKitCommon (14.0.0):
+    - GoogleDataTransport (~> 10.0)
+    - GoogleToolboxForMac/Logger (< 5.0, >= 4.2.1)
+    - "GoogleToolboxForMac/NSData+zlib (< 5.0, >= 4.2.1)"
+    - GoogleUtilities/Logger (~> 8.0)
+    - GoogleUtilities/UserDefaults (~> 8.0)
+    - GTMSessionFetcher/Core (< 4.0, >= 3.3.2)
+  - MLKitFaceDetection (8.0.0):
+    - MLKitCommon (~> 14.0)
+    - MLKitVision (~> 10.0)
+  - MLKitVision (10.0.0):
+    - GoogleToolboxForMac/Logger (< 5.0, >= 4.2.1)
+    - "GoogleToolboxForMac/NSData+zlib (< 5.0, >= 4.2.1)"
+    - GTMSessionFetcher/Core (< 4.0, >= 3.3.2)
+    - MLImage (= 1.0.0-beta8)
+    - MLKitCommon (~> 14.0)
+  - nanopb (3.30910.0):
+    - nanopb/decode (= 3.30910.0)
+    - nanopb/encode (= 3.30910.0)
+  - nanopb/decode (3.30910.0)
+  - nanopb/encode (3.30910.0)
+  - NVActivityIndicatorView (4.8.0):
+    - NVActivityIndicatorView/Presenter (= 4.8.0)
+  - NVActivityIndicatorView/Presenter (4.8.0)
+  - OTPFieldView (1.0.1)
+  - PromisesObjC (2.4.0)
+  - Protobuf (3.29.5)
+  - SDWebImage (5.21.5):
+    - SDWebImage/Core (= 5.21.5)
+  - SDWebImage/Core (5.21.5)
+  - SwiftMessages (9.0.9):
+    - SwiftMessages/App (= 9.0.9)
+  - SwiftMessages/App (9.0.9)
+  - UDatePicker (1.1.1)
+  - "UITextView+Placeholder (1.4.0)"
+
+DEPENDENCIES:
+  - Alamofire
+  - AMPopTip
+  - DatePickerDialog
+  - DropDown
+  - FADesignable
+  - FAPickerView
+  - GateToPayOnboardingSDK
+  - GoogleMLKit/FaceDetection
+  - IQKeyboardManagerSwift
+  - lottie-ios (~> 3.3.0)
+  - NVActivityIndicatorView (~> 4.8.0)
+  - OTPFieldView
+  - Protobuf (~> 3.25)
+  - SwiftMessages (~> 9.0.6)
+  - UDatePicker (from `https://github.com/zaidiabbas/UDatePicker`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AMPopTip
+    - DatePickerDialog
+    - DropDown
+    - FADesignable
+    - FAPickerView
+    - GateToPayOnboardingSDK
+    - GoogleDataTransport
+    - GoogleMLKit
+    - GoogleToolboxForMac
+    - GoogleUtilities
+    - GTMSessionFetcher
+    - IQKeyboardCore
+    - IQKeyboardManagerSwift
+    - IQKeyboardNotification
+    - IQKeyboardReturnManager
+    - IQKeyboardToolbar
+    - IQKeyboardToolbarManager
+    - IQTextInputViewNotification
+    - IQTextView
+    - lottie-ios
+    - MLImage
+    - MLKitCommon
+    - MLKitFaceDetection
+    - MLKitVision
+    - nanopb
+    - NVActivityIndicatorView
+    - OTPFieldView
+    - PromisesObjC
+    - Protobuf
+    - SDWebImage
+    - SwiftMessages
+    - "UITextView+Placeholder"
+
+EXTERNAL SOURCES:
+  UDatePicker:
+    :git: https://github.com/zaidiabbas/UDatePicker
+
+CHECKOUT OPTIONS:
+  UDatePicker:
+    :commit: 2f493faa19cce8d1761ec90aa01975a0ca26ed3d
+    :git: https://github.com/zaidiabbas/UDatePicker
+
+SPEC CHECKSUMS:
+  Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
+  AMPopTip: cf89d8690aa6e59ddc86bf46c0ccabb3e7d148a1
+  DatePickerDialog: ccff2f91ff7a018057a4d72fa5ad6de49c8cb0cd
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  FADesignable: bb71c8f922db8c7ddf44c961590f8ef60f56d4fa
+  FAPickerView: f3bb13877ffc252d51ec73309dc34524accdb834
+  GateToPayOnboardingSDK: 71ad27f3178b0acbaf87f6a53416bb7e4e6fa06d
+  GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
+  GoogleMLKit: b1eee21a41c57704fe72483b15c85cb2c0cd7444
+  GoogleToolboxForMac: d1a2cbf009c453f4d6ded37c105e2f67a32206d8
+  GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
+  GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
+  IQKeyboardCore: 8652977ec919cf5351aa2977fedd1a6546476fbc
+  IQKeyboardManagerSwift: 835fc9c6e4732398113406d84900ad2e8f141218
+  IQKeyboardNotification: eb4910401f5a0e68f97e71c62f8a0c5b7e9d535c
+  IQKeyboardReturnManager: fcbf51fc68d7536fc1fbcca5231c4e82576b12ac
+  IQKeyboardToolbar: 9fe900f8e7def414be4025af0ca098df764d4fe3
+  IQKeyboardToolbarManager: c8a575e8b5fffe5873d0e75312244498a0759473
+  IQTextInputViewNotification: 3b9fb27a16e7ee8958cc9092cfb07a1a9e1fd559
+  IQTextView: ae13b4922f22e6f027f62c557d9f4f236b19d5c7
+  lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
+  MLImage: 0de5c6c2bf9e93b80ef752e2797f0836f03b58c0
+  MLKitCommon: 47d47b50a031d00db62f1b0efe5a1d8b09a3b2e6
+  MLKitFaceDetection: 32549f1e70e6e7731261bf9cea2b74095e2531cb
+  MLKitVision: 39a5a812db83c4a0794445088e567f3631c11961
+  nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
+  NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
+  OTPFieldView: 700a752fe62c41d1c4914c78aa500fb30d97c255
+  PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
+  Protobuf: 164aea2ae380c3951abdc3e195220c01d17400e0
+  SDWebImage: e9c98383c7572d713c1a0d7dd2783b10599b9838
+  SwiftMessages: 1a23aef303fa7bb26ad802880746cf8358e378fe
+  UDatePicker: 9bc1e36698982375332daff674d26a68d40e2d3a
+  "UITextView+Placeholder": d7b0c400921f66523f3a85d74f774512e14f6502
+
+PODFILE CHECKSUM: 2aebf6a48e29059b8750ec8d38f9f42b6266c57c
+
+COCOAPODS: 1.16.2

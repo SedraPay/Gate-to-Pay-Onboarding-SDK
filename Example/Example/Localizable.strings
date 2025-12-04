@@ -1,0 +1,34 @@
+/* 
+  Localizable.strings
+ Abyan Demo
+
+  Created by Amani BTIT on 14/12/2025.
+  
+*/
+
+//"Abyan_Step_OneFaceDetectOnly" = "Make sure there is only one Face in the camera";
+//"Abyan_Step_Blink" = "Blink";
+//"Abyan_Step_LookRight" = "Look Right";
+//"Abyan_Step_LookLeft" = "Look Left";
+//"Abyan_Step_Speech_Recognition" = "Read this number in a loud voice";
+//"Abyan_Step_Smile" = "Smile 😁";
+"Please don't move during the Liveness check" = "Please don't move during the Liveness check";
+"Liveness check completed successfully" = "Liveness check completed successfully";
+"Make sure there is only one Face in the camera frame" = "Make sure there is only one Face in the camera frame";
+"Blink" = "Blink";
+"Please get close to the ID/Passport so it would fill the empty area" = "Please get close to the ID/Passport so it would fill the empty area";
+"Scan your passport" = "Scan your passport";
+"Scan your Driving front face" = "Scan your Driving front face";
+"Scan your ID front face" = "Scan your ID front face";
+"Scan your Driving back face" = "Scan your Driving back face";
+"Scan your ID back face" = "Scan your ID back face";
+
+"Movement during the Liveness check is not Allowed" = "Movement during the Liveness check is not Allowed";
+"Multiple faces detected, please to show one face in the camera frame." = "Multiple faces detected, please to show one face in the camera frame.";
+"We like your smile! Keep always smiling" = "We like your smile! Keep always smiling";
+"Time ended, please follow the step before time ends." = "Time ended, please follow the step before time ends.";
+"Step" = "Step";
+"Ok" = "Ok";
+"Keep Steady, Don't move a lot" = "Keep Steady, Don't move a lot";
+
+"Hello World" = "مرحبا مرحبا";
