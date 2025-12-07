@@ -81,14 +81,14 @@ override func viewDidLoad(){
 ///   - serverURLString: The base URL provided by the sales team.
 ///   - nationalNumber: Required so the backend can communicate with Civil Status Authority to retrieve user information.
 ///   - riskFormId: Used to fetch the first request which contains the risk form data.
-///   - applicationId: 
+///   - applicationId: Unique identifier used to label each KYC onboarding journey so it can be easily distinguished
 
 GatetoPayOnboardingSDK.shared.setSettings(
     serverKey: "<YOUR_SERVER_KEY>",
     serverURLString: "<YOUR_GIVEN_SERVER_URL>",
     nationalNumber: "<USER_NATIONAL_NUMBER>",
     riskFormId: "<RISK_FORM_ID>",
-    applicationId: ""
+    applicationId: "<APPLICATION_ID>"
 )
 }
 
