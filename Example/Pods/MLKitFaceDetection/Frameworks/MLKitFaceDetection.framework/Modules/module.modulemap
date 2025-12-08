@@ -18,7 +18,6 @@ framework module MLKitFaceDetection {
   link framework "CoreTelephony"
   link framework "CoreVideo"
   link framework "Foundation"
-  link framework "OSLog"
   link framework "QuartzCore"
   link framework "Security"
   link framework "SystemConfiguration"

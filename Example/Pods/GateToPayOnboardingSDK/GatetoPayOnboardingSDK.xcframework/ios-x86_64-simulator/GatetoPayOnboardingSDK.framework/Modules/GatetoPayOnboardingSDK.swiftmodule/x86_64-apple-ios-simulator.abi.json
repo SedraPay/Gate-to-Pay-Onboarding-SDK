@@ -25575,14 +25575,14 @@
               },
               {
                 "kind": "TypeNominal",
-                "name": "Int",
-                "printedName": "Swift.Int",
-                "usr": "s:Si"
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
               }
             ],
             "declKind": "Func",
-            "usr": "s:22GatetoPayOnboardingSDK0abC4CSPDC18getProductByIdType9riskLevel016customerIdentityJ0ySi_SitF",
-            "mangledName": "$s22GatetoPayOnboardingSDK0abC4CSPDC18getProductByIdType9riskLevel016customerIdentityJ0ySi_SitF",
+            "usr": "s:22GatetoPayOnboardingSDK0abC4CSPDC18getProductByIdType9riskLevel016customerIdentityJ0ySi_SStF",
+            "mangledName": "$s22GatetoPayOnboardingSDK0abC4CSPDC18getProductByIdType9riskLevel016customerIdentityJ0ySi_SStF",
             "moduleName": "GatetoPayOnboardingSDK",
             "declAttributes": [
               "Final",

@@ -399,7 +399,7 @@ extension GatetoPayOnboardingSDK.GatetoPayOnboardingCSPDDelegate {
 @_hasMissingDesignatedInitializers final public class GatetoPayOnboardingCSPD {
   final public var delegate: (any GatetoPayOnboardingSDK.GatetoPayOnboardingCSPDDelegate)?
   final public func getCSPDTypes(nationality: Swift.String, residency: Swift.String)
-  final public func getProductByIdType(riskLevel: Swift.Int, customerIdentityType: Swift.Int)
+  final public func getProductByIdType(riskLevel: Swift.Int, customerIdentityType: Swift.String)
   @objc deinit
 }
 public struct GatetoPayOnboardingDataResponse<Success, Failure> where Failure : Swift.Error {

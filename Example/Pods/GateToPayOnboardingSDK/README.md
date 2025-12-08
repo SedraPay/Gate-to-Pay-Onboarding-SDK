@@ -221,7 +221,7 @@ extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingRiskFormDelegate {
 
       @IBAction func NextButton(_ sender: Any) {
         GatetoPayOnboarding.cspdData.delegate = self
-        GatetoPayOnboarding.cspdData.getProductByIdType(riskLevel: risklevel ?? 0, customerIdentityType: self.customerIdentityType ?? 0)
+        GatetoPayOnboarding.cspdData.getProductByIdType(riskLevel: risklevel ?? 0, customerIdentityType: self.customerIdentityType ?? "")
     } 
    extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingDSPDDelegate {
     
