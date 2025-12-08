@@ -21,7 +21,7 @@ class CSPDListViewController: UIViewController {
 
     @IBOutlet weak var cspdListButton: UIButton!
     @IBOutlet weak var selectedCSPDLB: UILabel!
-    var customerIdentityType : Int?
+    var customerIdentityType : String?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,7 +46,7 @@ class CSPDListViewController: UIViewController {
                 // Update UI
                 selectedCSPDLB.text = selectedItem.title
 
-                self.customerIdentityType = Int(selectedItem.id) ?? 0
+                self.customerIdentityType = selectedItem.title ?? ""
               
             },
             cancel: {
@@ -58,7 +58,7 @@ class CSPDListViewController: UIViewController {
     
     @IBAction func NextButton(_ sender: Any) {
         GatetoPayOnboarding.cspdData.delegate = self
-        GatetoPayOnboarding.cspdData.getProductByIdType(riskLevel: risklevel ?? 0, customerIdentityType: self.customerIdentityType ?? 0)
+        GatetoPayOnboarding.cspdData.getProductByIdType(riskLevel: risklevel ?? 0, customerIdentityType: self.customerIdentityType ?? "")
     }
     
 }
