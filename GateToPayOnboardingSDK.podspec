@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
  s.name             = 'GateToPayOnboardingSDK'
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
 s.summary          = 'Find the liveness of your app user and to check if the ID image is similar to the photo of the user, extract info from ID and passport.'
 
 s.homepage         = 'https://github.com/SedraPay/Gate-to-Pay-Onboarding-SDK'
