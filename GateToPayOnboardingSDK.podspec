@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'GateToPayOnboardingSDK'
-  s.version          = '0.1.9'
+  s.version          = '1.0.0'
   s.summary          = 'iOS SDK for easy onboarding, KYC, liveness check, and identity verification'
 
   s.description      = <<-DESC
