@@ -630,6 +630,7 @@ public struct GatetoPayOnboardingKYCDynamicField : Swift.Codable {
   public var isBusiness: Swift.Bool?
   public var fileData: Foundation.Data?
   public var selectedFileName: Swift.String?
+  public var selectedFileMimeType: Swift.String?
   public var imageData: Foundation.Data?
   public var selectedImageName: Swift.String?
   public var isNeedUpdate: Swift.Bool?, isNewField: Swift.Bool?, isAPIIntegration: Swift.Bool?

@@ -40939,6 +40939,116 @@
           },
           {
             "kind": "Var",
+            "name": "selectedFileMimeType",
+            "printedName": "selectedFileMimeType",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:22GatetoPayOnboardingSDK0abC15KYCDynamicFieldV20selectedFileMimeTypeSSSgvp",
+            "mangledName": "$s22GatetoPayOnboardingSDK0abC15KYCDynamicFieldV20selectedFileMimeTypeSSSgvp",
+            "moduleName": "GatetoPayOnboardingSDK",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:22GatetoPayOnboardingSDK0abC15KYCDynamicFieldV20selectedFileMimeTypeSSSgvg",
+                "mangledName": "$s22GatetoPayOnboardingSDK0abC15KYCDynamicFieldV20selectedFileMimeTypeSSSgvg",
+                "moduleName": "GatetoPayOnboardingSDK",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:22GatetoPayOnboardingSDK0abC15KYCDynamicFieldV20selectedFileMimeTypeSSSgvs",
+                "mangledName": "$s22GatetoPayOnboardingSDK0abC15KYCDynamicFieldV20selectedFileMimeTypeSSSgvs",
+                "moduleName": "GatetoPayOnboardingSDK",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:22GatetoPayOnboardingSDK0abC15KYCDynamicFieldV20selectedFileMimeTypeSSSgvM",
+                "mangledName": "$s22GatetoPayOnboardingSDK0abC15KYCDynamicFieldV20selectedFileMimeTypeSSSgvM",
+                "moduleName": "GatetoPayOnboardingSDK",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "imageData",
             "printedName": "imageData",
             "children": [
@@ -53136,147 +53246,147 @@
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3081,
+      "offset": 3127,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3103,
+      "offset": 3149,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3125,
+      "offset": 3171,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3150,
+      "offset": 3196,
       "length": 1,
       "value": "4"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3172,
+      "offset": 3218,
       "length": 1,
       "value": "5"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3193,
+      "offset": 3239,
       "length": 1,
       "value": "6"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3211,
+      "offset": 3257,
       "length": 1,
       "value": "7"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3230,
+      "offset": 3276,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3251,
+      "offset": 3297,
       "length": 1,
       "value": "9"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3269,
+      "offset": 3315,
       "length": 2,
       "value": "10"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3289,
+      "offset": 3335,
       "length": 2,
       "value": "11"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3312,
+      "offset": 3358,
       "length": 2,
       "value": "12"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3332,
+      "offset": 3378,
       "length": 2,
       "value": "13"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3353,
+      "offset": 3399,
       "length": 2,
       "value": "14"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3374,
+      "offset": 3420,
       "length": 2,
       "value": "15"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3396,
+      "offset": 3442,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3421,
+      "offset": 3467,
       "length": 2,
       "value": "17"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3441,
+      "offset": 3487,
       "length": 2,
       "value": "18"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3470,
+      "offset": 3516,
       "length": 2,
       "value": "19"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3554,
+      "offset": 3600,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/amani\/Documents\/abyan-check-ios\/GatetoPayOnboardingSDK\/Models\/GatetoPayOnboardingKYCFieldModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 3577,
+      "offset": 3623,
       "length": 1,
       "value": "2"
     },
