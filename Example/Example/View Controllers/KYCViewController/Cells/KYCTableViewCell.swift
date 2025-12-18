@@ -136,6 +136,9 @@ class KYCTableViewCell: UITableViewCell {
             cellTextField.isUserInteractionEnabled = !(field.isReadOnly ?? false)
             boolSwitch.isHidden = true
             countryButton.isHidden = true
+            if field.isReadOnly ?? false {
+                cellTextField.textColor = .lightGray
+            }
 
         case .number:
             cellLeftImageView.isHidden = true
@@ -149,6 +152,10 @@ class KYCTableViewCell: UITableViewCell {
             cellTextField.isUserInteractionEnabled = !(field.isReadOnly ?? false)
             boolSwitch.isHidden = true
             countryButton.isHidden = true
+            if field.isReadOnly ?? false {
+                cellTextField.textColor = .lightGray
+            }
+
             
         case .mobile:
             cellLeftImageView.isHidden = true
@@ -162,6 +169,10 @@ class KYCTableViewCell: UITableViewCell {
             cellTextField.isUserInteractionEnabled = !(field.isReadOnly ?? false)
             boolSwitch.isHidden = true
             countryButton.isHidden = false
+            if field.isReadOnly ?? false {
+                cellTextField.textColor = .lightGray
+            }
+
 
         case .email:
             cellLeftImageView.isHidden = true
@@ -175,6 +186,10 @@ class KYCTableViewCell: UITableViewCell {
             cellTextField.isUserInteractionEnabled = !(field.isReadOnly ?? false)
             boolSwitch.isHidden = true
             countryButton.isHidden = true
+            if field.isReadOnly ?? false {
+                cellTextField.textColor = .lightGray
+            }
+
 
         case .textArea,.textEditor,.address:
             textView.isHidden = false
@@ -188,6 +203,10 @@ class KYCTableViewCell: UITableViewCell {
             cellDescriptionLabel.isHidden = true
             boolSwitch.isHidden = true
             countryButton.isHidden = true
+            if field.isReadOnly ?? false {
+                cellTextField.textColor = .lightGray
+            }
+
 
         default:
             break

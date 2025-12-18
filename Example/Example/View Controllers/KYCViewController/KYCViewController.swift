@@ -6,6 +6,7 @@ import DatePickerDialog
 import PDFKit
 import Photos
 import FAPickerView
+import UniformTypeIdentifiers
 
 class KYCViewController: UIViewController {
     
@@ -636,6 +637,7 @@ class KYCViewController: UIViewController {
     
     @objc func didSelectPhoneCountryDropDown(button: UIButton) {
         // Find the cell
+        self.view.endEditing(true)
         let row = button.tag // Get the row from the button tag
         
         // Find the cell that contains the button
@@ -993,6 +995,7 @@ extension KYCViewController: KYCChoiceDelegate {
 
 
 extension KYCViewController: UITextFieldDelegate {
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         let row = textField.tag
         
@@ -1045,6 +1048,7 @@ extension KYCViewController: UIDocumentPickerDelegate {
             } else if let pdf = PDFDocument(url: url) {
                 self.sectionsArray?[section].dynamicFields?[row].fileData = pdf.dataRepresentation()
                 self.sectionsArray?[section].dynamicFields?[row].selectedFileName = url.lastPathComponent
+                self.sectionsArray?[section].dynamicFields?[row].selectedFileMimeType = url.mimeType
                 self.tableView.reloadData()
             }
         }
@@ -1143,24 +1147,6 @@ extension KYCViewController: GatetoPayOnboardingKYCDelegate {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "CloseJourneyViewController") as? CloseJourneyViewController{
             self.navigationController?.pushViewController(vc, animated: true)
         }
-        
-        //        if DefaultsManager.shared.getLivenessCheckValue() ?? true{
-        //            if let vc = storyboard?.instantiateViewController(withIdentifier: "SelfieInstructionsViewController") as? SelfieInstructionsViewController {
-        ////                vc.documentsObject = self.documentsObject
-        //                self.navigationController?.pushViewController(vc, animated: true)
-        //            }
-        //        } else if DefaultsManager.shared.getCloseJourneyValue() ?? true {
-        //            if let vc = storyboard?.instantiateViewController(withIdentifier: "CloseJourneyViewController") as? CloseJourneyViewController{
-        //                self.navigationController?.pushViewController(vc, animated: true)
-        //            }
-        //        } else {
-        //            // The only switch on
-        //            if let vc = storyboard?.instantiateViewController(withIdentifier: "StatusViewController") as? StatusViewController{
-        //                vc.statusType = .profileSubmitted
-        //                vc.delegate = self
-        //                self.navigationController?.pushViewController(vc, animated: true)
-        //            }
-        //        }
     }
 }
 
@@ -1191,4 +1177,17 @@ func loadCountries() -> [CountryModel] {
 struct allCountriesCodesStruct {
     var countryData : CountryModel
     var FieldID : Int
+}
+
+extension URL {
+    var mimeType: String {
+        if #available(iOS 14.0, *) {
+            if let type = UTType(filenameExtension: self.pathExtension) {
+                return type.preferredMIMEType ?? "application/octet-stream"
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+        return "application/octet-stream"
+    }
 }

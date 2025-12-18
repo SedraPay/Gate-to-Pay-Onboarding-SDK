@@ -7,7 +7,7 @@ PODS:
     - "UITextView+Placeholder"
   - FAPickerView (0.2.1):
     - SDWebImage
-  - GateToPayOnboardingSDK (0.1.7):
+  - GateToPayOnboardingSDK (1.0.2):
     - Alamofire
     - GoogleMLKit/FaceDetection
     - lottie-ios
@@ -184,7 +184,7 @@ SPEC CHECKSUMS:
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   FADesignable: bb71c8f922db8c7ddf44c961590f8ef60f56d4fa
   FAPickerView: f3bb13877ffc252d51ec73309dc34524accdb834
-  GateToPayOnboardingSDK: 63de5e9bda4205993c32dfcd0172464dd4c69806
+  GateToPayOnboardingSDK: 039f221939c2f23c5853900608aeb21fbcfc7dc2
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleMLKit: 97ac7af399057e99182ee8edfa8249e3226a4065
   GoogleToolboxForMac: d1a2cbf009c453f4d6ded37c105e2f67a32206d8
