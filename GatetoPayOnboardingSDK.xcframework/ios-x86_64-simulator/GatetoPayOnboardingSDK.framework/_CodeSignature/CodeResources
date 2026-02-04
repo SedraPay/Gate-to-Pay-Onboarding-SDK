@@ -6,55 +6,11 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		Rpaw3ungenbi6pTI6SMuli+ZY7I=
-		</data>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/7Gl-sL-uXu-view-djZ-RV-ICA.nib</key>
-		<data>
-		EhwDeaVRO8Xap9T5g8PqbpRbNP4=
-		</data>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/7xK-3w-Ots-view-LFV-8G-12x.nib</key>
-		<data>
-		mYZjieSKQgFmVOn5y9HSiA4AX9U=
-		</data>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/DocumentsCameraViewController.nib</key>
-		<data>
-		pukUbm6tm2MbCdChUug2+uHXmdA=
-		</data>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/FAa-Aa-ekK-view-mcf-LS-CpD.nib</key>
-		<data>
-		k6usgoivwpi2qh3JxwsRCeLym3U=
+		Z0vKgpS0cx/X1fROP3FCawcPoFg=
 		</data>
 		<key>Base.lproj/GatetoPayOnboarding.storyboardc/Info.plist</key>
 		<data>
-		fGf7wFE8sfeeE2nhW+PekTreNMc=
-		</data>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/LivenessCheckViewController.nib</key>
-		<data>
-		PoowyLmvBTq6OVRYzLRNjMmyZHs=
-		</data>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/NewCameraViewController.nib</key>
-		<data>
-		WOJT3QhrphI3LXHtJQwGHAeSsUU=
-		</data>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/NewEditImageView.nib</key>
-		<data>
-		DeKL5Y3rmuosWAbnv24TfzTkqNA=
-		</data>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/P5z-qJ-seF-view-5O0-Kn-t6q.nib</key>
-		<data>
-		cVgIcI7bPKqTrCFzTmlAvDvDR9I=
-		</data>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/ReviewImageView.nib</key>
-		<data>
-		rnb69rotrqvQvF8wcBaKnTKJbak=
-		</data>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/ScanNnavigation.nib</key>
-		<data>
-		dmL+WtI3rQXJxoECUaIh5otQ/tQ=
-		</data>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/lIl-BR-EoQ-view-tg6-IR-3vA.nib</key>
-		<data>
-		C+f9xsroBJxh1ez70Tw+/LuG+yg=
+		GnMdGFfDuvwAuWJN7FS9ELLozY4=
 		</data>
 		<key>GoogleMVFaceDetectorResources.bundle/BCLjoy_200.emd</key>
 		<data>
@@ -70,7 +26,7 @@
 		</data>
 		<key>GoogleMVFaceDetectorResources.bundle/Info.plist</key>
 		<data>
-		hB6RotWnOvrXaLndkavo5dW2NFE=
+		RjJcsrEtu3rv6rNXOtrLVvuYBkI=
 		</data>
 		<key>GoogleMVFaceDetectorResources.bundle/LMprec_600.emd</key>
 		<data>
@@ -110,7 +66,7 @@
 		</data>
 		<key>Headers/GatetoPayOnboardingSDK-Swift.h</key>
 		<data>
-		NUIrJTpCzjJOsT8rJ2J1aboeuus=
+		6xcTPrQSMHFxo+I8YJUH5M6Vipo=
 		</data>
 		<key>Headers/GatetoPayOnboardingSDK.h</key>
 		<data>
@@ -118,27 +74,27 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		/r2pfaostbRylG/+uVXYBvtFlq0=
+		yDKUbUQHk+6k1N6vwLhsqnLd2a0=
 		</data>
 		<key>Modules/GatetoPayOnboardingSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		Jt1CykfjuYrsBip76w9Qbfhxca4=
+		9rEFXTMBbuVt8nogmmVBLXLL5io=
 		</data>
 		<key>Modules/GatetoPayOnboardingSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		BcEdrAxPJ6ZQjUs6FI6QgpYU+lI=
+		566fKQCS1gvO/973dRv26K9ufjI=
 		</data>
 		<key>Modules/GatetoPayOnboardingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		ukqcjUrNwtRVrgt8pcgcnM/rFdo=
+		pN4gTwo6DMcdIzKY/EQyAelpM/Y=
 		</data>
 		<key>Modules/GatetoPayOnboardingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		BcEdrAxPJ6ZQjUs6FI6QgpYU+lI=
+		566fKQCS1gvO/973dRv26K9ufjI=
 		</data>
 		<key>Modules/GatetoPayOnboardingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		8UgH/lJxac4mX+UXeHjd61C0IrU=
+		BGR2OVbWwklBoVIlpkTilUOaqww=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -155,91 +111,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Ftv62KUTO/kerQ1ymWdIXkkxDTul7jeXnUuTimRGdyg=
-			</data>
-		</dict>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/7Gl-sL-uXu-view-djZ-RV-ICA.nib</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			f7F5kkNCK4S+7HcxwrY1FKy1FNY90Mv+aoc1j+iEqOg=
-			</data>
-		</dict>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/7xK-3w-Ots-view-LFV-8G-12x.nib</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			VeWhpBS3MYJBhKQFIw2kAisSFtPrcqE7iyJRF9xwr48=
-			</data>
-		</dict>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/DocumentsCameraViewController.nib</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			5Nktx+i087t3MjmuhZgreBNGaxhHdVP4X0/IBd9fb8g=
-			</data>
-		</dict>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/FAa-Aa-ekK-view-mcf-LS-CpD.nib</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			y0F2wO7EJWJBOLCwZF7+nvYfOXW1nTauTbwTkzvgFmQ=
+			rLkDMUAaLBcY9UcVp1Vm75jkW1J0stFQy0JFVHwAKj8=
 			</data>
 		</dict>
 		<key>Base.lproj/GatetoPayOnboarding.storyboardc/Info.plist</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			KP6p8umQLemfM1BCZsnBEjNmK7hZitcsHN9i6Pwqv7k=
-			</data>
-		</dict>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/LivenessCheckViewController.nib</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			2kxsSZrJjn5pNr3YE9PageG8iAlorb+hQSLXmYZ3HM0=
-			</data>
-		</dict>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/NewCameraViewController.nib</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			MKqYlDb3JTSYVh9yNgepVNcC1RCPnQmcKtXUWEg1lUg=
-			</data>
-		</dict>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/NewEditImageView.nib</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			kS3SGvJmDbkB++SfIz4F5JYjrwtVUo9ijBIiqX7d5BQ=
-			</data>
-		</dict>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/P5z-qJ-seF-view-5O0-Kn-t6q.nib</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			OXYP/4h1Q3zw9WkTPcPIctvPGTag0IX89P1sk1EsE78=
-			</data>
-		</dict>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/ReviewImageView.nib</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			pnt4w85PWvIsAp+3m3y8LVlIuNhwpDFCDebcQ9Nx2uY=
-			</data>
-		</dict>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/ScanNnavigation.nib</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			C94bx0usOb5yIBxKzP6m/whDshncR0UWsOtad2Raxtw=
-			</data>
-		</dict>
-		<key>Base.lproj/GatetoPayOnboarding.storyboardc/lIl-BR-EoQ-view-tg6-IR-3vA.nib</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			vqWXY+tbtcybkOzMigclWHmDe4MlJevdVYQOXn3wOZw=
+			9gq+m2SfIqZdO4RnP+Q5bwx0h1nftPpvwkJZZ8jBiZE=
 			</data>
 		</dict>
 		<key>GoogleMVFaceDetectorResources.bundle/BCLjoy_200.emd</key>
@@ -267,7 +146,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			1ohzcJcpRZnU7Vup6AIO7XuvpfYbBFVSzkfo7ZuFQn0=
+			OQGXDWLoetaCab6yNm3VIziqMF9nQXJHRIKBe1q1iUk=
 			</data>
 		</dict>
 		<key>GoogleMVFaceDetectorResources.bundle/LMprec_600.emd</key>
@@ -337,7 +216,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			oGtfRD4Vj7XNLbQF8in2QSOHX8x61usa3wgTAP7kzFM=
+			1vhAbbXdc+GXxeaT5FnDVkehSv8AR2P4yYOtGaG8uUg=
 			</data>
 		</dict>
 		<key>Headers/GatetoPayOnboardingSDK.h</key>
@@ -351,35 +230,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			+Wh2e7Yi35kfesZ2d4heMgbAjOpmXdNtTY8dxov1wus=
+			MHAapxd+tDZ8k9ymRSG9NUQhWPWL698/78i2nm8ge8I=
 			</data>
 		</dict>
 		<key>Modules/GatetoPayOnboardingSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			iwaF31xSW8Rox0mPEfKuTK5+oOp6sy2fmJ1PkBoiAWY=
+			9D4wJIcPHF+R/sW1klEB4UyvmEqRb3fX6xfEBxDeBYg=
 			</data>
 		</dict>
 		<key>Modules/GatetoPayOnboardingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			SWHWil4nZGkFWDHDQYEu16ZMdKkRTFpPnJ6IqVajexQ=
+			hmfsdjrKjxipF/FqDrzYDLE4R+acUDui8xW1t4tulmk=
 			</data>
 		</dict>
 		<key>Modules/GatetoPayOnboardingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			iwaF31xSW8Rox0mPEfKuTK5+oOp6sy2fmJ1PkBoiAWY=
+			9D4wJIcPHF+R/sW1klEB4UyvmEqRb3fX6xfEBxDeBYg=
 			</data>
 		</dict>
 		<key>Modules/GatetoPayOnboardingSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			7641EaD1ZZcVt185+0idrN/yjAVG+vjVQEocvyHgFZQ=
+			OT1njNibkcTfaJfq5A1VrI3uEhMjFYXLzRc4oagE3Ho=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
