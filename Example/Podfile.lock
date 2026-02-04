@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.10.2)
+  - Alamofire (5.11.1)
   - AMPopTip (4.12.0)
   - DatePickerDialog (4.0)
   - DropDown (2.3.13)
@@ -7,7 +7,8 @@ PODS:
     - "UITextView+Placeholder"
   - FAPickerView (0.2.1):
     - SDWebImage
-  - GateToPayOnboardingSDK (1.0.2):
+  - FingerprintPro (2.7.0)
+  - GateToPayOnboardingSDK (1.0.3):
     - Alamofire
     - GoogleMLKit/FaceDetection
     - lottie-ios
@@ -38,6 +39,9 @@ PODS:
   - GoogleUtilitiesComponents (1.1.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (3.5.0)
+  - IDWise (5.7.4):
+    - FingerprintPro (= 2.7.0)
+    - Shield-Ptr (= 1.5.50)
   - IQKeyboardCore (1.0.8)
   - IQKeyboardManagerSwift (8.0.1):
     - IQKeyboardManagerSwift/Appearance (= 8.0.1)
@@ -108,6 +112,7 @@ PODS:
   - SDWebImage (5.21.5):
     - SDWebImage/Core (= 5.21.5)
   - SDWebImage/Core (5.21.5)
+  - Shield-Ptr (1.5.50)
   - SwiftMessages (9.0.9):
     - SwiftMessages/App (= 9.0.9)
   - SwiftMessages/App (9.0.9)
@@ -123,6 +128,7 @@ DEPENDENCIES:
   - FAPickerView
   - GateToPayOnboardingSDK
   - GoogleMLKit/FaceDetection
+  - IDWise (= 5.7.4)
   - IQKeyboardManagerSwift
   - lottie-ios (~> 3.3.0)
   - NVActivityIndicatorView (~> 4.8.0)
@@ -132,6 +138,8 @@ DEPENDENCIES:
   - UDatePicker (from `https://github.com/zaidiabbas/UDatePicker`)
 
 SPEC REPOS:
+  https://github.com/idwise/ios-sdk:
+    - IDWise
   trunk:
     - Alamofire
     - AMPopTip
@@ -139,6 +147,7 @@ SPEC REPOS:
     - DropDown
     - FADesignable
     - FAPickerView
+    - FingerprintPro
     - GateToPayOnboardingSDK
     - GoogleDataTransport
     - GoogleMLKit
@@ -165,6 +174,7 @@ SPEC REPOS:
     - PromisesObjC
     - Protobuf
     - SDWebImage
+    - Shield-Ptr
     - SwiftMessages
     - "UITextView+Placeholder"
 
@@ -178,19 +188,21 @@ CHECKOUT OPTIONS:
     :git: https://github.com/zaidiabbas/UDatePicker
 
 SPEC CHECKSUMS:
-  Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
+  Alamofire: eec6cd8f73b242b59e34153a606a909eb9864b14
   AMPopTip: cf89d8690aa6e59ddc86bf46c0ccabb3e7d148a1
   DatePickerDialog: ccff2f91ff7a018057a4d72fa5ad6de49c8cb0cd
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   FADesignable: bb71c8f922db8c7ddf44c961590f8ef60f56d4fa
   FAPickerView: f3bb13877ffc252d51ec73309dc34524accdb834
-  GateToPayOnboardingSDK: 039f221939c2f23c5853900608aeb21fbcfc7dc2
+  FingerprintPro: 0c7dbd28fc83751ca64b06328e2fb22bbc7ed118
+  GateToPayOnboardingSDK: 5d98eed7df21884e5e72f2a6fa47a290ebea0a3b
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleMLKit: 97ac7af399057e99182ee8edfa8249e3226a4065
   GoogleToolboxForMac: d1a2cbf009c453f4d6ded37c105e2f67a32206d8
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   GoogleUtilitiesComponents: 679b2c881db3b615a2777504623df6122dd20afe
   GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
+  IDWise: 2a6018e31dc7fd4d07e668c6e24a163436412172
   IQKeyboardCore: 8652977ec919cf5351aa2977fedd1a6546476fbc
   IQKeyboardManagerSwift: 835fc9c6e4732398113406d84900ad2e8f141218
   IQKeyboardNotification: eb4910401f5a0e68f97e71c62f8a0c5b7e9d535c
@@ -210,10 +222,11 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   Protobuf: 164aea2ae380c3951abdc3e195220c01d17400e0
   SDWebImage: e9c98383c7572d713c1a0d7dd2783b10599b9838
+  Shield-Ptr: 14319af04ee63dbad318b3e1714434bba99eed37
   SwiftMessages: 1a23aef303fa7bb26ad802880746cf8358e378fe
   UDatePicker: 9bc1e36698982375332daff674d26a68d40e2d3a
   "UITextView+Placeholder": d7b0c400921f66523f3a85d74f774512e14f6502
 
-PODFILE CHECKSUM: 2aebf6a48e29059b8750ec8d38f9f42b6266c57c
+PODFILE CHECKSUM: 0a617a6fd0297c896312e584c99e16529cb01a0f
 
 COCOAPODS: 1.16.2

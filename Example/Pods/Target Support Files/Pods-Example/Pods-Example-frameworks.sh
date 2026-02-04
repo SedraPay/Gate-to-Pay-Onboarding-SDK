@@ -204,7 +204,10 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/UITextView+Placeholder/UITextView_Placeholder.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
+  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/FingerprintPro/FingerprintPro.framework"
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/GateToPayOnboardingSDK/GatetoPayOnboardingSDK.framework"
+  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/IDWise/IDWiseSDK.framework"
+  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/Shield-Ptr/ShieldFraud.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework"
@@ -235,7 +238,10 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/UITextView+Placeholder/UITextView_Placeholder.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
+  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/FingerprintPro/FingerprintPro.framework"
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/GateToPayOnboardingSDK/GatetoPayOnboardingSDK.framework"
+  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/IDWise/IDWiseSDK.framework"
+  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/Shield-Ptr/ShieldFraud.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

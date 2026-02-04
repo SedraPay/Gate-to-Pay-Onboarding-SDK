@@ -72,15 +72,51 @@ class RiskFormViewController: UIViewController {
         }
     }
     
+    func isYesSelectedForOtherNationality(
+        sections: [GatetoPayOnboardingKYCFieldItem]
+    ) -> Bool {
+
+        return sections
+            .flatMap { $0.dynamicFields ?? [] }
+            .first(where: {
+                $0.fieldLabel?.trimmingCharacters(in: .whitespacesAndNewlines)
+                    .lowercased() == "other nationality?"
+            })?
+            .enumeratedValues?
+            .contains(where: {
+                $0.value?.lowercased() == "yes" && $0.isSelected == true
+            }) == true
+    }
+    
+    func isEmployedSelected(
+        sections: [GatetoPayOnboardingKYCFieldItem]
+    ) -> Bool {
+
+        return sections
+            .flatMap { $0.dynamicFields ?? [] }
+            .first(where: {
+                $0.fieldLabel?
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                    .lowercased() == "employment status"
+            })?
+            .enumeratedValues?
+            .contains(where: {
+                $0.value?.lowercased() == "employed" && $0.isSelected == true
+            }) == true
+    }
+
     func isValid() -> (Bool, [String]) {
         var isValid = true
+
         var errorsArray: [String] = []
         
         guard let sections = sectionsArray else {
             errorsArray.append("Data is empty")
             return (false, errorsArray)
         }
-        
+        let hasOtherNationalityYes = isYesSelectedForOtherNationality(sections: sections)
+        let isEmployed = isEmployedSelected(sections: sections)
+
         for section in sections {
             guard let dynamicFields = section.dynamicFields else { continue }
             
@@ -103,11 +139,35 @@ class RiskFormViewController: UIViewController {
                         errorsArray.append("\(item.regExErrorMessage ?? "\(item.fieldLabel ?? "") has invalid data")")
                     }
                     
-                case .dropdown, .country, .city:
-                    if (item.isRequired ?? false)  && (itemValue == nil || itemValue?.isEmpty ?? true){
-                        isValid = false
-                        errorsArray.append("\(item.fieldLabel ?? "") is required")
+                case .dropdown, .city:
+                    if item.fieldLabel?.lowercased() == "profession and job title" {
+                            if isEmployed {
+                                if itemValue == nil || itemValue?.isEmpty ?? true {
+                                    isValid = false
+                                    errorsArray.append("\(item.fieldLabel ?? "") is required")
+                                }
+                            }
+                        } else {
+                            if (item.isRequired ?? false) && (itemValue == nil || itemValue?.isEmpty ?? true) {
+                                isValid = false
+                                errorsArray.append("\(item.fieldLabel ?? "") is required")
+                            }
+                        }
+                case .country:
+                    if item.fieldLabel?.lowercased() == "other nationality" {
+                        if hasOtherNationalityYes {
+                            if itemValue == nil || itemValue?.isEmpty ?? true {
+                                isValid = false
+                                errorsArray.append("\(item.fieldLabel ?? "") is required")
+                            }
+                        }
+                    } else {
+                        if (item.isRequired ?? false) && (itemValue == nil || itemValue?.isEmpty ?? true) {
+                            isValid = false
+                            errorsArray.append("\(item.fieldLabel ?? "") is required")
+                        }
                     }
+
                     
                 case .countryandcity:
                     if item.isRequired ?? false {

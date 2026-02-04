@@ -1,0 +1,638 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0.2 effective-5.10 (swiftlang-6.0.2.1.2 clang-1600.0.26.4)
+// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name IDWiseSDK
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
+import AVFoundation
+import AVKit
+import AdSupport
+import CommonCrypto
+import CoreML
+import CoreMedia
+import CoreMotion
+import CoreVideo
+import DeveloperToolsSupport
+import FingerprintPro
+import Foundation
+import MachO
+import MobileCoreServices
+import OSLog
+import PDFKit
+import ShieldFraud
+import Swift
+import SwiftUI
+import SystemConfiguration
+import UIKit.UIDevice
+import UIKit.UIFont
+import UIKit.UIImage
+import UIKit
+import Vision
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+import os.log
+import os
+@_hasMissingDesignatedInitializers public class InternetConnectionManager {
+  public static let shared: IDWiseSDK.InternetConnectionManager
+  public static func isConnectedToNetwork() -> Swift.Bool
+  public func observeDisconnection(_ handler: @escaping () -> Swift.Void)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class InitializeSDKContainer {
+  @objc deinit
+}
+public enum IDWiseTheme {
+  case light, dark, systemDefault
+  public static func == (a: IDWiseSDK.IDWiseTheme, b: IDWiseSDK.IDWiseTheme) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class IDWiseInternal {
+  @objc deinit
+}
+@_inheritsConvenienceInitializers public class IDWise : IDWiseSDK.IDWiseInternal {
+  public class func startJourney(flowId: Swift.String, referenceNumber: Swift.String = "", locale: Swift.String = "", applicantDetails: [Swift.String : Swift.String]?, journeyCallbacks: any IDWiseSDK.IDWiseJourneyCallbacks)
+  public class func resumeJourney(flowId: Swift.String, journeyId: Swift.String, locale: Swift.String = "", journeyCallbacks: any IDWiseSDK.IDWiseJourneyCallbacks)
+  public class func initialize(clientKey: Swift.String, theme: IDWiseSDK.IDWiseTheme, onError: @escaping (IDWiseSDK.IDWiseError?) -> ())
+  public class func isDeviceBlocked() -> Swift.Bool
+  @objc deinit
+}
+@_inheritsConvenienceInitializers public class IDWiseDynamic : IDWiseSDK.IDWiseInternal {
+  public class func startJourney(flowId: Swift.String, referenceNumber: Swift.String = "", locale: Swift.String = "", applicantDetails: [Swift.String : Swift.String]?, journeyCallbacks: any IDWiseSDK.IDWiseJourneyCallbacks, stepCallbacks: any IDWiseSDK.IDWiseStepCallbacks)
+  public class func resumeJourney(flowId: Swift.String, journeyId: Swift.String, locale: Swift.String = "", journeyCallbacks: any IDWiseSDK.IDWiseJourneyCallbacks, stepCallbacks: any IDWiseSDK.IDWiseStepCallbacks)
+  public class func startStep(stepId: Swift.String)
+  @available(*, deprecated)
+  public class func startStepFromFileUpload(stepId: Swift.String, data: Foundation.Data)
+  public class func startStepFromFileUpload(stepId: Swift.String, image: Foundation.Data, backImage: Foundation.Data? = nil)
+  public class func initialize(clientKey: Swift.String, theme: IDWiseSDK.IDWiseTheme, onError: @escaping (IDWiseSDK.IDWiseError?) -> ())
+  public class func getJourneySummary(callback: @escaping ((IDWiseSDK.JourneySummary?, IDWiseSDK.IDWiseError?) -> ()))
+  public class func unloadSDK()
+  public class func finishJourney()
+  public class func skipStep(stepId: Swift.String)
+  public class func isDeviceBlocked() -> Swift.Bool
+  @objc deinit
+}
+public protocol NetworkConfigurable {
+  var baseURL: Foundation.URL { get }
+  var headers: [Swift.String : Swift.String] { get }
+  var queryParameters: [Swift.String : Swift.String] { get }
+}
+public struct ApiDataNetworkConfig : IDWiseSDK.NetworkConfigurable {
+  public var baseURL: Foundation.URL {
+    get
+  }
+  public var headers: [Swift.String : Swift.String]
+  public var queryParameters: [Swift.String : Swift.String]
+  public init(baseURL: Foundation.URL, headers: [Swift.String : Swift.String] = [:], queryParameters: [Swift.String : Swift.String] = [:])
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class MenuWidgetView : UIKit.UIView {
+  @objc @IBOutlet @_Concurrency.MainActor @preconcurrency weak public var menuTableView: UIKit.UITableView!
+  @objc deinit
+}
+extension IDWiseSDK.MenuWidgetView : UIKit.UITableViewDelegate, UIKit.UITableViewDataSource {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func numberOfSections(in tableView: UIKit.UITableView) -> Swift.Int
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, heightForHeaderInSection section: Swift.Int) -> CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, viewForHeaderInSection section: Swift.Int) -> UIKit.UIView?
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGFloat
+}
+public enum LogLevel : Swift.String {
+  case `default`
+  case verbose
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct IDWiseLogSettings {
+  public static func setLogLevel(_ level: IDWiseSDK.LogLevel)
+}
+public struct IDWiseErrorCode {
+  public static let emptyParameters: Swift.String
+  public static let sdkNotInitialized: Swift.String
+  public static let wrongCredentials: Swift.String
+  public static let emptyJourneyId: Swift.String
+  public static let fileTooLarge: Swift.String
+  public static let stepNotFound: Swift.String
+  public static let wrongStepId: Swift.String
+  public static let internalServerError: Swift.String
+  public static let networkError: Swift.String
+  public static let actionNotSupported: Swift.String
+  public static let stepNotStarted: Swift.String
+  public static let journeyNotCompleted: Swift.String
+  public static let invalidFlowId: Swift.String
+  public static let noActiveJourney: Swift.String
+  public static let journeyNotStarted: Swift.String
+  public static let stepConcluded: Swift.String
+  public static let nfcScanError: Swift.String
+  public static let noJourneyToResume: Swift.String
+  public static let tokenExpired: Swift.String
+  public static let journeyBlocked: Swift.String
+  public static let journeyCompleted: Swift.String
+}
+public struct IDWiseError : Swift.Codable {
+  public let code: Swift.String
+  public let message: Swift.String
+  public let requestId: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum LoaderPosition {
+  case middle
+  case lower
+  public static func == (a: IDWiseSDK.LoaderPosition, b: IDWiseSDK.LoaderPosition) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class LoadingView {
+  public static func show(message: Swift.String? = nil, font: UIKit.UIFont? = UIFont.systemFont(ofSize: 16,weight: .bold), position: IDWiseSDK.LoaderPosition = .middle)
+  public static func hide()
+  @objc deinit
+}
+public struct StepResultResponse : Swift.Equatable {
+  public let stepID: Swift.Int
+  public let hasPassedRules: Swift.String
+  public let document: IDWiseSDK.DocumentInfo?
+  public let failureReasonCode: Swift.String?
+  public static func == (a: IDWiseSDK.StepResultResponse, b: IDWiseSDK.StepResultResponse) -> Swift.Bool
+}
+public struct DocumentInfo : Swift.Equatable {
+  public static func == (lhs: IDWiseSDK.DocumentInfo, rhs: IDWiseSDK.DocumentInfo) -> Swift.Bool
+  public let isRecognized: Swift.Bool?
+  public let documentType: Swift.String?, issuingCountry: Swift.String?, issuingCountryCode: Swift.String?
+  public var extractedFields: [Swift.String : IDWiseSDK.FieldValue]?
+}
+public struct ExtractedFields : Swift.Equatable {
+  public let fullName: IDWiseSDK.FieldValue?, fullNameNative: IDWiseSDK.FieldValue?, personalNumber: IDWiseSDK.FieldValue?
+  public static func == (a: IDWiseSDK.ExtractedFields, b: IDWiseSDK.ExtractedFields) -> Swift.Bool
+}
+public struct FieldValue : Swift.Equatable, Swift.Codable {
+  public let value: Swift.String?
+  public static func == (a: IDWiseSDK.FieldValue, b: IDWiseSDK.FieldValue) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct NFCResult : Swift.Codable {
+  public let facePhoto: Foundation.Data?
+  public var extractedFields: [Swift.String : IDWiseSDK.FieldValue]?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+extension UIKit.UIFont {
+  public static let loadCustomFonts: ()
+}
+public enum JourneyCancellationReason : Swift.String, Swift.Codable {
+  case userCancelled
+  case tokenExpired
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol IDWiseJourneyCallbacks {
+  func onJourneyStarted(journeyStartedInfo: IDWiseSDK.JourneyStartedInfo)
+  func onJourneyResumed(journeyResumedInfo: IDWiseSDK.JourneyResumedInfo)
+  func onJourneyCompleted(journeyCompletedInfo: IDWiseSDK.JourneyCompletedInfo)
+  func onJourneyCancelled(journeyCancelledInfo: IDWiseSDK.JourneyCancelledInfo)
+  func onJourneyBlocked(journeyBlockedInfo: IDWiseSDK.JourneyBlockedInfo)
+  func onError(error: IDWiseSDK.IDWiseError)
+}
+public struct JourneyStartedInfo : Swift.Codable {
+  public let journeyId: Swift.String
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct JourneyResumedInfo : Swift.Codable {
+  public let journeyId: Swift.String
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct JourneyCancelledInfo : Swift.Codable {
+  public let journeyId: Swift.String
+  public var cancellationReason: IDWiseSDK.JourneyCancellationReason
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct JourneyCompletedInfo : Swift.Codable {
+  public let journeyId: Swift.String
+  public let isSuccessful: Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct JourneyBlockedInfo : Swift.Codable {
+  public let journeyId: Swift.String
+  public var blockedTransaction: IDWiseSDK.BlockedTransaction?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ApplicantDetailsKeys {
+  public static let FULL_NAME: Swift.String
+  public static let BIRTH_DATE: Swift.String
+  public static let SEX: Swift.String
+  public static let ADDRESS: Swift.String
+}
+public protocol NetworkCancellable {
+  func cancel()
+}
+extension Foundation.URLSessionTask : IDWiseSDK.NetworkCancellable {
+}
+public protocol NetworkSessionManager {
+  typealias CompletionHandler = (Foundation.Data?, Foundation.URLResponse?, (any Swift.Error)?) -> Swift.Void
+  func request(_ request: Foundation.URLRequest, completion: @escaping Self.CompletionHandler) -> any IDWiseSDK.NetworkCancellable
+}
+public protocol NetworkErrorLogger {
+  func log(request: Foundation.URLRequest)
+  func log(responseData data: Foundation.Data?, response: Foundation.URLResponse?)
+  func log(error: any Swift.Error)
+}
+final public class DefaultNetworkService {
+  public init(config: any IDWiseSDK.NetworkConfigurable, sessionManager: any IDWiseSDK.NetworkSessionManager = DefaultNetworkSessionManager(), logger: any IDWiseSDK.NetworkErrorLogger = DefaultNetworkErrorLogger())
+  @objc deinit
+}
+public class DefaultNetworkSessionManager : IDWiseSDK.NetworkSessionManager {
+  public init()
+  public func request(_ request: Foundation.URLRequest, completion: @escaping IDWiseSDK.DefaultNetworkSessionManager.CompletionHandler) -> any IDWiseSDK.NetworkCancellable
+  @objc deinit
+}
+final public class DefaultNetworkErrorLogger : IDWiseSDK.NetworkErrorLogger {
+  public init()
+  final public func log(request: Foundation.URLRequest)
+  final public func log(responseData data: Foundation.Data?, response: Foundation.URLResponse?)
+  final public func log(error: any Swift.Error)
+  @objc deinit
+}
+public protocol ResponseDecoder {
+  func decode<T>(_ data: Foundation.Data) throws -> T where T : Swift.Decodable
+}
+public protocol DataTransferErrorLogger {
+  func log(error: any Swift.Error)
+}
+final public class DefaultDataTransferErrorLogger : IDWiseSDK.DataTransferErrorLogger {
+  public init()
+  final public func log(error: any Swift.Error)
+  @objc deinit
+}
+public class DefaultDataTransferErrorResolver {
+  public init()
+  @objc deinit
+}
+public class JSONResponseDecoder : IDWiseSDK.ResponseDecoder {
+  public init()
+  public func decode<T>(_ data: Foundation.Data) throws -> T where T : Swift.Decodable
+  @objc deinit
+}
+public class RawDataResponseDecoder : IDWiseSDK.ResponseDecoder {
+  public init()
+  public func decode<T>(_ data: Foundation.Data) throws -> T where T : Swift.Decodable
+  @objc deinit
+}
+public enum CancellationReason : Swift.String, Swift.Codable {
+  case userCancelled
+  case scanningTimeout
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol IDWiseStepCallbacks {
+  func onStepCaptured(stepCapturedInfo: IDWiseSDK.StepCapturedInfo)
+  func onStepResult(stepResultInfo: IDWiseSDK.StepResultInfo)
+  func onStepCancelled(stepCancelledInfo: IDWiseSDK.StepCancelledInfo)
+  func onStepSkipped(stepSkippedInfo: IDWiseSDK.StepSkippedInfo)
+}
+public struct StepSkippedInfo : Swift.Codable {
+  public let stepId: Swift.String
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct StepCancelledInfo : Swift.Codable {
+  public let stepId: Swift.String
+  public var cancellationReason: IDWiseSDK.CancellationReason
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct StepResultInfo : Swift.Codable {
+  public let stepId: Swift.String
+  public let stepResult: IDWiseSDK.StepResult?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct StepCapturedInfo {
+  public let stepId: Swift.String
+  public let originalImage: UIKit.UIImage?
+  public let croppedImage: UIKit.UIImage?
+  public let originalImageBack: UIKit.UIImage?
+  public let croppedImageBack: UIKit.UIImage?
+}
+@_hasMissingDesignatedInitializers public class UIUtilities {
+  public static func addCircle(atPoint point: CoreFoundation.CGPoint, to view: UIKit.UIView, color: UIKit.UIColor, radius: CoreFoundation.CGFloat)
+  public static func addLineSegment(fromPoint: CoreFoundation.CGPoint, toPoint: CoreFoundation.CGPoint, inView: UIKit.UIView, color: UIKit.UIColor, width: CoreFoundation.CGFloat)
+  public static func addRectangle(_ rectangle: CoreFoundation.CGRect, to view: UIKit.UIView, color: UIKit.UIColor)
+  public static func addShape(withPoints points: [Foundation.NSValue]?, to view: UIKit.UIView, color: UIKit.UIColor)
+  public static func imageOrientation(fromDevicePosition devicePosition: AVFoundation.AVCaptureDevice.Position = .back) -> UIKit.UIImage.Orientation
+  public static func createUIImage(from imageBuffer: CoreVideo.CVImageBuffer, orientation: UIKit.UIImage.Orientation) -> UIKit.UIImage?
+  public static func createImageBuffer(from image: UIKit.UIImage) -> CoreVideo.CVImageBuffer?
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class AppDIContainer {
+  @objc deinit
+}
+extension UIKit.UIApplication {
+  @_Concurrency.MainActor @preconcurrency public static var isRunningTest: Swift.Bool {
+    get
+  }
+}
+final public class Observable<Value> {
+  final public var value: Value {
+    get
+    set
+  }
+  public init(_ value: Value)
+  final public func observe(on observer: Swift.AnyObject, observerBlock: @escaping (Value) -> Swift.Void)
+  final public func remove(observer: Swift.AnyObject)
+  @objc deinit
+}
+public protocol StoryboardInstantiable : ObjectiveC.NSObjectProtocol {
+  associatedtype T
+  static var defaultFileName: Swift.String { get }
+  static func instantiateViewController() -> Self.T
+}
+extension IDWiseSDK.StoryboardInstantiable where Self : UIKit.UIViewController {
+  public static var defaultFileName: Swift.String {
+    get
+  }
+  public static func instantiateViewController() -> Self
+}
+public protocol ConnectionError : Swift.Error {
+  var isInternetConnectionError: Swift.Bool { get }
+}
+extension Swift.Error {
+  public var isInternetConnectionError: Swift.Bool {
+    get
+  }
+}
+public protocol PersistenceService {
+  func set<EnumString, EnumKey>(enumString: EnumString, for key: EnumKey) where EnumString : Swift.RawRepresentable, EnumKey : Swift.RawRepresentable, EnumString.RawValue == Swift.String, EnumKey.RawValue == Swift.String
+  func set<EnumKey>(string: Swift.String, for key: EnumKey) where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  func string<EnumString, EnumKey>(for key: EnumKey) -> EnumString? where EnumString : Swift.RawRepresentable, EnumKey : Swift.RawRepresentable, EnumString.RawValue == Swift.String, EnumKey.RawValue == Swift.String
+  func string<EnumKey>(for key: EnumKey) -> Swift.String? where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  func register<EnumKey>(defaultValue: Swift.Bool, key: EnumKey) where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  func set<EnumKey>(bool: Swift.Bool, for key: EnumKey) where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  func bool<EnumKey>(for key: EnumKey) -> Swift.Bool where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  func set<EnumKey>(date: Foundation.Date?, for key: EnumKey) where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  func date<EnumKey>(for key: EnumKey) -> Foundation.Date? where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  func set<EnumKey>(data: Foundation.Data, for key: EnumKey) where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  func data<EnumKey>(for key: EnumKey) -> Foundation.Data? where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  func removeObject<EnumKey>(for key: EnumKey) where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  func set<EnumKey>(int: Swift.Int, for key: EnumKey) where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  func integer<EnumKey>(for key: EnumKey) -> Swift.Int? where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+}
+public enum HTTPMethodType : Swift.String {
+  case get
+  case head
+  case post
+  case put
+  case patch
+  case delete
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum BodyEncoding {
+  case jsonSerializationData
+  case stringEncodingAscii
+  public static func == (a: IDWiseSDK.BodyEncoding, b: IDWiseSDK.BodyEncoding) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum BodyRequestType {
+  case multipartFormData
+  case jsonEncoding
+  public static func == (a: IDWiseSDK.BodyRequestType, b: IDWiseSDK.BodyRequestType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class Endpoint<R> : IDWiseSDK.ResponseRequestable {
+  public typealias Response = R
+  final public let path: Swift.String
+  final public let isFullPath: Swift.Bool
+  final public let method: IDWiseSDK.HTTPMethodType
+  final public let headerParamaters: [Swift.String : Swift.String]
+  final public let queryParametersEncodable: (any Swift.Encodable)?
+  public var queryParameters: [Swift.String : Any]
+  final public let bodyParamatersEncodable: (any Swift.Encodable)?
+  public var bodyParamaters: [Swift.String : Any]
+  final public let bodyEncoding: IDWiseSDK.BodyEncoding
+  final public let responseDecoder: any IDWiseSDK.ResponseDecoder
+  final public let boundar: Swift.String
+  public var bodyRequestType: IDWiseSDK.BodyRequestType
+  public var jsonEncodedData: Foundation.Data?
+  @objc deinit
+}
+public protocol Requestable {
+  var path: Swift.String { get }
+  var isFullPath: Swift.Bool { get }
+  var method: IDWiseSDK.HTTPMethodType { get }
+  var headerParamaters: [Swift.String : Swift.String] { get }
+  var queryParametersEncodable: (any Swift.Encodable)? { get }
+  var queryParameters: [Swift.String : Any] { get }
+  var bodyParamatersEncodable: (any Swift.Encodable)? { get }
+  var bodyParamaters: [Swift.String : Any] { get }
+  var bodyEncoding: IDWiseSDK.BodyEncoding { get }
+  var boundar: Swift.String { get }
+  var bodyRequestType: IDWiseSDK.BodyRequestType { get }
+  var jsonEncodedData: Foundation.Data? { get }
+  func urlRequest(with networkConfig: any IDWiseSDK.NetworkConfigurable) throws -> Foundation.URLRequest
+}
+public protocol ResponseRequestable : IDWiseSDK.Requestable {
+  associatedtype Response
+  var responseDecoder: any IDWiseSDK.ResponseDecoder { get }
+}
+extension IDWiseSDK.Requestable {
+  public func urlRequest(with config: any IDWiseSDK.NetworkConfigurable) throws -> Foundation.URLRequest
+}
+public enum Model : Swift.String {
+  case simulator, iPad2, iPad3, iPad4, iPadAir, iPadAir2, iPadAir3, iPadAir4, iPad5, iPad6, iPad7, iPad8, iPad9, iPadMini, iPadMini2, iPadMini3, iPadMini4, iPadMini5, iPadMini6, iPadPro9_7, iPadPro10_5, iPadPro11, iPadPro2_11, iPadPro3_11, iPadPro12_9, iPadPro2_12_9, iPadPro3_12_9, iPadPro4_12_9, iPadPro5_12_9, iPhone4, iPhone4S, iPhone5, iPhone5S, iPhone5C, iPhone6, iPhone6Plus, iPhone6S, iPhone6SPlus, iPhoneSE, iPhone7, iPhone7Plus, iPhone8, iPhone8Plus, iPhoneX, iPhoneXS, iPhoneXSMax, iPhoneXR, iPhone11, iPhone11Pro, iPhone11ProMax, iPhoneSE2, iPhone12Mini, iPhone12, iPhone12Pro, iPhone12ProMax, iPhone13Mini, iPhone13, iPhone13Pro, iPhone13ProMax, iPhoneSE3, iPhone14, iPhone14Plus, iPhone14Pro, iPhone14ProMax, iPhone15, iPhone15Plus, iPhone15Pro, iPhone15ProMax, iPhone16, iPhone16Plus, iPhone16Pro, iPhone16ProMax, iPhone16e, unrecognized
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol Alertable {
+}
+extension IDWiseSDK.Alertable where Self : UIKit.UIViewController {
+  public func showAlert(title: Swift.String = "", message: Swift.String, preferredStyle: UIKit.UIAlertController.Style = .alert, completion: (() -> Swift.Void)? = nil)
+  public func showAlertWithActions(title: Swift.String = "", message: Swift.String, preferredStyle: UIKit.UIAlertController.Style = .alert, confirmed: (() -> Swift.Void)? = nil, rejected: (() -> Swift.Void)? = nil)
+  public func showAlertWithoutVC(title: Swift.String = "", message: Swift.String, preferredStyle: UIKit.UIAlertController.Style = .alert, completion: (() -> Swift.Void)? = nil)
+  public func showPopUpForCancellingJourney(_ callBack: @escaping () -> ())
+}
+public struct JourneyDefinitionDTO : Swift.Codable {
+  public let totalSteps: Swift.Int?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct JourneyResultDTO : Swift.Codable {
+  public var completedSteps: Swift.Int?
+  public let interimRuleAssessment: IDWiseSDK.InterimRuleAssessment?
+  public var interimRuleDetails: [Swift.String : IDWiseSDK.RuleDetail]?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum InterimRuleAssessment : Swift.String, Swift.Codable {
+  case Passed
+  case Failed
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum InterimRuleResult : Swift.String, Swift.Codable {
+  case Passed
+  case Failed
+  case CouldNotApply
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct RuleDetail : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct DocumentRecognition : Swift.Codable {
+  public let document_type: Swift.String?
+  public let issuing_country_code: Swift.String?
+  public let issuing_country_name: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct BlockedTransaction : Swift.Codable, Swift.Equatable {
+  public let canRetry: Swift.Bool?
+  public let blockReasonMessage: Swift.String?
+  public let allBlockReasons: [IDWiseSDK.BlockReason]?
+  public static func == (a: IDWiseSDK.BlockedTransaction, b: IDWiseSDK.BlockedTransaction) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct BlockReason : Swift.Codable, Swift.Equatable {
+  public let blockReasonCode: Swift.String?
+  public static func == (a: IDWiseSDK.BlockReason, b: IDWiseSDK.BlockReason) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct NFCConfigurationDTO : Swift.Codable {
+  public let performNFC: Swift.Bool?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct JourneySummary : Swift.Codable {
+  public var isCompleted: Swift.Bool
+  public var journeyId: Swift.String
+  public var stepSummaries: [IDWiseSDK.JourneySummary.StepSummary]?
+  public var journeyResult: IDWiseSDK.JourneySummary.JourneyResult?
+  public struct StepSummary : Swift.Codable {
+    public var definition: IDWiseSDK.JourneySummary.StepDefinition
+    public var result: IDWiseSDK.StepResult?
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct StepDefinition : Swift.Codable {
+    public var stepId: Swift.Int
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct JourneyResult : Swift.Codable {
+    public var completedSteps: Swift.Int?
+    public let interimRuleAssessment: IDWiseSDK.InterimRuleAssessment?
+    public var interimRuleDetails: [Swift.String : IDWiseSDK.RuleDetail]?
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct StepResult : Swift.Codable {
+  public let hasPassedRules: Swift.Bool?
+  public let isConcluded: Swift.Bool?
+  public let status: Swift.String?, errorUserFeedbackCode: Swift.String?, errorUserFeedbackTitle: Swift.String?, errorUserFeedbackDetails: Swift.String?
+  public var extractedFields: [Swift.String : IDWiseSDK.FieldValue]?
+  public var nfcResult: IDWiseSDK.NFCResult?
+  public var recognition: IDWiseSDK.DocumentRecognition?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct AccessibilityIdentifier {
+}
+@_hasMissingDesignatedInitializers public class UserDefaultsPersistenceService : IDWiseSDK.PersistenceService {
+  public static let shared: IDWiseSDK.UserDefaultsPersistenceService
+  public func set<EnumString, EnumKey>(enumString: EnumString, for key: EnumKey) where EnumString : Swift.RawRepresentable, EnumKey : Swift.RawRepresentable, EnumString.RawValue == Swift.String, EnumKey.RawValue == Swift.String
+  public func set<EnumKey>(string: Swift.String, for key: EnumKey) where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  public func string<EnumString, EnumKey>(for key: EnumKey) -> EnumString? where EnumString : Swift.RawRepresentable, EnumKey : Swift.RawRepresentable, EnumString.RawValue == Swift.String, EnumKey.RawValue == Swift.String
+  public func string<EnumKey>(for key: EnumKey) -> Swift.String? where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  public func register<EnumKey>(defaultValue: Swift.Bool, key: EnumKey) where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  public func set<EnumKey>(bool: Swift.Bool, for key: EnumKey) where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  public func bool<EnumKey>(for key: EnumKey) -> Swift.Bool where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  public func set<EnumKey>(date: Foundation.Date?, for key: EnumKey) where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  public func date<EnumKey>(for key: EnumKey) -> Foundation.Date? where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  public func set<EnumKey>(data: Foundation.Data, for key: EnumKey) where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  public func data<EnumKey>(for key: EnumKey) -> Foundation.Data? where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  public func removeObject<EnumKey>(for key: EnumKey) where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  public func set<EnumKey>(int: Swift.Int, for key: EnumKey) where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  public func integer<EnumKey>(for key: EnumKey) -> Swift.Int? where EnumKey : Swift.RawRepresentable, EnumKey.RawValue == Swift.String
+  @objc deinit
+}
+extension UIKit.UIImage {
+  public func resizeImage(with size: CoreFoundation.CGSize?) -> UIKit.UIImage?
+  public func cropped(to rect: CoreFoundation.CGRect?) -> UIKit.UIImage
+}
+extension UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public func addShadow(_ shadowColor: UIKit.UIColor)
+}
+public protocol Cancellable {
+  func cancel()
+}
+extension IDWiseSDK.IDWiseTheme : Swift.Equatable {}
+extension IDWiseSDK.IDWiseTheme : Swift.Hashable {}
+extension IDWiseSDK.LogLevel : Swift.Equatable {}
+extension IDWiseSDK.LogLevel : Swift.Hashable {}
+extension IDWiseSDK.LogLevel : Swift.RawRepresentable {}
+extension IDWiseSDK.LoaderPosition : Swift.Equatable {}
+extension IDWiseSDK.LoaderPosition : Swift.Hashable {}
+extension IDWiseSDK.JourneyCancellationReason : Swift.Equatable {}
+extension IDWiseSDK.JourneyCancellationReason : Swift.Hashable {}
+extension IDWiseSDK.JourneyCancellationReason : Swift.RawRepresentable {}
+extension IDWiseSDK.CancellationReason : Swift.Equatable {}
+extension IDWiseSDK.CancellationReason : Swift.Hashable {}
+extension IDWiseSDK.CancellationReason : Swift.RawRepresentable {}
+extension IDWiseSDK.HTTPMethodType : Swift.Equatable {}
+extension IDWiseSDK.HTTPMethodType : Swift.Hashable {}
+extension IDWiseSDK.HTTPMethodType : Swift.RawRepresentable {}
+extension IDWiseSDK.BodyEncoding : Swift.Equatable {}
+extension IDWiseSDK.BodyEncoding : Swift.Hashable {}
+extension IDWiseSDK.BodyRequestType : Swift.Equatable {}
+extension IDWiseSDK.BodyRequestType : Swift.Hashable {}
+extension IDWiseSDK.Model : Swift.Equatable {}
+extension IDWiseSDK.Model : Swift.Hashable {}
+extension IDWiseSDK.Model : Swift.RawRepresentable {}
+extension IDWiseSDK.InterimRuleAssessment : Swift.Equatable {}
+extension IDWiseSDK.InterimRuleAssessment : Swift.Hashable {}
+extension IDWiseSDK.InterimRuleAssessment : Swift.RawRepresentable {}
+extension IDWiseSDK.InterimRuleResult : Swift.Equatable {}
+extension IDWiseSDK.InterimRuleResult : Swift.Hashable {}
+extension IDWiseSDK.InterimRuleResult : Swift.RawRepresentable {}

@@ -1,0 +1,118 @@
+[
+  {
+    "metadataOutputVersion" : "3.0",
+    "userDefinedMetadata" : {
+      "iou_threshold" : "0.45",
+      "classes" : "Doc",
+      "confidence_threshold" : "0.25"
+    },
+    "classLabels" : [
+      "Doc"
+    ],
+    "availability" : {
+      "macOS" : "10.15",
+      "tvOS" : "13.0",
+      "visionOS" : "1.0",
+      "watchOS" : "6.0",
+      "iOS" : "13.0",
+      "macCatalyst" : "13.0"
+    },
+    "inputSchema" : [
+      {
+        "height" : "640",
+        "colorspace" : "RGB",
+        "isOptional" : "0",
+        "width" : "640",
+        "isColor" : "1",
+        "formattedType" : "Image (Color 640 × 640)",
+        "hasSizeFlexibility" : "0",
+        "type" : "Image",
+        "shortDescription" : "Input image",
+        "name" : "image"
+      },
+      {
+        "isOptional" : "0",
+        "formattedType" : "Double",
+        "type" : "Double",
+        "name" : "iouThreshold",
+        "shortDescription" : "(optional) IOU Threshold override (default: 0.45)"
+      },
+      {
+        "isOptional" : "0",
+        "formattedType" : "Double",
+        "type" : "Double",
+        "name" : "confidenceThreshold",
+        "shortDescription" : "(optional) Confidence Threshold override (default: 0.25)"
+      }
+    ],
+    "outputSchema" : [
+      {
+        "dataType" : "Double",
+        "hasShapeFlexibility" : "1",
+        "isOptional" : "0",
+        "shapeFlexibility" : "0... × 1",
+        "shapeRange" : "[[0, -1], [1, 1]]",
+        "formattedType" : "MultiArray (Double 0 × 1)",
+        "type" : "MultiArray",
+        "shape" : "[0, 1]",
+        "name" : "confidence",
+        "shortDescription" : "Boxes × Class confidence (see user-defined metadata \"classes\")"
+      },
+      {
+        "dataType" : "Double",
+        "hasShapeFlexibility" : "1",
+        "isOptional" : "0",
+        "shapeFlexibility" : "0... × 4",
+        "shapeRange" : "[[0, -1], [4, 4]]",
+        "formattedType" : "MultiArray (Double 0 × 4)",
+        "type" : "MultiArray",
+        "shape" : "[0, 4]",
+        "name" : "coordinates",
+        "shortDescription" : "Boxes × [x, y, width, height] (relative to image size)"
+      }
+    ],
+    "modelParameters" : [
+
+    ],
+    "storagePrecision" : "Mixed (Float32, Int8)",
+    "neuralNetworkLayerTypeHistogram" : {
+      "Concat" : 13,
+      "UnaryPower" : 3,
+      "Convolution" : 60,
+      "PoolingINVALID" : 3,
+      "Transpose" : 3,
+      "ReshapeStatic" : 6,
+      "UpsampleINVALID" : 2,
+      "LoadConstantND" : 6,
+      "ActivationSigmoid" : 60,
+      "SplitND" : 4,
+      "Squeeze" : 1,
+      "Multiply" : 71,
+      "Add" : 10,
+      "ConcatND" : 4
+    },
+    "method" : "predict",
+    "version" : "https:\/\/github.com\/ultralytics\/yolov5",
+    "isUpdatable" : "0",
+    "specificationVersion" : 4,
+    "stateSchema" : [
+
+    ],
+    "computePrecision" : "Float16",
+    "shortDescription" : "https:\/\/github.com\/ultralytics\/yolov5",
+    "license" : "https:\/\/github.com\/ultralytics\/yolov5\/blob\/master\/LICENSE",
+    "generatedClassName" : "document_detector",
+    "author" : "glenn.jocher@ultralytics.com",
+    "modelType" : {
+      "name" : "MLModelType_pipeline",
+      "structure" : [
+        {
+          "name" : "MLModelType_neuralNetwork"
+        },
+        {
+          "name" : "MLModelType_nonMaximumSuppression"
+        }
+      ]
+    }
+  }
+]

@@ -66,23 +66,10 @@ class CSPDListViewController: UIViewController {
 extension CSPDListViewController : GatetoPayOnboardingCSPDDelegate {
     func productIdForKYCReceived(productId: Int) {
         productIdForKYC = productId
-        if !isDocumentVerificationEnabled && !isLivenessEnabled {
-            GatetoPayOnboarding.kyc.delegate = self
-            Dialogs.showLoading()
-            GatetoPayOnboarding.kyc.getKYCFields(fieldValues: [] , productId: productIdForKYC ?? 0)
-           
-        }
-        else if isDocumentVerificationEnabled {
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "ScanIDViewController") as? ScanIDViewController {
-                vc.pageType = .documentType
-                vc.nationalitiesResponse = nationalitiesResponse
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
-        else if isLivenessEnabled && !isDocumentVerificationEnabled {
-            GatetoPayOnboarding.livenessCheck.checkLiveness(viewController: self, detectOptions: [.blink, .lookRight, .lookLeft], isDetectionOptionsSorted: true)
-            GatetoPayOnboarding.livenessCheck.delegate = self
-        }
+        Dialogs.showLoading()
+        GatetoPayOnboarding.verificationJourney.delegate = self
+        GatetoPayOnboarding.verificationJourney.startVerification(applicationLanguage: "en", nationality: "Jordanian")
+        
     }
     
     func productIdForKYCFinishedWithError(error: GatetoPayOnboardingError) {
@@ -90,136 +77,43 @@ extension CSPDListViewController : GatetoPayOnboardingCSPDDelegate {
 
     }
 }
-
-extension CSPDListViewController: GatetoPayOnboardingDocumentsDelegate{
-    func didFinishWithError(error: GatetoPayOnboardingError) {
-        Dialogs.dismiss()
-        Dialogs.showError(error.errorString)
-    }
-    
-    func userFinishCapturingDocumentsWithError(documents: [GatetoPayOnboardingDocument], error: GatetoPayOnboardingError) {
-        Dialogs.dismiss()
-        Dialogs.showError(error.errorString)
-    }
-    
-    func userFinishCapturingDocument(documents: [GatetoPayOnboardingDocument]) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "DocumentVerificationViewController") as? DocumentVerificationViewController{
-            vc.delegate = self
-           
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-    
-    func userFinishCapturingDocumentsWithResponse(documents: [GatetoPayOnboardingDocument], response: DocumentVerificationResponse) {
-        print("\(response)")
-        Dialogs.dismiss()
-        
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "OCRDataResponseViewController") as? OCRDataResponseViewController{
-            vc.documentsObject = response
-            vc.nationalitiesResponse = self.nationalitiesResponse
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-    
-    func userFinishCapturingDocumentsWithError(documents: [GatetoPayOnboardingDocument]) {
-        Dialogs.showError("Error", duration: 3)
-    }
-    
-    func userDidCloseCamera() {
+extension CSPDListViewController : VerificationJourneyDelegate {
+    func onJourneyStarted(journeyId: String) {
         
     }
     
-}
-
-extension CSPDListViewController: SelfieConfirmationDelegate{
-    func userDidVerifySelfie() {
-        Dialogs.showLoading()
-        GatetoPayOnboarding.documentsCheck.extractData()
+    func onJourneyResumed(journeyId: String) {
+        
     }
     
-    func userDidSelectToRetakeSelfie() {
-        self.navigationController?.popToViewController(self, animated: true)
-    }
-    
-    
-}
-
-
-extension CSPDListViewController: GatetoPayOnboardingLivenessCheckDelegate{
-    func faceMatchingBundleNotAvailable() {
-        Dialogs.showLoading()
+    func onJourneyCompleted(journeyId: String) {
         GatetoPayOnboarding.kyc.delegate = self
+        Dialogs.showLoading()
         GatetoPayOnboarding.kyc.getKYCFields(fieldValues: [] , productId: productIdForKYC ?? 0)
     }
     
+    func onJourneyCancelled(journeyId: String, cancellationReason: String) {
+        
+    }
     
-    func LivenessCheckPageError(error: GatetoPayOnboardingError) {
-        Dialogs.dismiss()
+    func onJourneyBlocked(journeyId: String, blockReasonMessage: String) {
+        
+    }
+    
+    func onJourneyError(error: String) {
+        Dialogs.showError(error)
+    }
+    
+    func checkIsMobileJourneyFailed(error: GatetoPayOnboardingSDK.GatetoPayOnboardingError) {
         Dialogs.showError(error.errorString)
-    }
-    
-    func cameraAccessDeniedError(error: GatetoPayOnboardingError) {
-        Dialogs.dismiss()
-        let alert = UIAlertController(
-            title: "Camera Access Needed",
-            message: "To use this feature, please allow camera access in Settings.",
-            preferredStyle: .alert
-        )
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Allow", style: .default) { _ in
-            //               if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-            //                   UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
-            //               }
-            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (_) in
-                GatetoPayOnboarding.livenessCheck.checkLiveness(viewController: self, detectOptions: [.blink, .lookRight, .lookLeft], isDetectionOptionsSorted: true)
-                GatetoPayOnboarding.livenessCheck.delegate = self
-            })
-        })
-        
-        if let topController = UIApplication.shared.windows.first?.rootViewController {
-            topController.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    func didPressCancel() {
-        
-    }
-    
-    func LivenessCheckDone(){
-    }
-    
-    func didGetImageSuccessfully(data: UIImage) {
-        //1
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "SelfieConfirmationViewController") as? SelfieConfirmationViewController{
-            vc.delegate = self
-            vc.passedImage = data
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-    
-    func didGetImageMatchingResponseSuccessfully(response: ImageMatchingResponse) {
-        Dialogs.dismiss()
-        self.navigationController?.popViewController(animated: false)
-        
-        if !(response.isIdentical ?? false) {
-            Dialogs.showError("Faces do not match", duration: 4)
-            return
-        }
-        
-        Dialogs.showLoading()
-        GatetoPayOnboarding.kyc.delegate = self
-        GatetoPayOnboarding.kyc.getKYCFields(fieldValues: [] , productId: productIdForKYC ?? 0)
-    }
-    
-    func didGetError(errorMessage: String) {
-        //show error
-        Dialogs.dismiss()
-        Dialogs.showError(errorMessage, duration: 5)
     }
     
     
 }
+
+
+
+
 
 
 extension CSPDListViewController: GatetoPayOnboardingKYCDelegate {
@@ -244,11 +138,9 @@ extension CSPDListViewController: GatetoPayOnboardingKYCDelegate {
             let alert = UIAlertController(title: "", message: "It seems that your ID number is wrong or your ID Scan is not clear or does not match your selfie image", preferredStyle: .alert)
             
             let rescanAction = UIAlertAction(title: "Re scan Card ID", style: .default) { _ in
-                if let vc = self.storyboard?.instantiateViewController(withIdentifier: "ScanIDViewController") as? ScanIDViewController {
-                    vc.pageType = .documentType
-                    vc.nationalitiesResponse = self.nationalitiesResponse
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
+                Dialogs.showLoading()
+                GatetoPayOnboarding.verificationJourney.delegate = self
+                GatetoPayOnboarding.verificationJourney.startVerification(applicationLanguage: "en", nationality: "Jordanian")
             }
             
             
@@ -270,11 +162,9 @@ extension CSPDListViewController: GatetoPayOnboardingKYCDelegate {
             let alert = UIAlertController(title: "", message: "It seems that your image does not match your ID image", preferredStyle: .alert)
             
             let rescanAction = UIAlertAction(title: "Re scan Card ID", style: .default) { _ in
-                if let vc = self.storyboard?.instantiateViewController(withIdentifier: "ScanIDViewController") as? ScanIDViewController {
-                    vc.pageType = .documentType
-                    vc.nationalitiesResponse = self.nationalitiesResponse
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
+                Dialogs.showLoading()
+                GatetoPayOnboarding.verificationJourney.delegate = self
+                GatetoPayOnboarding.verificationJourney.startVerification(applicationLanguage: "en", nationality: "Jordanian")
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel){ _ in
                 self.navigationController?.popToRootViewController(animated: true)

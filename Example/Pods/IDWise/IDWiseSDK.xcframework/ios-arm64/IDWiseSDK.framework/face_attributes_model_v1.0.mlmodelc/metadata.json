@@ -1,0 +1,87 @@
+[
+  {
+    "metadataOutputVersion" : "3.0",
+    "storagePrecision" : "Float16",
+    "outputSchema" : [
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Float32",
+        "formattedType" : "MultiArray (Float32)",
+        "shortDescription" : "",
+        "shape" : "[]",
+        "name" : "cls_probs",
+        "type" : "MultiArray"
+      },
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Float32",
+        "formattedType" : "MultiArray (Float32)",
+        "shortDescription" : "",
+        "shape" : "[]",
+        "name" : "reg_outputs",
+        "type" : "MultiArray"
+      }
+    ],
+    "modelParameters" : [
+
+    ],
+    "specificationVersion" : 4,
+    "computePrecision" : "Float16",
+    "isUpdatable" : "0",
+    "stateSchema" : [
+
+    ],
+    "availability" : {
+      "macOS" : "10.15",
+      "tvOS" : "13.0",
+      "visionOS" : "1.0",
+      "watchOS" : "6.0",
+      "iOS" : "13.0",
+      "macCatalyst" : "13.0"
+    },
+    "modelType" : {
+      "name" : "MLModelType_neuralNetwork"
+    },
+    "userDefinedMetadata" : {
+      "com.github.apple.coremltools.version" : "8.3.0",
+      "com.github.apple.coremltools.source" : "torch==2.1.0",
+      "com.github.apple.coremltools.source_dialect" : "TorchScript"
+    },
+    "inputSchema" : [
+      {
+        "height" : "400",
+        "colorspace" : "RGB",
+        "isOptional" : "0",
+        "width" : "400",
+        "isColor" : "1",
+        "formattedType" : "Image (Color 400 × 400)",
+        "hasSizeFlexibility" : "0",
+        "type" : "Image",
+        "shortDescription" : "",
+        "name" : "input"
+      }
+    ],
+    "generatedClassName" : "face_attributes_model_v1_0",
+    "neuralNetworkLayerTypeHistogram" : {
+      "Mvn" : 4,
+      "Copy" : 1,
+      "InnerProduct" : 11,
+      "ActivationSigmoidHard" : 31,
+      "Convolution" : 52,
+      "Gelu" : 1,
+      "ActivationSigmoid" : 3,
+      "Scale" : 4,
+      "ReshapeStatic" : 9,
+      "LoadConstantND" : 1,
+      "ActivationThresholdedReLU" : 22,
+      "Multiply" : 32,
+      "Add" : 8,
+      "Gather" : 1,
+      "ActivationReLU" : 15,
+      "PoolingAverage" : 10
+    },
+    "method" : "predict"
+  }
+]

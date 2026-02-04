@@ -1,10 +1,13 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, '13.0'
 
+source 'https://cdn.cocoapods.org/'
+source 'https://github.com/idwise/ios-sdk'
+
 target 'Example' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'GateToPayOnboardingSDK'
+  pod 'GateToPayOnboardingSDK' 
   pod 'Alamofire'
   pod 'GoogleMLKit/FaceDetection'
   pod 'lottie-ios', '~> 3.3.0'
@@ -20,6 +23,7 @@ target 'Example' do
   pod 'UDatePicker', :git=>  "https://github.com/zaidiabbas/UDatePicker"
   pod 'FAPickerView'                        # Picker vi
   pod 'Protobuf', '~> 3.25'
+  pod 'IDWise', '5.7.4'
 
   # Pods for Example
 

@@ -15,12 +15,10 @@ The new eKYC in simple way.
 
 
 ## Requirements
-[![Platform iOS](https://img.shields.io/badge/Platform-iOS-blue.svg?style=fla)]()
-
-
+- iOS 13.0+
+- Swift 5.7+
 
 ## Installation
-==========================
 
 Gate to Pay Onboarding SDK is available through [CocoaPods](https://github.com/SedraPay/Gate-to-Pay-Onboarding-SDK). To install
 it, simply add the following line to your Podfile:
@@ -41,308 +39,406 @@ end
 
 Then install it in terminal using below lines:
 
+```bash
 pod install
 
--- OR --
+# OR
 
 pod install --repo-update
-
-
-## Add below line into your Info.plist
-
-```xml
-<key>NSCameraUsageDescription</key>
-<string>$(PRODUCT_NAME) {camera usage description and why the app needs to use it}.</string>
 ```
 
+**Alternative: Xcode project reference (for this repo)**
+- Add `GatetoPayOnboardingSDK.xcodeproj` to your app workspace.
+- In your app target **General → Frameworks, Libraries, and Embedded Content**, add `GatetoPayOnboardingSDK.framework` and set it to **Embed & Sign**.
 
-### Lets Start coding
+Then import the module where needed:
+```swift
+import GatetoPayOnboardingSDK
+```
 
-## First step is required to have so you will create session and can use below steps
+## Quick Start
 
-###### Create Journey ######
+### First Step: Create Journey
+
+This is a mandatory step to create a session before using any other features.
 
 ```swift
 import GatetoPayOnboardingSDK
 
-//Mandatory step to add
-
-override func viewDidLoad(){
-    super.viewDidLoad()
+class YourViewController: UIViewController, GatetoPayOnboardingJourneyDelegate {
     
-    //assign the delegate to your viewController
-    GatetoPayOnboardingSDK.shared.delegate = self
-    
-/// This function is required to initialize the SDK correctly.
-/// You must provide all parameters to ensure proper functionality.
-///
-/// - Parameters:
-///   - serverKey: The key provided to you from the portal.
-///   - serverURLString: The base URL provided by the sales team.
-///   - nationalNumber: Required so the backend can communicate with Civil Status Authority to retrieve user information.
-///   - riskFormId: Used to fetch the first request which contains the risk form data.
-///   - applicationId: Unique identifier used to label each KYC onboarding journey so it can be easily distinguished
-
-GatetoPayOnboardingSDK.shared.setSettings(
-    serverKey: "<YOUR_SERVER_KEY>",
-    serverURLString: "<YOUR_GIVEN_SERVER_URL>",
-    nationalNumber: "<USER_NATIONAL_NUMBER>",
-    riskFormId: "<RISK_FORM_ID>",
-    applicationId: "<APPLICATION_ID>"
-)
-}
-
-
-extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingJourneyDelegate{
-    func didFinishCreatingJourneyWithError(error: GatetoPayOnboardingCheckError){
-        //do your own code as:
-        //dismiss dialogs, loadings
-        //recall the function
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Assign the delegate to your viewController
+        GatetoPayOnboarding.shared.delegate = self
+        
+        /// This function is required to initialize the SDK correctly.
+        /// You must provide all parameters to ensure proper functionality.
+        ///
+        /// - Parameters:
+        ///   - serverKey: The key provided to you from the portal.
+        ///   - serverURLString: The base URL provided by the sales team.
+        ///   - needsLogging: Optional flag for logging (default: false)
+        ///   - journeyType: Type of journey (.new or .update, default: .new)
+        ///   - referenceKey: Optional reference key
+        ///   - customerId: Optional unique customer identifier
+        ///   - nationalNumber: Required so the backend can communicate with Civil Status Authority to retrieve user information.
+        ///   - riskFormId: Used to fetch the first request which contains the risk form data.
+        ///   - applicationId: Unique identifier used to label each KYC onboarding journey so it can be easily distinguished
+        
+        try? GatetoPayOnboarding.shared.setSettings(
+            serverKey: "<YOUR_SERVER_KEY>",
+            serverURLString: "<YOUR_GIVEN_SERVER_URL>",
+            true,                     // needsLogging
+            .new,                     // journey type
+            referenceKey: nil,
+            customerId: "unique-customer-id",
+            nationalNumber: "<USER_NATIONAL_NUMBER>",
+            riskFormId: "<RISK_FORM_ID>",
+            applicationId: "<APPLICATION_ID>"
+        )
     }
     
-    func didFinishCreatingJourneyWithSuccess(journeyId: String, isDocumentVerification: Bool, isLiveness: Bool, isFaceMatching: Bool) {
-        //do your own code as:
-        //dismiss dialog, loadings
-        //save the journey if needed as a reference to your server to check user from our protal
-         GatetoPayOnboarding.riskForm.delegate = self
-         GatetoPayOnboarding.riskForm.getRiskFields(fieldValues: [])
+    // MARK: - GatetoPayOnboardingJourneyDelegate
+    
+    func didFinishCreatingJourneyWithError(error: GatetoPayOnboardingError) {
+        // Handle error: dismiss dialogs, loadings, or recall the function
+        print("Journey creation failed: \(error.errorString ?? "Unknown error")")
+    }
+    
+    func didFinishCreatingJourneyWithSuccess(
+        journeyId: String,
+        isDocumentVerification: Bool,
+        isLiveness: Bool,
+        isFaceMatching: Bool
+    ) {
+        // Journey created successfully
+        // Save the journeyId if needed as a reference to your server
+        // Now you can proceed with the onboarding flow
+        
+        // Example: Start with Risk Form
+        GatetoPayOnboarding.riskForm.delegate = self
+        GatetoPayOnboarding.riskForm.getRiskFields(fieldValues: [])
     }
 }
-
-
-Enable / Disable OCR
-
-You can enable or disable the OCR feature for all forms.
-
-@IBAction func enableOCRSwitchAction(_ sender: UISwitch) {
-    sender.isOn ?
-      GatetoPayOnboarding.shared.setOCREnabled(true) :
-      GatetoPayOnboarding.shared.setOCREnabled(false)
-}
-
-If set to true → OCR will be enabled and applied on all forms.
-If set to false → OCR will be applied only if the form itself supports OCR, otherwise it will be skipped.
-
 ```
-###### END OF CREATE JOURNEY ######
 
+## Usage
 
-###### GatetoPayOnboarding Risk Form Flow ######
+### Risk Form Flow
 
 ```swift
-override func viewDidLoad() {
-    super.viewDidLoad()
+class RiskFormViewController: UIViewController, GatetoPayOnboardingRiskFormDelegate {
     
-    GatetoPayOnboarding.riskForm.delegate = self
+    var sectionsArray: [GatetoPayOnboardingKYCFieldItem]?
     
-    // Request dynamic risk form fields
-    GatetoPayOnboarding.riskForm.getRiskFields(fieldValues: [])
-}
-
-
-@IBAction func nextButton(_ sender: UIButton) {
-    Dialogs.showLoading()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        GatetoPayOnboarding.riskForm.delegate = self
+        
+        // Request dynamic risk form fields
+        GatetoPayOnboarding.riskForm.getRiskFields(fieldValues: [])
+    }
     
-    // Submit updated risk form data
-    GatetoPayOnboarding.riskForm.updateRiskData(
-        riskFields: sectionsArray ?? []
-    )
-}
-
-
-
-extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingRiskFormDelegate {
-
+    @IBAction func nextButton(_ sender: UIButton) {
+        // Submit updated risk form data
+        GatetoPayOnboarding.riskForm.updateRiskData(
+            riskFields: sectionsArray ?? []
+        )
+    }
+    
+    // MARK: - GatetoPayOnboardingRiskFormDelegate
+    
+    /// Called when retrieving Risk Form fields fails
+    func riskFormFinishedWithError(error: GatetoPayOnboardingError) {
+        // Handle error: dismiss dialogs, show error message
+        print("Risk form error: \(error.errorString ?? "Unknown error")")
+    }
+    
+    /// Called when Risk Form dynamic fields are successfully retrieved
+    func riskFormFields(fields: [GatetoPayOnboardingKYCFieldItem]) {
+        // Store fields to display in your UI
+        sectionsArray = fields
+        
+        var allFields: [GatetoPayOnboardingKYCDynamicField] = []
+        for item in fields {
+            if let dynamicFields = item.dynamicFields {
+                allFields.append(contentsOf: dynamicFields)
+            }
+        }
+        
+        // Now `allFields` contains all dynamic fields to display in your UI
+        // Render your form UI here
+    }
+    
     /// Called when updating the Risk Form fails
     func updateRiskFormFinishedWithError(error: String) {
-        Dialogs.dismiss()
         // Handle retry or show a proper message to the user
+        print("Update risk form failed: \(error)")
     }
-
+    
     /// Called when updating the Risk Form succeeds
     func didUpdateRiskFormSuccessfully(riskLevel: Int?) {
-        Dialogs.dismiss()
-        
         // Save riskLevel for later usage when submitting getProductByIdType API
+        let savedRiskLevel = riskLevel ?? 0
         
         GatetoPayOnboarding.cspdData.delegate = self
         
         if let sections = sectionsArray {
             let allFields = sections.flatMap { $0.dynamicFields ?? [] }
-
+            
             let nationality = allFields.first {
                 $0.fieldLabel == "Nationality"
             }?.value?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-
+            
             let residency = allFields.first {
                 $0.fieldLabel == "Country of Residency" ||
                 $0.fieldLabel == "Country Of Residency"
             }?.value?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-
+            
             guard !nationality.isEmpty, !residency.isEmpty else {
                 print("Nationality or residency is empty — skipping CSPD API call")
                 return
             }
-
+            
             GatetoPayOnboarding.cspdData.getCSPDTypes(
                 nationality: nationality,
                 residency: residency
             )
         }
     }
-
-    /// Called when retrieving Risk Form fields fails
-    func riskFormFinishedWithError(error: GatetoPayOnboardingError) {
-        Dialogs.dismiss()
-        Dialogs.showError(error.localizedDescription)
-    }
-
-    /// Called when Risk Form dynamic fields are successfully retrieved
-    func riskFormFields(fields: [GatetoPayOnboardingKYCFieldItem]) {
-        Dialogs.dismiss()
-        
-        var array: [GatetoPayOnboardingKYCDynamicField] = []
-        
-        fields.forEach { item in
-            if let items = item.dynamicFields {
-                array.append(contentsOf: items)
-            }
-        }
-        
-        // `array` now contains all dynamic fields to display in your UI
-        // Please store it into sectionsArray to submit it later
-    }
 }
-
 ```
 
-###### GatetoPayOnboarding CSPD Flow ######
-```swift
+### CSPD Data Flow
 
-      @IBAction func NextButton(_ sender: Any) {
+```swift
+class CSPDViewController: UIViewController, GatetoPayOnboardingCSPDDelegate {
+    
+    var riskLevel: Int?
+    var customerIdentityType: String?
+    var productIdForKYC: Int?
+    
+    @IBAction func nextButton(_ sender: Any) {
         GatetoPayOnboarding.cspdData.delegate = self
-        GatetoPayOnboarding.cspdData.getProductByIdType(riskLevel: risklevel ?? 0, customerIdentityType: self.customerIdentityType ?? "")
-    } 
-   extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingDSPDDelegate {
-    
-    
-    func cspdTypesReceived(types: [CSPDType]){
-          //do your own code as:
-         //dismiss dialogs, loadings
-         //recall the function
+        GatetoPayOnboarding.cspdData.getProductByIdType(
+            riskLevel: riskLevel ?? 0,
+            customerIdentityType: customerIdentityType ?? ""
+        )
     }
     
+    // MARK: - GatetoPayOnboardingCSPDDelegate
     
-    
-    func cspdTypesFinishedWithError(error: GatetoPayOnboardingError){
-        Dialogs.dismiss()
-        Dialogs.showError(error.localizedDescription)
+    func cspdTypesReceived(types: [CSPDType]) {
+        // Handle CSPD types received
+        // Display types to user if needed
     }
     
+    func cspdTypesFinishedWithError(error: GatetoPayOnboardingError) {
+        // Handle error
+        print("CSPD types error: \(error.errorString ?? "Unknown error")")
+    }
     
     func productIdForKYCReceived(productId: Int) {
         productIdForKYC = productId
-        if !isDocumentVerificationEnabled && !isLivenessEnabled {
-            GatetoPayOnboarding.kyc.delegate = self
-            Dialogs.showLoading()
-            GatetoPayOnboarding.kyc.getKYCFields(fieldValues: [] , productId: productIdForKYC ?? 0)
-           
-        }
-        else if isDocumentVerificationEnabled {
         
-              GatetoPayOnboarding.documentsCheck.captureDocuments(documentType: .id, configuration: configuration)
-
-        }
-        else if isLivenessEnabled && !isDocumentVerificationEnabled {
-            GatetoPayOnboarding.livenessCheck.checkLiveness(viewController: self, detectOptions: [.blink, .lookRight, .lookLeft], isDetectionOptionsSorted: true)
-            GatetoPayOnboarding.livenessCheck.delegate = self
-        }
+        // Now you can fetch KYC fields using this productId
+        GatetoPayOnboarding.kyc.delegate = self
+        GatetoPayOnboarding.kyc.getKYCFields(
+            fieldValues: [],
+            productId: productIdForKYC ?? 0
+        )
     }
     
     func productIdForKYCFinishedWithError(error: GatetoPayOnboardingError) {
-        Dialogs.showError(error.errorString)
-
+        // Handle error
+        print("Product ID error: \(error.errorString ?? "Unknown error")")
     }
-    
-  
+}
 ```
 
-###### GatetoPayOnboarding KYC  ######
+### KYC Dynamic Fields
 
-To handle the KYC flow, you need to conform to the GatetoPayOnboardingKYCDelegate protocol.
 ```swift
-extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingKYCDelegate {
-
-    // Called when updating KYC fails
-    func updateKYCFinishedWithError(error: String) {
-          //do your own code as:
-         //dismiss dialogs, loadings
-         //recall the function
+class KYCViewController: UIViewController, GatetoPayOnboardingKYCDelegate {
+    
+    var sectionsArray: [GatetoPayOnboardingKYCFieldItem]?
+    
+    func fetchKYCFields(productId: Int) {
+        GatetoPayOnboarding.kyc.delegate = self
+        GatetoPayOnboarding.kyc.getKYCFields(
+            fieldValues: [],
+            productId: productId
+        )
     }
     
-    // Called when updating KYC succeeds
-    func didUpdateKYCSuccessfully(id: Int?) {
-         //do your own code as:
-         //dismiss dialogs, loadings
-         //recall the function
+    @IBAction func submitButton(_ sender: UIButton) {
+        // Submit KYC form data
+        GatetoPayOnboarding.kyc.updateKYC(kycFields: sectionsArray ?? [])
     }
     
-    // Called when KYC request fails
+    // MARK: - GatetoPayOnboardingKYCDelegate
+    
+    /// Called when KYC request fails
     func kycFinishedWithError(error: GatetoPayOnboardingError) {
-        Dialogs.dismiss()
-        Dialogs.showError(error.localizedDescription)
+        // Handle error
+        print("KYC error: \(error.errorString ?? "Unknown error")")
     }
     
-    // Called when KYC dynamic fields are returned
-    func kycFields(fields: [GatetoPayOnboardingKYCFieldItem]) {
-        Dialogs.dismiss()
+    /// Called when KYC dynamic fields are returned
+    func kycFields(fields: GatetoPayOnboardingKYCFieldModel) {
+        // Extract fields from the model
+        sectionsArray = fields.steps
         
-        /// This will return all dynamic fields from the SDK.
-        /// You can use them to render your own KYC form dynamically.
-        var array: [GatetoPayOnboardingKYCDynamicField] = []
+        var allFields: [GatetoPayOnboardingKYCDynamicField] = []
         
-        for item in fields {
-            if let items = item.dynamicFields {
-                for object in items {
-                    array.append(object)
+        if let steps = fields.steps {
+            for item in steps {
+                if let dynamicFields = item.dynamicFields {
+                    allFields.append(contentsOf: dynamicFields)
                 }
             }
         }
         
-        // Now `array` contains all dynamic fields to display in your UI.
+        // Now `allFields` contains all dynamic fields to display in your UI
+        // Render your KYC form UI here
+    }
+    
+    /// Called when updating KYC fails
+    func updateKYCFinishedWithError(error: String) {
+        // Handle error: dismiss dialogs, show error message
+        print("Update KYC failed: \(error)")
+    }
+    
+    /// Called when updating KYC succeeds
+    func didUpdateKYCSuccessfully(id: Int?) {
+        // KYC updated successfully
+        // Proceed to next step in your flow
+        print("KYC updated successfully with ID: \(id ?? -1)")
     }
 }
 ```
-#### Countries and Cities
 
-Call this method only once and cache the response (countries and cities) locally.
-This data will be used later in the KYC screen to handle data types like country and countryCity.
+### Countries and Cities
+
+Call this method only once and cache the response (countries and cities) locally. This data will be used later in the KYC screen to handle data types like country and countryCity.
 
 ```swift
-extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingCountriesDelegate {
-
-  func loadCountries() {
-    GatetoPayOnboarding.countries.delegate = self
-    GatetoPayOnboarding.countries.getNationalities()
-  }
-
-  func didGetNationalitiesWithSuccess(response: CountriesAndCitiesResponse) {
-    // use response (countries, cities)
-  }
-
-  func didGetNationalitiesWithError(error: GatetoPayOnboardingError) {
-    // handle error
-  }
+class CountriesViewController: UIViewController, GatetoPayOnboardingCountriesDelegate {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        loadCountries()
+    }
+    
+    func loadCountries() {
+        GatetoPayOnboarding.countries.delegate = self
+        GatetoPayOnboarding.countries.getNationalities()
+    }
+    
+    // MARK: - GatetoPayOnboardingCountriesDelegate
+    
+    func didGetNationalitiesWithSuccess(response: CountriesAndCitiesResponse) {
+        // Cache the response locally
+        // Use response.countries and response.cities in your KYC forms
+        // This data will be used for fields with dataType: .country, .city, or .countryandcity
+    }
+    
+    func didGetNationalitiesWithError(error: GatetoPayOnboardingError) {
+        // Handle error
+        print("Countries error: \(error.errorString ?? "Unknown error")")
+    }
 }
 ```
 
-###### GatetoPayOnboarding Dynamic Fields ######
+### Verification Journey
 
-Both FormInfofields(fields: [IntegrationInfo]) and kycFields(fields: [GatetoPayOnboardingKYCFieldItem]) can return dynamic fields.
-
-The possible field types are:
 ```swift
- GatetoPayOnboardingKYCFieldType {
+class VerificationViewController: UIViewController, VerificationJourneyDelegate {
+    
+    func startVerification(applicationLanguage: String, nationality: String) {
+        GatetoPayOnboarding.verificationJourney.delegate = self
+        GatetoPayOnboarding.verificationJourney.startVerification(
+            applicationLanguage: applicationLanguage,
+            nationality: nationality
+        )
+    }
+    
+    // MARK: - VerificationJourneyDelegate
+    
+    func onJourneyStarted(journeyId: String) {
+        // Journey started
+        print("Verification journey started: \(journeyId)")
+    }
+    
+    func onJourneyResumed(journeyId: String) {
+        // Journey resumed
+        print("Verification journey resumed: \(journeyId)")
+    }
+    
+    func onJourneyCompleted(journeyId: String) {
+        // Journey completed successfully
+        print("Verification journey completed: \(journeyId)")
+    }
+    
+    func onJourneyCancelled(journeyId: String, cancellationReason: String) {
+        // User cancelled the journey
+        print("Verification journey cancelled: \(cancellationReason)")
+    }
+    
+    func onJourneyBlocked(journeyId: String, blockReasonMessage: String) {
+        // Journey was blocked
+        print("Verification journey blocked: \(blockReasonMessage)")
+    }
+    
+    func onJourneyError(error: String) {
+        // Handle error
+        print("Verification journey error: \(error)")
+    }
+    
+    func checkIsMobileJourneyFailed(error: GatetoPayOnboardingError) {
+        // Handle error when mobile journey check fails
+        print("Mobile journey check failed: \(error.errorString ?? "Unknown error")")
+    }
+}
+```
+
+### Close Journey
+
+```swift
+class CloseJourneyViewController: UIViewController, GatetoPayOnboardingCloseJourneyDelegate {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        GatetoPayOnboarding.closeJourney.delegate = self
+        GatetoPayOnboarding.closeJourney.closeJourneyAPI(customerId: "unique-customer-id")
+    }
+    
+    // MARK: - GatetoPayOnboardingCloseJourneyDelegate
+    
+    func didFinishCloseJourneyWithSuccess() {
+        // Journey closed successfully
+        // Dismiss dialogs, loadings, or proceed to next step
+        print("Journey closed successfully")
+    }
+    
+    func didFinishCloseJourneyWithError(error: GatetoPayOnboardingError) {
+        // Handle error: dismiss dialogs, loadings, or retry
+        print("Close journey error: \(error.errorString ?? "Unknown error")")
+    }
+}
+```
+
+## Dynamic Fields Types
+
+Both `riskFormFields` and `kycFields` return dynamic fields. The possible field types are:
+
+```swift
+public enum GatetoPayOnboardingKYCFieldType: Int, Codable {
     case textField = 1          // Simple text input
     case dropdown = 2           // Select from multiple options
     case checkbox = 3           // Tick multiple options
@@ -363,303 +459,68 @@ The possible field types are:
     case yesNo = 18             // Yes/No option
     case countryandcity = 19    // Country and city combined
 }
-
 ```
 
-###### GatetoPayOnboarding Check ######
+### Handling File and Image Uploads
 
-If you need to let the user capture the document (id, passport), use below code:
+When a field has `dataType == .file` or `dataType == .image`, you need to set the file/image data before submitting:
 
 ```swift
+// For image fields
+field.imageData = imageData
+field.selectedImageName = "image.jpg"
 
-//put this code when you need to capture the document.
-@objc func myButtonAction(_ sender: UIButton){
-    GatetoPayOnboarding.documentsCheck.delegate = self
-
-    /// Below function is for ocr the document and get the information of the user.
-    /// - Parameters:
-    ///   - documentType: this is an enum (.id, .passport)
-    ///   - configuration: of type ConfigureScanDocumentsViews whitch contains 3 objects type will be declared down 
-
-    GatetoPayOnboarding.documentsCheck.captureDocuments(documentType: .id, configuration: configuration)
-}
-
-extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingDocumentsDelegate{
-    func userDidCloseCamera(){
-    
-    }
-    func userFinishCapturingDocument(documents: [GatetoPayOnboardingDocument]){
-    
-    }
-    func userFinishCapturingDocumentsWithResponse(documents: [GatetoPayOnboardingDocument], response: GatetoPayOnboardingDocumentVerificationResponse){
-    
-    }
-    func userFinishCapturingDocumentsWithError(documents: [GatetoPayOnboardingDocument], , error: GatetoPayOnboardingError){
-    
-    }
-    func didFinishWithError(error: GatetoPayOnboardingError){
-
-    }
-    func userFinishCapturingDocumentsWithError(documents: [GatetoPayOnboardingDocument]) {
-        
-    }
-}
-```
-###### END OF GatetoPayOnboarding CHECK ######
-
-###### GatetoPayOnboarding Configuration ######
-If you need to configure the Documents Pages, use below code:
-```swift
-/// ConfigureDocumentsCameraPage: this is the first object which configure all attributes in the Camera Page, use below code with default values:
-
-public struct ConfigureDocumentsCameraPage {
-    //Camera Page Attributes
-    public var cameraViewBackgroundColor: UIColor? = .black
-    public var topHintCameraLabelColor:UIColor? = .white
-    public var topHintCameraLabelTitle:String? = NSLocalizedString("Please get close to the ID/Passport so it would fill the empty area", comment: "")
-    public var topHintCameraIsHidden:Bool? = false
-    public var topHintCameraLabelNumberOfLines:Int? = 0
-    
-    public var frontIDLabelColor:UIColor? = .white
-    public var frontIDLabelTitle:String? =  NSLocalizedString("Scan your ID front face", comment: "")
-    public var frontIDIsHidden:Bool? = false
-    
-    public var backIDLabelColor:UIColor? = .white
-    public var backIDLabelTitle:String? =  NSLocalizedString("Scan your ID Back face", comment: "")
-    public var backIDIsHidden:Bool? = false
-    
-    public var passportLabelColor:UIColor? = .white
-    public var passportLabelTitle:String? =  NSLocalizedString("Scan your passport", comment: "")
-    public var passportIsHidden:Bool? = false
-    
-    public var frontDrivingLicenseLabelColor:UIColor? = .white
-    public var frontDrivingLicenseLabelTitle:String? =  NSLocalizedString("Scan your Driving front face", comment: "")
-    public var frontDrivingLicenseIsHidden:Bool? = false
-    
-    public var backDrivingLicenseLabelColor:UIColor? = .white
-    public var backDrivingLicenseLabelTitle:String? =  NSLocalizedString("Scan your Driving back face", comment: "")
-    public var backDrivingLicenseIsHidden:Bool? = false
-    
-    public var documentTypeLabelNumberOfLines:Int? = 0
-    public var fontNameAndSize: UIFont? = .systemFont(ofSize: 13)
-    
-    public var captureButtonImage: UIImage? = nil
-    public var captureButtonImageURL: String? = ""
-    public var captureButtonIsHidden:Bool? = false
-    public var captureButtonTitle:String? = ""
-    public var captureButtonColor:UIColor? = .clear
-    public var captureButtonFontColor:UIColor? = .white
-    public var captureButtonFontNameAndSize:UIFont? = .systemFont(ofSize: 13)
-    public var captureButtonImageTintColor:UIColor? = .white
-    
-    public var closeButtonImageURL:String? = ""
-    public var closeButtonImage:UIImage? = nil
-    public var closeButtonIsHidden:Bool? = false
-    public var closeButtonTitle:String? = ""
-    public var closeButtonColor:UIColor? = .clear
-    public var closeButtonFontColor:UIColor? = .white
-    public var closeButtonFontNameAndSize:UIFont? = .systemFont(ofSize: 13)
-    public var closeButtonImageTintColor:UIColor? = .white
-    
-    public var flashButtonImageURL:String? = ""
-    public var flashButtonImage:UIImage? = nil
-    public var flashButtonIsHidden:Bool? = false
-    public var flashButtonTitle:String? = ""
-    public var flashButtonColor:UIColor? = .clear
-    public var flashButtonFontColor:UIColor? = .white
-    public var flashButtonFontNameAndSize:UIFont? = .systemFont(ofSize: 13)
-    public var flashButtonImageTintColor:UIColor? = .white
-    }
- 
- ```
- 
- ```swift
-/// ConfigureDocumentsEditPage: this is the second object which configure all attributes in the edit Page, use below code with default values:
-
-public struct ConfigureDocumentsEditPage {
-    public var editPageBackgroundColor: UIColor? = .black
-    public var outlinesCroppingColor:UIColor? = .red
-    
-    public var backButtonImage:UIImage? = nil
-    public var backButtonImageURL:String? = ""
-    public var backButtonTitle:String? = ""
-    public var backButtonIsHidden:Bool? = false
-    public var backButtonColor:UIColor? = .clear
-    public var backButtonFontColor:UIColor? = .white
-    public var backButtonFontNameAndSize:UIFont? = .systemFont(ofSize: 13)
-    public var backButtonImageTintColor:UIColor? = .white
-    
-    public var cropButtonImage:UIImage? = nil
-    public var cropButtonImageURL:String? = ""
-    public var cropButtonTitle:String? = ""
-    public var cropButtonIsHidden:Bool? = false
-    public var cropButtonColor:UIColor? = .clear
-    public var cropButtonFontColor:UIColor? = .white
-    public var cropButtonFontNameAndSize:UIFont? = .systemFont(ofSize: 13)
-    public var cropButtonImageTintColor:UIColor? = .white
-    }
- ```
- 
- ```swift
-/// ConfigureDocumentsPreviewPage: this is the third object which configure all attributes in the preview Page, use below code with default values:
- 
- public struct ConfigureDocumentsPreviewPage {
-    public var previewPageBackgroundColor: UIColor? = .black
-    
-    public var reviewLabelTitle:String? = ""
-    public var reviewLabelColor:UIColor = .white
-    public var reviewLabelNumberOfLine:Int? = 0
-    public var reviewLabelIsHidden:Bool? = false
-    
-    public var editScanButtonImage:UIImage? = nil
-    public var editScanButtonImageURL:String? = ""
-    public var editScanButtonTitle:String? = ""
-    public var editScanButtonIsHidden:Bool? = false
-    public var editScanButtonColor:UIColor? = .clear
-    public var editButtonFontColor:UIColor? = .white
-    public var editButtonFontNameAndSize:UIFont? = .systemFont(ofSize: 13)
-    public var editScanButtonImageTintColor:UIColor? = .white
-    
-    public var confirmButtonImage:UIImage? = nil
-    public var confirmButtonImageURL:String? = ""
-    public var confirmButtonTitle:String? = ""
-    public var confirmButtonIsHidden:Bool? = false
-    public var confirmScanButtonColor:UIColor? = .clear
-    public var confirmButtonFontColor:UIColor? = .white
-    public var confirmButtonFontNameAndSize:UIFont? = .systemFont(ofSize: 13)
-    public var confirmScanButtonImageTintColor:UIColor? = .white
-    
-    public var rotateButtonImage:UIImage? = nil
-    public var rotateButtonImageURL:String? = ""
-    public var rotateButtonTitle:String? = ""
-    public var rotateButtonIsHidden:Bool? = false
-    public var rotateScanButtonColor:UIColor? = .clear
-    public var rotateButtonFontColor:UIColor? = .white
-    public var rotateButtonFontNameAndSize:UIFont? = .systemFont(ofSize: 13)
-    public var rotateScanButtonImageTintColor:UIColor? = .white
-    }
+// For file fields
+field.fileData = fileData
+field.selectedFileName = "document.pdf"
+field.selectedFileMimeType = "application/pdf"
 ```
 
-###### END OF GatetoPayOnboarding CHECK ######
+The SDK will automatically upload these files when you call `updateKYC()` or `updateRiskData()`.
 
-###### GatetoPayOnboarding Liveness Check ######
+## Error Handling
 
-If you need to check user liveness and take a selfie, use below code:
+Most calls report `GatetoPayOnboardingError` via delegates. Common error cases:
+- `.journeyIsNotGenerated` - Journey session was not created
+- `.serverError` - Server returned an error
+- `.imageLoadingError` - Error loading/processing images
+- `.invalidSubscription` - Invalid subscription key
 
-```swift
+## Sample App Walkthrough
 
-//put this code when you need to check liveness.
-@objc func myButtonAction(_ sender: UIButton){
-        GatetoPayOnboarding.livenessCheck.delegate = self
+The `Sample/` folder contains an end-to-end reference implementation. Key screens:
 
+- **LandingPageViewController**
+  - Collects the subscription key and initializes the SDK via `GatetoPayOnboarding.shared.setSettings(...)`
 
-    /// Below function is for checking the liveness of the user and take a photo for the user.
-    /// - Parameters:
-    ///   - viewController: current viewController
-    ///   - detectOptions: array of side(detection) options enum [.blink, .smile, .lookRight, .lookLeft] 
+- **RiskFormViewController**
+  - Retrieves risk form fields via `GatetoPayOnboarding.riskForm.getRiskFields(...)`
+  - Submits risk form data with `GatetoPayOnboarding.riskForm.updateRiskData(...)`
+  - Uses CSPD data to get product ID for KYC flow
 
-        GatetoPayOnboarding.livenessCheck.checkLiveness(viewController: vc, detectOptions: [.blink])
+- **KYCViewController**
+  - Retrieves dynamic KYC fields via `GatetoPayOnboarding.kyc.getKYCFields(...)`
+  - Builds the form UI and submits values with `GatetoPayOnboarding.kyc.updateKYC(...)`, including file/image uploads handled internally by the SDK
 
-}
+- **CloseJourneyViewController**
+  - Closes the journey at the end of the flow via `GatetoPayOnboarding.closeJourney.closeJourneyAPI(...)`
 
-extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingCheckLivenessCheckDelegate{
-    func didPressCancel(){
-    
-    }
-    func didGetImageSuccessfully(data: UIImage){
-    
-    }
-    func didGetImageMatchingResponseSuccessfully(response: ImageMatchingResponse){
-    
-    }
-    func didGetError(errorMessage: String){
-    
-    }
-    func LivenessCheckPageError(error: GatetoPayOnboardingCheckError){
-        
-    }
-    func LivenessCheckDone(){
-    
-    }
-    func cameraAccessDeniedError(error: GatetoPayOnboardingError){
-    
-    }
-    
-}
-```
-###### END OF SEDRA LIVENESS CHECK ######
+You can follow these controllers step-by-step to mirror the same integration in your own app.
 
+## Localization
 
-###### GatetoPayOnboarding Comply ######
+Check the `Localizable.strings` file in the project and translate it according to your needs.
 
+## Contact Us & Report a Bug
 
-```swift
-
-//put this code when you need to check your user in the world check.
-@objc func myButtonAction(_ sender: UIButton){
-    GatetoPayOnboardingCheck.comply.delegate = self
-
-    /// Below function is for screening and checking the customer.
-    /// - Parameters:
-    ///   - firstName: enter the first name of the user <Required>
-    ///   - secondName: enter the second name of the user <Optional>, leave empty string if not needed
-    ///   - thirdName: enter the third name of the user <Optional>, leave empty string if not needed
-    ///   - lastName: enter the last name of the user <Required>
-
-    GatetoPayOnboarding.comply.screenCustomer(firstName: "<FIRST_NAME_HERE>",
-                                    secondName: "<SECOND_NAME_HERE>",
-                                    thirdName: "<THIRD_NAME_HERE>",
-                                    lastName: "<LAST_NAME_HERE>")
-}
-
-extension <YOUR_VIEW_CONTROLLER>: GatetoPayOnboardingComplyDelegate{
-    func screeningFinishedWithSuccess(response: GatetoPayOnboardingScreeningResponse){
-        //do your code here
-    }
-    
-    func screeningFinishedWithError(message: GatetoPayOnboardingError){
-        //do your code here
-    }
-}
-```
-###### END OF APYAN COMPLY ######
-
-###### Close Journey ######
-
-```swift
-extension <YOUR_VIEW_CONTROLLER>:  GatetoPayOnboardingCloseJourneyDelegate {
-  override func viewDidLoad(){
-    super.viewDidLoad()
-    GatetoPayOnboarding.closeJourney.delegate = self
-    GatetoPayOnboarding.closeJourney.closeJourneyAPI(customerId: "unique-customer-id")
-  }
-  func didFinishCloseJourneyWithSuccess() { 
-        //do your own code as:
-        //dismiss dialogs, loadings
-        //recall the function
-  }
-  func didFinishCloseJourneyWithError(error: GatetoPayOnboardingError) { 
-         //do your own code as:
-         //dismiss dialogs, loadings
-         //recall the function
-}
-}
-```
-
-Localization
-==========================
-Check localizable.string file in the project and translate it in the way you love.
-
-
-Contact Us & Report a Bug
-==========================
-
-If you have any questions or you want to contact us, visit our website.
+If you have any questions or want to contact us, visit our website:
 
 https://sedracheck.sedrapay.com/
 
-
 --- OR ---
 
-Contact us via email mob@sedrapay.com
+Contact us via email: mob@sedrapay.com
 
+## License
+
+Proprietary. All rights reserved unless otherwise stated.
