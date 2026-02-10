@@ -57,8 +57,19 @@ class CSPDListViewController: UIViewController {
 
     
     @IBAction func NextButton(_ sender: Any) {
+        
+        guard let identityType = customerIdentityType,
+              !identityType.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            
+            Dialogs.showError("Please select your ID type")
+            return
+        }
+        
         GatetoPayOnboarding.cspdData.delegate = self
-        GatetoPayOnboarding.cspdData.getProductByIdType(riskLevel: risklevel ?? 0, customerIdentityType: self.customerIdentityType ?? "")
+        GatetoPayOnboarding.cspdData.getProductByIdType(
+            riskLevel: risklevel ?? 0,
+            customerIdentityType: identityType
+        )
     }
     
 }
